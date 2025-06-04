@@ -1,0 +1,32 @@
+{
+    // Set list indent level to 4 which Python-Markdown requires
+    "MD007": {
+        "indent": 4
+    },
+    // Disable line length check for tables and code blocks
+    "MD013": {
+        "line_length": 3000,
+        "code_blocks": false,
+        "tables": false
+    },
+    // Configure special behavior for MD026
+    "MD026": {
+        "punctuation": ".,:;"
+    },
+    // Set Ordered list item prefix to "ordered" (use 1. 2. 3. not 1. 1. 1.)
+    "MD029": {
+        "style": "ordered"
+    },
+    // This is broken when list items have line breaks in (would be good to fix and put back though...)
+    "MD032": false,
+    // Exclude in-line HTML, need it for multi line entries in tables (at least)
+    "MD033": false,
+    // Bare URLs are required in internal documentaion
+    "MD034": false,
+    // Subjective.
+    "MD036": false,
+    // Exclude code block style
+    "MD046": false,
+    // Table header separation gives false positive
+    "MD057": false
+}

@@ -1,0 +1,36 @@
+site_name: High Performance Computing with CREATE
+site_description: High Performance Computing with CREATE
+site_author: KCL e-Research
+site_url: 'https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training'
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - meta
+  - attr_list
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+
+theme:
+  name: material
+  locale: en
+  features:
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+  custom_dir: theme/
+
+nav:
+    - Intro: 'index.md'
+    - Connecting: 'connecting.md'
+    - Accessing software: 'using_software.md'
+    - Submitting jobs: 'submitting_jobs.md'
+    - Singularity: 'singularity.md'
+    - RStudio: 'rstudio.md'
+    - Practical: 'exercises.md'
+    - Next steps: 'next-steps.md'
+    - Slides: 'slides.md'

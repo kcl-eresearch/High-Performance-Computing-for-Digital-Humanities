@@ -1,0 +1,9 @@
+docenv/
+.python-version
+.venv/
+.vscode/
+.DS_Store
+
+# Compiled materials
+public/
+site/
