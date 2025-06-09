@@ -30,7 +30,6 @@ nav:
     - Accessing software: 'using_software.md'
     - Submitting jobs: 'submitting_jobs.md'
     - Singularity: 'singularity.md'
-    - RStudio: 'rstudio.md'
     - Practical: 'exercises.md'
     - Next steps: 'next-steps.md'
     - Reference:
