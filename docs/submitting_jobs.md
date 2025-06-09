@@ -12,18 +12,21 @@ you have to wait for the job to run.
 ![Waiter analogy](images/restaurant_queue_manager.svg)
 
 CREATE is using [SLURM](https://slurm.schedmd.com) scheduler, which stands for Simple Linux Utility for Resource Management.
+SLURM is commonly used by other HPC systems as well.
+You may also encounter other job schedulers such as [PBS](https://www.openpbs.org/).
+These work on similar principles, although the exact commands and terminology will be different.
 
 ## Partitions
 
 You can think of partitions as queues - they reside over specific sets of resources and allow access to particular groups.
 Following the restaurant analogy, think of them as different sections of the restaurant and corresponding queues assigned to them.
 
-The public partitions are:
+The public partitions available on CREATE HPC are:
 
 * `cpu`: Partition for cpu jobs
 * `gpu`: Partition for gpu jobs
-* `long_`: Partitions for long running jobs. Requires justification and explicit permission to use
-* `interruptible_`: Partitions that use unused capacity on private servers
+* `long_cpu` and `long_gpu`: Partitions for long running jobs. Requires justification and explicit permission to use
+* `interruptible_cpu` and `interruptible_gpu`: Partitions that use unused capacity on private servers
 
 In addition, specific groups/faculties have their own partitions on CREATE HPC that can only be used by members of those groups.
 The list of CREATE partitions and who can use them can be found in our [documentation](https://docs.er.kcl.ac.uk/CREATE/running_jobs/#identify-your-partition).
@@ -47,7 +50,7 @@ Any additional rows you see in the output of `sinfo` will be private partitions 
 
 ## Submitting jobs
 
-In most cases you will be submitting non-interactive jobs, comonly referred to as batch jobs. For this you will be
+In most cases you will be submitting non-interactive jobs, commonly referred to as batch jobs. For this you will be
 using the [`sbatch`](https://slurm.schedmd.com/sbatch.html) utility.
 
 To submit a job to the queue, we need to write a **shell script** which contains the commands we want to run.
