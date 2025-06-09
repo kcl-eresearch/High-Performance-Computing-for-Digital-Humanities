@@ -12,40 +12,6 @@ directory also contains example scripts from the exercises for convenience.
     There might be multiple ways to achieve a specific goal - If your method does not match the sample
     answer it might not mean you have done things incorrectly, just differently.
 
-## Navigating CREATE HPC
-
-1. ### Filesystem navigation
-
-    **Goal**: List the contents of your home directory and personal scratch
-
-    * Where is your personal scratch directory located?
-
-    ??? hint
-        Use `ls` utility to list the contents, `cd` to change the directory and `pwd` to print the working (current) directory.
-
-        Experiment with addition options to `ls` such as `la` or `ltra`.
-
-    ??? example "Sample answer"
-        Your home directory is located in `/users/k-number`, e.g. `/users/k1234567`.
-
-        Your personal scratch can be found in `/scratch/users/k-number`, e.g. `/scratch/users/k1234567`
-
-1. ### Filesystem quota reporting
-
-    **Goal**: Display quota information for your account
-
-    * What's the quota limit for your home directory?
-
-    ??? example "Sample answer"
-        Quota information is listed as part of MOTD when you log in, but you can also use `quotas` utility:
-
-        ```
-        k1234567@erc-hpc-login2:~$ quotas
-        Path                     Type      Quota GB    Usage GB    Avail GB    Usage %
-        -----------------------  ------  ----------  ----------  ----------  ---------
-        /scratch/users/k1234567  User           200           0         200          0
-        /users/k1234567          User            50          10          40         20
-        ```
 
 ## Using modules
 
