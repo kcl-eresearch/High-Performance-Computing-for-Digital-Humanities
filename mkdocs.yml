@@ -33,4 +33,7 @@ nav:
     - RStudio: 'rstudio.md'
     - Practical: 'exercises.md'
     - Next steps: 'next-steps.md'
+    - Reference:
+      - Unix commands: 'unix_commands.md'
+      - SSH keys: 'ssh_keys.md'
     - Slides: 'slides.md'
