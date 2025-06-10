@@ -7,3 +7,6 @@ docenv/
 # Compiled materials
 public/
 site/
+
+.ipynb_checkpoints/
+.jupyter/
