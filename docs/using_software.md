@@ -178,100 +178,101 @@ python/3.11.6-gcc-13.2.0                       : The Python programming language
 
 ## Exercises - modules
 
-To test your understanding of how to access software on CREATE HPC, work through the exercises in [this section](exercises.md/#using-modules).
+To test your understanding of how to access software using modules, work through the exercises in [this section](exercises.md/#using-modules).
 
 ## Installing your own software
 
-Although we do provide a significant number of software packages on the cluster, there is a chance that the package that you want to use
-is not installed and cannot be accessed via the module file.
+Although it's likely that many software packages are pre-installed on any HPC cluster, there is a chance that the package that you want to use
+is not installed and cannot be accessed as a module.
 
 You can of course build, or install your own packages. As you do not have root (administrative rights) on the nodes you won't be able to install them
 into system locations, or use system package managers (`apt`, `dpkg`) to perform the installations.
 You can however install into your own personal location, or the group shares - in essence anywhere you can write to. Build systems such
 as `cmake` or `automake` will have appropriate switches to define custom installation locations.
 
-Although software installation is beyond the scope of this workshop, we will cover a few approaches that you might find useful:
+Building and installing software can become complex, and is beyond the scope of this workshop.
+However, we will discuss a few other approaches to accessing software that you might find useful:
 Python virtual environments, Conda, and [Singularity](singularity.md).
 
-Python virtual environments and Conda/Anaconda provide a way to extend functionality of existing python installation and create isolated environments
+Python virtual environments and Conda/Anaconda provide a way to extend functionality of an existing python installation and create isolated environments
 that can be used to install, or upgrade specific packages.
+Singularity is a tool for running [software containers](https://en.wikipedia.org/wiki/Containerization_(computing)).
 
-??? note "Python virtual environments"
-    To create a Python virtual environment load the relevant python module and then execute `python3 -m venv envname` command replacing `envname` with the name
-    of the environment you want to create:
+### Python virtual environments
 
-    ```text
-    k1234567@erc-hpc-login1:~$ module load python/3.11.6-gcc-13.2.0
-    k1234567@erc-hpc-login1:~$ python3 -m venv myenv
-    ```
+To create a Python virtual environment load the relevant python module and then execute `python3 -m venv envname` command replacing `envname` with the name
+of the environment you want to create:
 
-    With this, Python has created the `myenv` directory which now contains the required base files.
+```text
+k1234567@erc-hpc-login1:~$ module load python/3.11.6-gcc-13.2.0
+k1234567@erc-hpc-login1:~$ python3 -m venv myenv
+```
 
-    !!! tip
-        You can also specify the absolute/relative path to the environment if you do not want it created in the current directory.
+With this, Python has created the `myenv` directory which now contains the required base files.
 
-    You only need to create the environment once. Once it has been created you do not need to run the command again (unless you need deleted the current one, or wish to create another one).
+!!! tip
+    You can also specify the absolute/relative path to the environment if you do not want it created in the current directory.
 
-    To use the environment you have to activate it first by sourcing the activate script
+You only need to create the environment once. Once it has been created you do not need to run the command again (unless you need deleted the current one, or wish to create another one).
 
-    ```text
-    k1234567@erc-hpc-login1:~$ source myenv/bin/activate
-    (myenv) k1234567@erc-hpc-login1:~$
-    ```
+To use the environment you have to activate it first by sourcing the activate script
 
-    !!! important
-        When activating the virtual environment you can use relative paths, but the activation has to be initiated from the right directory.
-        Using full (absolute) path might be the safer alternative.
+```text
+k1234567@erc-hpc-login1:~$ source myenv/bin/activate
+(myenv) k1234567@erc-hpc-login1:~$
+```
 
-    The name of the venv should be prepended to your prompt indicating that the environment is active. From now on you can use the environment:
+!!! important
+    When activating the virtual environment you can use relative paths, but the activation has to be initiated from the right directory.
+    Using full (absolute) path might be the safer alternative.
 
-    * to install packages
+The name of the venv should be prepended to your prompt indicating that the environment is active. From now on you can use the environment:
 
-        ```text
-        (myenv) k1234567@erc-hpc-login2:~$ pip install pytest
-        Collecting pytest
-          Downloading pytest-7.3.2-py3-none-any.whl (320 kB)
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 320.9/320.9 kB 12.8 MB/s eta 0:00:00
-        Collecting tomli>=1.0.0
-          Downloading tomli-2.0.1-py3-none-any.whl (12 kB)
-        Collecting packaging
-          Downloading packaging-23.1-py3-none-any.whl (48 kB)
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 kB 2.5 MB/s eta 0:00:00
-        Collecting iniconfig
-          Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
-        Collecting exceptiongroup>=1.0.0rc8
-          Downloading exceptiongroup-1.1.1-py3-none-any.whl (14 kB)
-        Collecting pluggy<2.0,>=0.12
-          Downloading pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
-        Installing collected packages: tomli, pluggy, packaging, iniconfig, exceptiongroup, pytest
-        Successfully installed exceptiongroup-1.1.1 iniconfig-2.0.0 packaging-23.1 pluggy-1.0.0 pytest-7.3.2 tomli-2.0.1
-
-        [notice] A new release of pip available: 22.3.1 -> 23.1.2
-        [notice] To update, run: pip install --upgrade pip
-        ```
-
-    * or to run python scripts
-
-        ```text
-        (myenv) k1234567@erc-hpc-login1:~$ python /datasets/hpc_training/utils/helloworld.py
-        Hello World!
-        ```
-
-    To deactivate the environment use `deactivate` command
+* to install packages
 
     ```text
-    (myenv) k1234567@erc-hpc-login1:~$ deactivate
-    k1234567@erc-hpc-login1:~$
+    (myenv) k1234567@erc-hpc-login2:~$ pip install pytest
+    Collecting pytest
+      Downloading pytest-7.3.2-py3-none-any.whl (320 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 320.9/320.9 kB 12.8 MB/s eta 0:00:00
+    Collecting tomli>=1.0.0
+      Downloading tomli-2.0.1-py3-none-any.whl (12 kB)
+    Collecting packaging
+      Downloading packaging-23.1-py3-none-any.whl (48 kB)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 kB 2.5 MB/s eta 0:00:00
+    Collecting iniconfig
+      Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+    Collecting exceptiongroup>=1.0.0rc8
+      Downloading exceptiongroup-1.1.1-py3-none-any.whl (14 kB)
+    Collecting pluggy<2.0,>=0.12
+      Downloading pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+    Installing collected packages: tomli, pluggy, packaging, iniconfig, exceptiongroup, pytest
+    Successfully installed exceptiongroup-1.1.1 iniconfig-2.0.0 packaging-23.1 pluggy-1.0.0 pytest-7.3.2 tomli-2.0.1
+
+    [notice] A new release of pip available: 22.3.1 -> 23.1.2
+    [notice] To update, run: pip install --upgrade pip
     ```
 
-    You will see that the environment name has disappeared from the shell prompt.
+* or to run python scripts
 
-    __Exercises - virtual environments__
+    ```text
+    (myenv) k1234567@erc-hpc-login1:~$ python /datasets/hpc_training/utils/helloworld.py
+    Hello World!
+    ```
 
-    To practice using Python virtual environments, work through the exercises in [this section](exercises.md/#python-virtual-environments).
+To deactivate the environment use `deactivate` command
+
+```text
+(myenv) k1234567@erc-hpc-login1:~$ deactivate
+k1234567@erc-hpc-login1:~$
+```
+
+You will see that the environment name has disappeared from the shell prompt.
+
 
 ??? note "Conda virtual environments"
-    Anaconda/Conda is available as a module on CREATE.
+    Conda is another tool for creating virtual environments.
+    On CREATE, Conda is available via the `anaconda3` module.
 
     To use Conda, first load the module:
 
@@ -305,3 +306,7 @@ that can be used to install, or upgrade specific packages.
     !!! tip
         To prevent activation of the Conda base environment by default, which may conflict with other modules/packages, run
         `conda config --set auto_activate_base false`
+
+#### Exercises - virtual environments
+
+To practice using Python virtual environments, work through the exercises in [this section](exercises.md/#python-virtual-environments).

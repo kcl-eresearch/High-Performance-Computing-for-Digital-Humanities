@@ -13,7 +13,7 @@ One main advantage of using an HPC system is the ability to utilise its large co
     It also leads to resources being wasted as they are allocated to your job but are unused.
 
     If you request multiple CPUs/nodes for your job, it's a good idea to check how effectively your job uses them using `sacct`, as discussed
-    in the [job monitoring](#job-monitoring) section.
+    in the [job monitoring](submitting_jobs.md#job-monitoring) section.
     Most applications do not scale infinitely and will reach a point where the marginal impact of allocating more resources is minimal.
 
 ## Multithreaded/multicore (SMP) jobs
