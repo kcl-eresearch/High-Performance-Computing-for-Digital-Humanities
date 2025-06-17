@@ -187,4 +187,4 @@ A sample output would be:
 
 ## Exercises - parallel jobs and benchmarking
 
-Work through the exercises in [this section](exercises.md/#job-submission-part-2) to practice submitting parallel jobs, and [this section](exercises.md/#job-submission-part-3) to look at optimisation and benchmarking.
+Work through the exercises in [this section](exercises.md/#job-submission-part-2) to practice submitting parallel jobs.

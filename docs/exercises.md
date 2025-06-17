@@ -12,7 +12,6 @@ directory also contains example scripts from the exercises for convenience.
     There might be multiple ways to achieve a specific goal - If your method does not match the sample
     answer it might not mean you have done things incorrectly, just differently.
 
-
 ## Using modules
 
 1. ### Basic software environment module usage
@@ -256,9 +255,10 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-job1
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
         #SBATCH --ntasks=1
         #SBATCH --nodes=1
+        #SBATCH --cpus-per-task=1
         #SBATCH --mem=2G
 
         echo "My hostname is "`hostname`
@@ -299,7 +299,7 @@ directory also contains example scripts from the exercises for convenience.
 
 1. ### SLURM interactive job submission
 
-    **Goal**: Request an interactive session with two cores and 4G of memory
+    **Goal**: Request an interactive session with one core and 4G of memory
 
     * Print the hostname of the interactive node that you have been allocated
     * Print number of cores available
@@ -314,7 +314,7 @@ directory also contains example scripts from the exercises for convenience.
         Use `srun` command to request an interactive session
 
         ```
-        k1234567@erc-hpc-login2:~$ srun -p cpu --ntasks 1 --cpus-per-task 2 --mem 4G --pty /bin/bash -l
+        k1234567@erc-hpc-login2:~$ srun -p cpu --mem 4G --pty /bin/bash -l
         srun: job 56741 queued and waiting for resources
         srun: job 56741 has been allocated resources
         k1234567@erc-hpc-comp001:~$
@@ -326,7 +326,7 @@ directory also contains example scripts from the exercises for convenience.
         k1234567@erc-hpc-comp001:~$ hostname
         erc-hpc-comp001
         k1234567@erc-hpc-comp001:~$ nproc
-        2
+        1
         ```
 
 1. ### Debugging SLURM job scripts (1)
@@ -463,7 +463,7 @@ directory also contains example scripts from the exercises for convenience.
         ...
         ```
 
-        and the accouting information should contain:
+        and the accounting information should contain:
 
         ```
         k1234567@erc-hpc-login2:~$ sacct -j 57619
@@ -494,7 +494,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-multicore
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
         #SBATCH --ntasks=1
         #SBATCH --cpus-per-task=2
 
@@ -531,8 +531,8 @@ directory also contains example scripts from the exercises for convenience.
 
     **Goal**: Submit a job requesting gpu(s) on a single node.
 
-    * Write a job script that requests single gpu and does something that reports the information in its output
-    * Submit the job that requests two gpus and check the output
+    * Write a job script that requests a single gpu and does something that reports the information in its output
+    * Submit a job that requests two gpus and check the output
 
     ??? hint
         * Use `nvidia-smi --id=$CUDA_VISIBLE_DEVICES` utility to print the details of allocated gpu(s) for the job
@@ -544,7 +544,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-gpu
-        #SBATCH --partition=gpu
+        #SBATCH --partition=interruptible_gpu
         #SBATCH --ntasks=1
         #SBATCH --cpus-per-task=1
         #SBATCH --gres gpu:1
@@ -639,7 +639,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-array
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
         #SBATCH --ntasks=1
         #SBATCH --array=1-3
 
@@ -697,7 +697,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-array
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
         #SBATCH --ntasks=1
         #SBATCH --array=1-3
 
@@ -722,163 +722,6 @@ directory also contains example scripts from the exercises for convenience.
         k1234567@erc-hpc-login2:~$ cat slurm-56769_3.out
         Hello, I'm file 3  
         ```
-
-## Job submission (part 3)
-
-1. ### Performance benchmarking
-
-    **Goal**: Benchmark multi-core computations, understand the contribution from parallelisation
-
-    * For this task, you will use a software program called `sharpen` that is in the `utils` folder in the supporting files directory. There are two versions:
-        * `sharpen-fser`
-          : This is the serial version of the code, it will only use a single core
-        * `sharpen-fomp`
-          : This is the multi-threaded version of the code, it can use any number of cores _on a single node_
-
-        !!! info
-            `sharpen` processes an image by convolving it with a filter (Gaussian and Laplacian functions). To speed up the process, the image is decomposed into an array, each chunk is then processed separately, in parallel, before recombining. This is an example of the [_divide and conquer_](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm) approach.
-
-    * Write a job submission script that runs the `sharpen` application on a single core (it's sufficient to set a walltime of 1 minute).
-    * Submit the job. `sharpen` reports how long the whole process took in its output, you should see two lines similar to this:
-
-        ```
-        Calculation time was 5.579000 seconds
-        Overall run time was 5.671895 seconds
-        ```
-
-      How long did your job take? What is the most probable reason for the difference between 'calculation time' and 'overall run time'?
-
-    * Now write another job script to run `sharpen` on 2 cores. What path/filename should you use for the `sharpen` binary (program)? What's a good choice for the walltime?
-    * Submit the job. How long did the calculation take this time? What about the overall run time?
-    * Now repeat the process, using 4 cores, then 8 cores, and finally 16 cores. Tabulate the results:
-
-        | Cores  | Calculation time (s)  | Overall run time (s)  | Difference (s)    | Core-seconds  |
-        |--------|-----------------------|-----------------------|-------------------|---------------|
-        | 1      |                       |                       |                   |               |
-        | 2      |                       |                       |                   |               |
-        | 4      |                       |                       |                   |               |
-
-    * Do the results make sense? Graph the different time metrics versus CPU cores — what is the profile of the different metrics?
-
-    ??? hint
-        * Copy the input file, `fuzzy.pgm` from the `sample-files/sharpen` folder in the supporting files directory to your working directory (`sharpen` expects `fuzzy.pgm` to be in the same directory from where you run the job)
-        * Make sure you use `sharpen-fser` for the single-core job, and `sharpen-fomp` for the multi-core jobs
-
-    ??? example "Sample answer"
-        Create a sample script `sharpen-serial.sh` and add the following contents to it:
-
-        ```
-        #!/bin/bash -l
-
-        #SBATCH --job-name=sharpen-serial
-        #SBATCH --partition=cpu
-        #SBATCH --time=0-0:01
-        #SBATCH --ntasks=1
-
-        cp /datasets/hpc_training/sample-files/sharpen/fuzzy.pgm ./
-        /datasets/hpc_training/utils/sharpen-fser
-        ```
-
-        Submit the job using:
-
-        ```
-        k1234567@erc-hpc-login2:~$ sbatch sharpen-serial.sh
-        Submitted batch job 13629786
-        ```
-
-        Examine the output, which should be located in the `slurm-jobid.out` file (replace `jobid` with the id of your job):
-
-        ```
-        k1234567@erc-hpc-login2:~$ tail -n 3 slurm-13629786.out
-        Calculation time was 5.579000 seconds
-        Overall run time was 5.671895 seconds
-        ```
-
-        Create another script, called `sharpen-parallel.sh`, with the following content:
-
-        ```
-        #!/bin/bash -l
-
-        #SBATCH --job-name=sharpen-parallel
-        #SBATCH --partition=cpu
-        #SBATCH --time=0-0:00:30    # You might expect the job to take half as long, so you cut your time request in half
-        #SBATCH --ntasks=2
-
-        cp /datasets/hpc_training/sample-files/sharpen/fuzzy.pgm ./
-       /datasets/hpc_training/utils/sharpen-fomp
-        ```
-
-        Submit the job using:
-
-        ```
-        k1234567@erc-hpc-login2:~$ sbatch sharpen-parallel.sh
-        Submitted batch job 13629787
-        ```
-
-        Examine the output file to record the run times again, then change the `sharpen-parallel.sh` script to request more cores (4, 8, 16) and re-submit.
-        Add the run times to your table (your results may differ from the example shown here):
-
-        | Cores  | Overall run time (s)  | Calculation time (s)  | I/O time (s)  | Total core seconds  |
-        |------- |---------------------- |---------------------- |------------- |-------------------- |
-        | 1      | 5.544246              | 5.410836              | 0.13341      | 5.410836            |
-        | 2      | 2.917452              | 2.804676              | 0.112776     | 5.609352            |
-        | 4      | 1.609339              | 1.48881               | 0.120529     | 5.95524             |
-        | 8      | 0.924753              | 0.793237              | 0.131516     | 6.345896            |
-        | 12     | 0.665114              | 0.530394              | 0.13472      | 6.364728            |
-        | 24     | 0.40722               | 0.268055              | 0.139165     | 6.43332             |
-        | 48     | 0.315862              | 0.136599              | 0.179263     | 6.556752            |
-        | 96     | 0.239602              | 0.071997              | 0.167605     | 6.911712            |
-
-        Using more cores results in a faster time to solution (overall run time).
-
-        The difference between overall time and calculation time is mostly due to I/O, when the processed chunks are combined and the result file written out. Disk input/output is often significantly slower than CPU calculation. The nature of the `sharpen` code is such that this step is the same, regardless of the number of CPU cores (i.e. it is not parallelised), therefore, this value is roughly the same for all runs.
-        The total core-seconds used is an indication of efficiency (see the next section); it increases with core count.
-
-1. ### Analysing parallel performance and resource optimisation
-
-    **Goal**: Understand performance scaling, parallel efficiency & speed-up
-
-    * Now we have some data showing the performance of our application we need to try and draw some useful conclusions as to what the most efficient set of resources are to use for our jobs. To do this we introduce two metrics:
-
-        * **Speedup**
-          : The ratio of the baseline runtime (or runtime on the lowest core count) to the runtime at the specified core count. i.e. baseline runtime divided by runtime at the specified core count.
-        * **Ideal speedup**
-          : The expected speedup if the application showed perfect scaling. i.e. if you double the number of cores, the application should run twice as fast.
-        * **Parallel efficiency**
-          : The percentage of ideal speedup actually obtained for a given core count. This gives an indication of how well you are exploiting the additional resources you are using.
-
-    * Using the run times from your calculations in the previous exercise, complete the following table:
-
-        | Cores  | Overall run time (s)  | Ideal speed-up  | Actual speed-up  | Parallel efficiency  |
-        |--------|-----------------------|-----------------|------------------|----------------------|
-        | 1      |                       |                 |                  |                      |
-        | 2      |                       |                 |                  |                      |
-        | 4      |                       |                 |                  |                      |
-
-    * What number of cores is the most _efficient_, irrespective of total time to result?
-    * What number of cores gives the _fastest overall_ result, irrespective of efficiency?
-    * What would be a good number of cores to use for this application? Why did you choose that? What other factors might come into play?
-    * Now repeat the tabulation, using **Calculation time** instead of overall run time. This factors out the non-parallised part of the computation (I/O time) — how well has the calculation part been parallelised?
-
-    ??? example "Sample answer"
-        The table below shows these metrics calculated for example results
-
-        | Cores  | Overall run time (s)  | Ideal speedup  | Actual speedup    | Parallel efficiency  |
-        |------- |---------------------- |--------------- |------------------ |--------------------- |
-        | 1      | 5.544246              | 1              | 1                 | 100%                 |
-        | 2      | 2.917452              | 2              | 1.90037265394598  | 95%                  |
-        | 4      | 1.609339              | 4              | 3.44504545033706  | 86%                  |
-        | 8      | 0.924753              | 8              | 5.99538038806038  | 75%                  |
-        | 12     | 0.665114              | 12             | 8.33578303869713  | 69%                  |
-        | 24     | 0.40722               | 24             | 13.614866656844   | 57%                  |
-        | 48     | 0.315862              | 48             | 17.5527477189406  | 37%                  |
-        | 96     | 0.239602              | 96             | 23.1393978347426  | 24%                  |
-
-        Using a single core is always the most efficient, by definition.
-
-        In this example, the speed-up is always positive, that is, using more cores gives a faster overall time to solution, albeit at the expense of actual efficiency. Note that, for more complex calculations, especially where there is a dependency between component parts at some point there is often an inflection where using more cores results in a _slower_ time to solution (for example, many-to-many body particle interactions simulations neccesitate communication of information between parallel workers; this _increases_ with core count, off-setting the gains from parallelisation).
-
-        Good parallel efficiency is often considered to be 70% or greater. On a busy HPC system, jobs with greater resources might queue for longer than smaller jobs — balancing overall time to solution with efficiency is difficult to predict when one factors in queueing time.
 
 1. ### Jupyter Lab/Notebook jobs
 
@@ -918,7 +761,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-jlab
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
         #SBATCH --ntasks=1
         #SBATCH --mem=2G
         #SBATCH --signal=USR2
@@ -979,7 +822,7 @@ directory also contains example scripts from the exercises for convenience.
         the login nodes
 
         ```
-        srun --partition cpu --pty /bin/bash -l
+        srun --partition interruptible_cpu --pty /bin/bash -l
         ```
 
         After the resources have been allocated, pull the lolcow container using `singularity pull`
@@ -1030,7 +873,7 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-singularity
-        #SBATCH --partition=cpu
+        #SBATCH --partition=interruptible_cpu
 
         singularity exec ~/lolcow_latest.sif cowsay "Hello there"
         ```
