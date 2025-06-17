@@ -1,7 +1,7 @@
 # Accessing software
 
 HPC systems tend to provide software packages for the users. The number can be quite large and
-the software varied, especially on the clusters where users come from different research backgrounds, such as bioinformatics, computer science, etc.
+the software varied, especially on clusters where users come from different research backgrounds, such as bioinformatics, computer science, etc.
 
 By default no software is preloaded and to use any of the software packages available one must _load_ them explicitly. This is driven
 by the challenges presented by
@@ -11,7 +11,7 @@ by the challenges presented by
 * incompatibilities between different versions and packages
 
 !!! info
-    We use [spack](https://spack.readthedocs.io/en/latest/) to manage the software on the platform.
+    On CREATE HPC, [spack](https://spack.readthedocs.io/en/latest/) is used to install and manage the software on the platform.
 
 ## Environment Modules
 
@@ -118,16 +118,16 @@ Currently Loaded Modules:
     Although you can load the modules on the login nodes and they will be propagated to the scheduled jobs, you __should__ load them in your job script as some of the
     software is optimised for specific processor architectures. You will also avoid conflicts and missing modules (in case you forget to load them before submitting the job).
 
-To remove, or unload specific module use `module rm`
+To remove, or unload a specific module use `module rm`
 
 ```bash
 module rm python/3.11.6-gcc-13.2.0
 ```
 
-This will also remove all of the dependant modules added during the load process.
+This will also unload any dependent modules required by the module you are unloading.
 
 !!! tip
-    To remove all of the loaded modules use `module purge`.
+    To remove __all__ loaded modules use `module purge`.
 
 To find out more information about the module, use `module whatis`
 
@@ -140,41 +140,6 @@ You should see information about the module
 ```text
 python/3.11.6-gcc-13.2.0                       : The Python programming language.
 ```
-
-??? note "Module test environment"
-    CREATE has a test modules environment, which by default is not available to the users and has to be explicitly active
-    for the modules in that section.
-    You should generally not need to use the test modules unless instructed to do so by e-Research Support.
-
-    The section contains software that has been requested by the users,
-    installed by us, but waiting for the final confirmation of successful tests before moving into production.
-    If you do need to use the test modules, you can enable the test environment by loading the `test_switch_kcl` module.
-
-    ```bash
-    module load test_switch_kcl/2.0.0-gcc-13.2.0
-    ```
-
-    After that you should be able to switch between production and test environments using
-
-    ```bash
-    source test_switch
-    ```
-
-    and you should see something similar to
-
-    ```text
-    k1234567@erc-hpc-login1:~$ source test_switch
-    Now using /software/spackages_v0_21_test/modules/linux-ubuntu22.04-zen2
-    To switch back use source test_switch again
-    k1234567@erc-hpc-login1:~$ source test_switch
-    Now using /software/spackages_v0_21_prod/modules/linux-ubuntu22.04-zen2
-    To switch back use source test_switch again
-    ```
-
-    !!! tip
-        You can also check which environment you are using by analysing the contents of `MODULEPATH`
-        environment variable, i.e. you should see something similar to `/software/spackages_prod/modules/` for
-        production and `/software/spackages_test/modules/` for test.
 
 ## Exercises - modules
 
@@ -268,7 +233,6 @@ k1234567@erc-hpc-login1:~$
 ```
 
 You will see that the environment name has disappeared from the shell prompt.
-
 
 ??? note "Conda virtual environments"
     Conda is another tool for creating virtual environments.
