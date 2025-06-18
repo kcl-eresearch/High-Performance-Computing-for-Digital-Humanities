@@ -169,8 +169,16 @@ sbatch submit_squares_numba.sh
 
 ## Array jobs
 
-Array jobs offer a mechanism for submitting and managing collections of similar jobs quickly and easily.
-All jobs will have the same initial options (e.g. memory, cpu, runtime, etc.) and will run the same commands.
+Array jobs are a feature provided by job schedulers like SLURM and offer a mechanism for **submitting and managing collections of similar tasks** (a task is equal to a single "job" from a "job array") quickly and easily.
+Each task in the job array runs independently.
+Job arrays are useful for running multiple instances of the same job with different input parameters or configurations.
+Tasks in a job array may or may not communicate with each other, depending on the specific requirements of the job.
+
+Unlike in MPI or multi-threading, **parallelization is orchestrated at the level of the shell script** rather than within your program (e.g. Python script).
+Each task in the job array represents an independent instance of the program, and the shell script manages the execution of these instances in parallel by iterating over the task indices and launching separate invocations of the program.
+This approach allows you to parallelize the execution of the program across multiple tasks without modifying the script itself, making it a flexible and convenient method for running parallel tasks on HPC systems.
+
+All jobs will have the same initial options (e.g. memory, number of cpus, runtime, etc.) and will run the same commands.
 Using array jobs is an easy way to parallelise your workloads, as long as the following is true:
 
 * Each array task can run independently of the others and there are no dependencies between the
@@ -193,7 +201,6 @@ A sample array job is given below:
 #SBATCH --partition=cpu
 #SBATCH --ntasks=1
 #SBATCH --mem=1G
-#SBATCH --reservation=cpu_introduction
 #SBATCH -t 0-0:02 # time (D-HH:MM)
 #SBATCH --array=1-3
 
@@ -207,14 +214,22 @@ echo "Array job - task id: $SLURM_ARRAY_TASK_ID"
     As a result, the array job will produce a separate log file for each of the tasks, i.e.
     you will see multiple files in the `slurm-jobid_taskid.out` format.
 
-## MPI jobs
+### Python example
+
+TODO
+
+## Distributed Memory Parallelism (DMP) / MPI jobs
 
 Sometimes you might want to utilise resources on multiple nodes simultaneously to perform computations.
+This is possible using a Message Passing Interface (MPI).
+In MPI, multiple independent processes run concurrently on separate nodes or processors.
+Each process has its own memory space.
+Communication between processes is achieved through explicit message passing (processes send and receive messages via MPI function calls).
 
 As mentioned earlier, requesting the resource by itself will not make your application run in parallel - the application has to support parallel execution.
 
 [Message Passing Interface (MPI)](https://en.wikipedia.org/wiki/Message_Passing_Interface)
-is standard designed for parallel execution and it allows programs to exploit multiple processing cores in parallel.
+is the most common library used by research software for parallel execution across processes.
 
 Although MPI programming is beyond the scope of this course, if your application
 uses, or supports MPI then it can be executed on multiple nodes in parallel.
@@ -227,7 +242,6 @@ For example, given the following submission script:
 #SBATCH --nodes=2
 #SBATCH --ntasks=16
 #SBATCH --mem=2G
-#SBATCH --reservation=cpu_introduction
 #SBATCH -t 0-0:05 # time (D-HH:MM)
 
 module load openmpi/4.1.3-gcc-10.3.0-python3+-chk-version
