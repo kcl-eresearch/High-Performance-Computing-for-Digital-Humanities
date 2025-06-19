@@ -83,12 +83,8 @@ sleep 60
 From the login node, submit the job to the scheduler using:
 
 ```bash
-sbatch --partition cpu --reservation=cpu_introduction test_job.sh
+sbatch --partition cpu test_job.sh
 ```
-
-With this command we tell the scheduler that we want to use the partition named "cpu" and using the reserved node we've put aside for this workshop.
-By reserving some space on the cluster, we've hopefully made sure that submitted jobs will run quickly.
-Outside of this workshop, you won't usually have access to a reservation, so you should submit your jobs without the `--reservation=cpu_introduction` argument.
 
 If necessary we can also often get test jobs like these to run more quickly by using the `interruptible_cpu` queue.
 The interruptible queues make use of otherwise unused space on private nodes, but if the owner of the nodes wants to use them, your running jobs may be cancelled.
@@ -97,7 +93,7 @@ It's useful for quick testing, but if you're going to use the interruptible queu
 Once the command is executed you should see something similar to:
 
 ```text
-k1234567@@erc-hpc-login1:~$ sbatch --partition cpu --reservation=cpu_introduction test_job.sh
+k1234567@@erc-hpc-login1:~$ sbatch --partition cpu test_job.sh
 Submitted batch job 56543
 ```
 
@@ -114,17 +110,17 @@ in the [job monitoring](#job-monitoring) section.
 
 Sometimes you might need, or want to run things interactively, rather than submitting them as batch jobs.
 This could be because you want to debug or test something, or the application/pipeline does not support
-non-interactive execution. To request interactive job via the scheduler use [`srun`](https://slurm.schedmd.com/srun.html) utility:
+non-interactive execution. To request an interactive job via the scheduler use the [`srun`](https://slurm.schedmd.com/srun.html) utility:
 
 ```bash
-srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+srun --partition cpu --pty /bin/bash -l
 ```
 
 The request will go through the scheduler and if resources are available you will be placed on
 a compute node, i.e.
 
 ```text
-k1234567@erc-hpc-login1:~$ srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+k1234567@erc-hpc-login1:~$ srun --partition cpu --pty /bin/bash -l
 srun: job 56544 queued and waiting for resources
 srun: job 56544 has been allocated resources
 k1234567@erc-hpc-comp001:~$
@@ -263,7 +259,7 @@ For a full list of options please see [sbatch](https://slurm.schedmd.com/sbatch.
 You can provide those options as arguments to the `sbatch`, or `srun` commands, i.e.
 
 ```bash
-sbatch --job-name test_job --partition cpu --reservation=cpu_introduction --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
+sbatch --job-name test_job --partition cpu --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
 ```
 
 however that can be time consuming and prone to errors. Luckily you can also define those resource requirements
@@ -277,7 +273,6 @@ will look like:
 #SBATCH --partition=cpu
 #SBATCH --ntasks=1
 #SBATCH --mem=1G
-#SBATCH --reservation=cpu_introduction
 #SBATCH -t 0-0:2 # time (D-HH:MM)
 
 echo "Hello World! "`hostname`
