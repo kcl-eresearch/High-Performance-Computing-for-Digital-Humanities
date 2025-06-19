@@ -31,6 +31,7 @@ nav:
     - Submitting jobs: 'submitting_jobs.md'
     - Parallel jobs: 'parallel_jobs.md'
     - Singularity: 'singularity.md'
+    - Jupyter notebooks: 'jupyter.md'
     - Practical: 'exercises.md'
     - Next steps: 'next-steps.md'
     - Reference:
