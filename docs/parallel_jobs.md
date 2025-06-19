@@ -214,9 +214,71 @@ echo "Array job - task id: $SLURM_ARRAY_TASK_ID"
     As a result, the array job will produce a separate log file for each of the tasks, i.e.
     you will see multiple files in the `slurm-jobid_taskid.out` format.
 
-### Python example
+### A more realistic example
 
-TODO
+For a more realistic example, let's revisit the Python script we used earlier to identify the most frequent words in a text file.
+It would be useful to able to run this on many input text files, without having to modify the Python script or manually submit a job for each input.
+This is a great usecase for array jobs.
+
+Here's our original submission script, which specifies a single text file as input.
+
+```bash
+#! /bin/bash -l
+
+#SBATCH --job-name=top_words
+#SBATCH --partition=cpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH -t 0-0:10 # time (D-HH:MM)
+
+module load python/3.11.6-gcc-13.2.0
+source top_words_env/bin/activate
+
+python top_words.py paradise-lost.txt 20
+```
+
+There are multiple text files we can use as input in the `/datasets/hpc_training/DH-RSE/data/` folder.
+We'll use `ls` to create a list of these input files and save it to an file.
+
+```bash
+ls /datasets/hpc_training/DH-RSE/data/*.txt > input_files.txt
+```
+
+We can now use the `head` and `tail` commands to pull out individual lines in the file.
+For example, to extract the third line:
+
+```bash
+head input_files.txt -n 3 | tail -n 1
+```
+
+The `head` command extracts the first _n_ lines of a file (here _n_ = 3).
+We use the pipe `|` to pass this output directly to the `tail` command, which extracts the last _n_ lines of its input.
+Here we specify _n_ = 1 to extract just the last line returned by `head`, which is the the third line of the input file.
+
+In the submission script, we can use the `$SLURM_ARRAY_TASK_ID` to extract the corresponding file name.
+Here's what our updated submission script looks like:
+
+```bash
+#! /bin/bash -l
+
+#SBATCH --job-name=top_words
+#SBATCH --partition=cpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH -t 0-0:10 # time (D-HH:MM)
+#SBATCH --array=1-10
+
+module load python/3.11.6-gcc-13.2.0
+source top_words_env/bin/activate
+
+input_file=`head input_files.txt -n $SLURM_ARRAY_TASK_ID | tail -n 1`
+
+echo "Analysing "$input_file
+
+python top_words.py $input_file 20
+```
 
 ## Distributed Memory Parallelism (DMP) / MPI jobs
 
