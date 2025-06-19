@@ -334,6 +334,103 @@ You can also separate the stdout and stderr into separate log files
     `%u` and `%j` are replacement symbols (representing username and job id) that will be replaced with actual values once the job is submitted.
     Please see [file patterns section](https://slurm.schedmd.com/sbatch.html) for details.
 
+## A more realistic example
+
+Let's work through a more realistic example.
+
+Here's a Python script which takes a text file as input and identifies the most common words in the file.
+The text is split into tokens, and punctuation and the most common English words are removed.
+The script then generates a wordcloud of the most common words, and saves it to a .png file.
+Finally, the top _N_ words are output in a text file.
+
+```py
+import nltk
+import wordcloud
+import pandas as pd
+import os
+import sys
+
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
+from string import punctuation
+
+# process command line arguments
+file_name = sys.argv[1]
+top_N = int(sys.argv[2])
+
+file_base, ext = os.path.splitext(os.path.basename(file_name))
+
+# read in text
+with open(file_name, encoding='utf-8-sig') as f:
+    txt = f.read().lower()
+
+# split text into tokens
+tokens = nltk.word_tokenize(txt)
+# remove punctuation and common words
+punct = punctuation + "“" + "”" + "’"
+english_stop_words = set(stopwords.words('english'))
+tokens = [word for word in tokens if 
+                     word not in english_stop_words and
+                     word not in punct]
+
+# create wordcloud and save to file
+wc = wordcloud.WordCloud()
+wc.generate(",".join(tokens))
+wc.to_file(file_base + '-wordcloud.png')
+
+# write csv file of top N tokens
+token_distribution = nltk.FreqDist(tokens)
+top_tokens = pd.DataFrame(token_distribution.most_common(top_N),
+                            columns=['Word', 'Frequency'])
+
+top_tokens.to_csv(file_base + '-top.csv')
+```
+
+The script can be run as follows, specifying the input text file and the number of top words to return:
+
+```bash
+python top_words.py paradise-lost.txt 20
+```
+
+To run this script, we need to first install the Python packages it uses.
+Let's create a new Python virtual environment to install them.
+
+```bash
+module load python/3.11.6-gcc-13.2.0
+python -m venv top_words_env
+```
+
+The packages we need to install are:
+`nltk`, for natural language processing;
+`wordcloud`, to create the wordcloud;
+and `pandas`, to create the table of most common words and their frequencies.
+
+```bash
+source top_words_env/bin/activate
+pip install nltk pandas wordcloud
+```
+
+In the submission script for this job, we need to load the `python` module and activate the virtual environment.
+We then run the script, specifying the input text file and number of top words to return.
+
+```bash
+#! /bin/bash -l
+
+#SBATCH --job-name=top_words
+#SBATCH --partition=cpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH -t 0-0:10 # time (D-HH:MM)
+
+module load python/3.11.6-gcc-13.2.0
+source top_words_env/bin/activate
+
+python top_words.py paradise-lost.txt 20
+```
+
 ## Exercises - submitting jobs
 
 Work through the exercises in [this section](exercises.md/#job-submission-part-1) to practice submitting and debugging jobs.
