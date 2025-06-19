@@ -273,15 +273,20 @@ Hello world from process 5 of 16 on host erc-hpc-comp005
 ## GPU jobs
 
 GPU jobs utilise GPUs present in the system.
-You can request those using the following script - note that this time we're using the `gpu` partition and the `gpu_introduction` reservation:
+GPUs are very good at certain types of calculations, and can have >10k cores each so can run many calculations in parallel.
+However, GPUs are not the best option for all tasks.
+GPUs are very bad at things that aren't these types of calculations, and typically have much smaller memory.
+In addition, GPU programming can be complex.
+
+You can request GPUs using the following script - note that this time we're using the `gpu` partition.
+The `nvidia-smi` command prints some information about the GPUs allocated to the job.
 
 ``` bash
 #SBATCH --job-name=gpu-job
 #SBATCH --partition=gpu
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
-#SBATCH --reservation=gpu_introduction
 #SBATCH -t 0-0:02 # time (D-HH:MM)
 #SBATCH --gres gpu:1
 
