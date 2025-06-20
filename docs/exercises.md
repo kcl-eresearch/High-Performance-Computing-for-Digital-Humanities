@@ -900,3 +900,46 @@ directory also contains example scripts from the exercises for convenience.
                         ||----w |
                         ||     ||
         ```
+
+1. ### Finding containers that are useful for your research
+
+    **Goal**: Use DockerHub to find a container that could be useful for your research and run it with Singularity
+
+    [DockerHub](https://hub.docker.com) is an online repository of container images.
+    Many commonly used pieces of software have been containerized into images that are officially endorsed, providing a convenient way to use this software without needing to install it.
+
+    * On DockerHub, search for some software you use in your research and see if you can find a container for that software
+    * Can you find documentation about how to use the container?
+    * Download the image to the HPC cluster
+    * Run it with Singularity
+
+        ??? hint
+
+            * If you can't think of a software to search for, try searching for `R` or `python`.
+            * Start an interactive session before running the commands
+            * Use `singularity pull docker://{container name}` command to download the container (replacing the `{}` and their contents with the correct container name)
+            * Use `singularity run` command to run the container
+
+        ??? example "Sample answer"
+            Let's search for a container that provides the `tidyverse` R packages.
+            
+            There is a `tidyverse` container provided by the `rocker` organisation.
+            
+            To pull the container, first start an interactive session as singularity is not available on
+            the login nodes:
+
+            ```
+            srun --partition interruptible_cpu --pty /bin/bash -l
+            ```
+
+            We can then pull the container with:
+
+            ```bash
+            singularity pull tidyverse.sif docker://rocker/tidyverse
+            ```
+
+            We can run R using the container with:
+
+            ```bash
+            singularity exec tidyverse.sif R
+            ```
