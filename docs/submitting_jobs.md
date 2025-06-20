@@ -294,28 +294,81 @@ This is quite useful, as it means the script can be executed outside the schedul
     so your job will likely be scheduled sooner.
     This also ensures that the HPC resources are being used efficiently.
 
-### Advanced resource requirements
+## Using GPUs
 
-In some situations you might want to request specific hardware, such as chipset or fast network interconects.
-This can be achived with the use of `--constrain` option.
+GPUs are becoming increasingly widely used in research software applications, especially for machine learning and AI approaches.
 
-To request a specific type of GPU `a100` you would use
+GPUs are very good at certain types of calculations, and can have >10k cores each so can run many of these calculations in parallel.
+However, GPUs are not the best option for all tasks.
+GPUs are very bad at things that aren't these types of calculations, and typically have much smaller memory.
+In addition, GPU programming can be complex.
 
-```text
-#SBATCH --constrain=a100
+You can request GPUs using the `--gres` option to SLURM.
+In the submission script below, `--gres gpu:1` requests one GPU.
+On CREATE HPC, you also need to use the `gpu` partition.
+The `nvidia-smi` command prints some information about the GPUs allocated to the job.
+
+!!! hint
+    You can request `X` gpus (up to 4) using `--gres gpu:X`
+
+``` bash
+#SBATCH --job-name=gpu-job
+#SBATCH --partition=gpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH -t 0-0:02 # time (D-HH:MM)
+#SBATCH --gres gpu:1
+
+nvidia-smi --id=$CUDA_VISIBLE_DEVICES
 ```
 
-or to request a specific type of processor/architecture you would use
+A sample output would be:
 
 ```text
-#SBATCH --constrain=haswell
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla K40c          On   | 00000000:08:00.0 Off |                    0 |
+| 23%   32C    P8    23W / 235W |      0MiB / 11441MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
 ```
+
+!!! note "Advanced resource requirements"
+
+    In some situations you might want to request specific hardware, such as chipset or fast network interconects.
+    This can be achived with the use of `--constrain` option.
+
+    To request a specific type of GPU `a100` you would use
+
+    ```text
+    #SBATCH --constrain=a100
+    ```
+
+    or to request a specific type of processor/architecture you would use
+
+    ```text
+    #SBATCH --constrain=haswell
+    ```
 
 ## Job log files
 
 By default the log files will be placed in the directory you have made your submission from (i.e. current working directory) in the format of `slurm-jobid.out`.
 Both [stdout and stderr streams](https://en.wikipedia.org/wiki/Standard_streams) will be redirected from the job to that file.
-These log files are important as they will give you clueues about the execution of your application in particular why it has failed.
+These log files are important as they will give you clues about the execution of your application in particular why it has failed.
 
 You can modify this to suit your needs by explicitly defining different path
 

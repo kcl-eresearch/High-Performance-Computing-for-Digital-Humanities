@@ -332,56 +332,6 @@ Hello world from process 4 of 16 on host erc-hpc-comp005
 Hello world from process 5 of 16 on host erc-hpc-comp005
 ```
 
-## GPU jobs
-
-GPU jobs utilise GPUs present in the system.
-GPUs are very good at certain types of calculations, and can have >10k cores each so can run many calculations in parallel.
-However, GPUs are not the best option for all tasks.
-GPUs are very bad at things that aren't these types of calculations, and typically have much smaller memory.
-In addition, GPU programming can be complex.
-
-You can request GPUs using the following script - note that this time we're using the `gpu` partition.
-The `nvidia-smi` command prints some information about the GPUs allocated to the job.
-
-``` bash
-#SBATCH --job-name=gpu-job
-#SBATCH --partition=gpu
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --mem=4G
-#SBATCH -t 0-0:02 # time (D-HH:MM)
-#SBATCH --gres gpu:1
-
-nvidia-smi --id=$CUDA_VISIBLE_DEVICES
-```
-
-A sample output would be:
-
-```text
-+-----------------------------------------------------------------------------+
-| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
-|-------------------------------+----------------------+----------------------+
-| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-|                               |                      |               MIG M. |
-|===============================+======================+======================|
-|   0  Tesla K40c          On   | 00000000:08:00.0 Off |                    0 |
-| 23%   32C    P8    23W / 235W |      0MiB / 11441MiB |      0%      Default |
-|                               |                      |                  N/A |
-+-------------------------------+----------------------+----------------------+
-
-+-----------------------------------------------------------------------------+
-| Processes:                                                                  |
-|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-|        ID   ID                                                   Usage      |
-|=============================================================================|
-|  No running processes found                                                 |
-+-----------------------------------------------------------------------------+
-```
-
-!!! hint
-    You can request `X` gpus (up to 4) using `--gres gpu:X`
-
 ## Exercises - parallel jobs and benchmarking
 
 Work through the exercises in [this section](exercises.md/#job-submission-part-2) to practice submitting parallel jobs.
