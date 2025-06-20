@@ -98,7 +98,7 @@ Submitted batch job 56543
 ```
 
 !!! info
-    If you do not define a partition during the job submission the default, cpu partition will be used.
+    If you do not define a partition during the job submission the default partition will be used, in this case `cpu`.
 
 The job id (`56543`) is a unique identifier assigned to your job and can be used to query the status of the job. We will go through it
 in the [job monitoring](#job-monitoring) section.
@@ -323,6 +323,12 @@ The `nvidia-smi` command prints some information about the GPUs allocated to the
 nvidia-smi --id=$CUDA_VISIBLE_DEVICES
 ```
 
+Submit this job using:
+
+```bash
+sbatch test_gpu.sh
+```
+
 A sample output would be:
 
 ```text
@@ -483,6 +489,14 @@ source top_words_env/bin/activate
 
 python top_words.py paradise-lost.txt 20
 ```
+
+Submit the job using:
+
+```bash
+sbatch submit_top_words.sh
+```
+
+Once it finishes, examine the output using `cat` or `less` to look at the contents of `paradise-lost-top.csv`.
 
 ## Exercises - submitting jobs
 

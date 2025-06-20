@@ -161,7 +161,7 @@ source numba_venv/bin/activate
 pip install numba numpy
 ```
 
-We run the shell script:
+We can then submit the job:
 
 ```bash
 sbatch submit_squares_numba.sh
@@ -205,6 +205,12 @@ A sample array job is given below:
 #SBATCH --array=1-3
 
 echo "Array job - task id: $SLURM_ARRAY_TASK_ID"
+```
+
+Submit the array job using:
+
+```bash
+sbatch submit_array.sh
 ```
 
 !!! info
@@ -280,6 +286,15 @@ echo "Analysing "$input_file
 python top_words.py $input_file 20
 ```
 
+Submit the array job with:
+
+```bash
+sbatch submit_top_words_array.sh
+```
+
+You can then monitor the jobs with `squeue --me`.
+Output files will be produced for each item in the array.
+
 ## Distributed Memory Parallelism (DMP) / MPI jobs
 
 Sometimes you might want to utilise resources on multiple nodes simultaneously to perform computations.
@@ -311,7 +326,13 @@ module load openmpi/4.1.3-gcc-10.3.0-python3+-chk-version
 mpirun /datasets/hpc_training/utils/mpi_hello
 ```
 
-A sample output would be
+Which would be submitted using:
+
+```bash
+sbatch test_mpi.sh
+```
+
+A sample output would be:
 
 ```text
 Hello world from process 11 of 16 on host erc-hpc-comp006

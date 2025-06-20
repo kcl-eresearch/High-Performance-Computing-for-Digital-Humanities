@@ -167,7 +167,7 @@ e.g. `ssh -NL 8888:erc-hpc-comp015:53723 k1234567@hpc.create.kcl.ac.uk`.
     This will produce a message saying you may need to visit the e-Research Portal to authorise
     your SSH connection, but then no further output, even if successful. This is expected!
 
-Then in your web browser go to [http://localhost:8888/lab?token=<add the token from the jupyter output below>](http://localhost:8888), and you should see the Jupyter Lab interface.
+Then in your web browser go to [http://localhost:8888/lab?token=yourtokenhere](http://localhost:8888), and you should see the Jupyter Lab interface.
 
 When you're finished working, close the browser tab,
 use `Ctrl+C` to close the SSH tunnel,
