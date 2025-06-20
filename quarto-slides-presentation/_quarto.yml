@@ -1,0 +1,24 @@
+title: "An Intro to and History of HPC Computing"
+author: "Max Wyatt, e-Research"
+format:
+  revealjs:
+    theme: "default"
+    slideLevel: 2
+    transition: "slide"
+    width: 1920
+    height: 1080
+    controls: true
+    progress: true
+    history: true
+    center: true
+    loop: false
+    keyboard: true
+    touch: true
+    fragments: true
+    slideNumber: true
+    overview: true
+    markdown: true
+    math: true
+    highlight: true
+    css: "styles.css"  # Optional: Custom CSS file for styling
+    js: "scripts.js"    # Optional: Custom JavaScript file for additional functionality
