@@ -7,11 +7,34 @@ However, there are ways to run software with a graphical user interface on an HP
 This allows you to benefit from the resources available on the HPC (multiple cores for parallel jobs, more memory than available on your computer)
 while also having the convenience of a familiar graphical user interface.
 
+## SSH tunneling
+
+The approach we will use to connect to the Jupyter notebook today is called SSH tunneling (or SSH port forwarding).
+A port, in this context, is a virtual point where network connections between devices start and end.
+Computers have 65,535 possible ports; each port is assigned a number to identify it.
+Some port numbers are reserved to identify specific services.
+For example, port 80 is used for HTTP connections and port 443 for HTTPS.
+
+Jupyter notebooks use port 8888 by default - if you run a Jupyter notebook locally e.g. using `jupyterlab`, you likely access it by going to `localhost:8888/lab` in your web browser.
+
+To connect to a Jupyter notebook (or other service) running on an HPC cluster, we have to set up an SSH tunnel that connects a port on our local machine to the port used by the Jupyter notebook on the HPC node.
+
+We can do this using the `ssh` command with specific options:
+
+```bash
+ssh -NL 8888:10.211.123.123:12345 k1234567@hpc.create.kcl.ac.uk
+```
+
+* The `-N` and `-L` options specify that we want to just set up port forwarding and not run any commands on the HPC node.
+* `8888` is the _local_ port we want to use to connect to the Jupyter notebook
+* `10.211.123.123` is the IP address of the node we want to connect to
+* `12345` is the port on that node that the Jupyter notebook is running on (when running on a shared system, it's best not to use the default `8888` port as someone else might also be using it!)
+
 ## Installing Jupyterlab
 
-We will use `jupyterlab` to run a Jupyter notebook.
+We will use `jupyterlab` to run a Jupyter notebook on the HPC.
 We'll create a new Python virtual environment for this,
-but note that you could also install the `jupyterlab` package within an existing virtual environment if you have created one for a specific project.
+but note that you could also install the `jupyterlab` package within an existing virtual environment if you have created a virtual env for a specific project.
 
 ```bash
 module load python/3.11.6-gcc-13.2.0
@@ -96,7 +119,8 @@ module load python/3.11.6-gcc-13.2.0
 source jupyter_env/bin/activate
 ```
 
-The next block does some setup and prints some information to the SLURM output file which will explain how to connect to your Jupyterlab session after you submit the job.
+The next block identifies the IP address of the allocated node and finds an unused port for Jupyterlab to use.
+It then prints information to the SLURM output file which will explain how set up the SSH tunnel and connect to your Jupyterlab session after you submit the job.
 
 ```text
 # get unused socket per https://unix.stackexchange.com/a/132524
@@ -121,7 +145,7 @@ issuing the following command on the login node:
 END
 ```
 
-The final section of the batch script runs jupyterlab.
+The final section of the batch script runs jupyterlab using the identified IP address and port.
 
 ```text
 jupyter-lab --port=${PORT} --ip=${IPADDRESS} --no-browser
@@ -135,7 +159,6 @@ k1234567@erc-hpc-login2:~$ sbatch jupyter.sh
 Submitted batch job 15244802
 k1234567@erc-hpc-login2:~$ cat slurm-15244802.out
 ```
-
 
 On your laptop or desktop, start a new terminal session and run the ssh command given in your job's output,
 e.g. `ssh -NL 8888:erc-hpc-comp015:53723 k1234567@hpc.create.kcl.ac.uk`.
