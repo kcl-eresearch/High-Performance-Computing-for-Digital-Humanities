@@ -29,8 +29,12 @@ nav:
     - Connecting: 'connecting.md'
     - Accessing software: 'using_software.md'
     - Submitting jobs: 'submitting_jobs.md'
+    - Parallel jobs: 'parallel_jobs.md'
     - Singularity: 'singularity.md'
-    - RStudio: 'rstudio.md'
+    - Jupyter notebooks: 'jupyter.md'
     - Practical: 'exercises.md'
     - Next steps: 'next-steps.md'
+    - Reference:
+      - Unix commands: 'unix_commands.md'
+      - SSH keys: 'ssh_keys.md'
     - Slides: 'slides.md'

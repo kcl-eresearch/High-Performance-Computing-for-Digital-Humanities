@@ -12,18 +12,21 @@ you have to wait for the job to run.
 ![Waiter analogy](images/restaurant_queue_manager.svg)
 
 CREATE is using [SLURM](https://slurm.schedmd.com) scheduler, which stands for Simple Linux Utility for Resource Management.
+SLURM is commonly used by other HPC systems as well.
+You may also encounter other job schedulers such as [PBS](https://www.openpbs.org/).
+These work on similar principles, although the exact commands and terminology will be different.
 
 ## Partitions
 
 You can think of partitions as queues - they reside over specific sets of resources and allow access to particular groups.
 Following the restaurant analogy, think of them as different sections of the restaurant and corresponding queues assigned to them.
 
-The public partitions are:
+The public partitions available on CREATE HPC are:
 
 * `cpu`: Partition for cpu jobs
 * `gpu`: Partition for gpu jobs
-* `long_`: Partitions for long running jobs. Requires justification and explicit permission to use
-* `interruptible_`: Partitions that use unused capacity on private servers
+* `long_cpu` and `long_gpu`: Partitions for long running jobs. Requires justification and explicit permission to use
+* `interruptible_cpu` and `interruptible_gpu`: Partitions that use unused capacity on private servers
 
 In addition, specific groups/faculties have their own partitions on CREATE HPC that can only be used by members of those groups.
 The list of CREATE partitions and who can use them can be found in our [documentation](https://docs.er.kcl.ac.uk/CREATE/running_jobs/#identify-your-partition).
@@ -47,7 +50,7 @@ Any additional rows you see in the output of `sinfo` will be private partitions 
 
 ## Submitting jobs
 
-In most cases you will be submitting non-interactive jobs, comonly referred to as batch jobs. For this you will be
+In most cases you will be submitting non-interactive jobs, commonly referred to as batch jobs. For this you will be
 using the [`sbatch`](https://slurm.schedmd.com/sbatch.html) utility.
 
 To submit a job to the queue, we need to write a **shell script** which contains the commands we want to run.
@@ -80,12 +83,8 @@ sleep 60
 From the login node, submit the job to the scheduler using:
 
 ```bash
-sbatch --partition cpu --reservation=cpu_introduction test_job.sh
+sbatch --partition cpu test_job.sh
 ```
-
-With this command we tell the scheduler that we want to use the partition named "cpu" and using the reserved node we've put aside for this workshop.
-By reserving some space on the cluster, we've hopefully made sure that submitted jobs will run quickly.
-Outside of this workshop, you won't usually have access to a reservation, so you should submit your jobs without the `--reservation=cpu_introduction` argument.
 
 If necessary we can also often get test jobs like these to run more quickly by using the `interruptible_cpu` queue.
 The interruptible queues make use of otherwise unused space on private nodes, but if the owner of the nodes wants to use them, your running jobs may be cancelled.
@@ -94,12 +93,12 @@ It's useful for quick testing, but if you're going to use the interruptible queu
 Once the command is executed you should see something similar to:
 
 ```text
-k1234567@@erc-hpc-login1:~$ sbatch --partition cpu --reservation=cpu_introduction test_job.sh
+k1234567@@erc-hpc-login1:~$ sbatch --partition cpu test_job.sh
 Submitted batch job 56543
 ```
 
 !!! info
-    If you do not define a partition during the job submission the default, cpu partition will be used.
+    If you do not define a partition during the job submission the default partition will be used, in this case `cpu`.
 
 The job id (`56543`) is a unique identifier assigned to your job and can be used to query the status of the job. We will go through it
 in the [job monitoring](#job-monitoring) section.
@@ -111,17 +110,17 @@ in the [job monitoring](#job-monitoring) section.
 
 Sometimes you might need, or want to run things interactively, rather than submitting them as batch jobs.
 This could be because you want to debug or test something, or the application/pipeline does not support
-non-interactive execution. To request interactive job via the scheduler use [`srun`](https://slurm.schedmd.com/srun.html) utility:
+non-interactive execution. To request an interactive job via the scheduler use the [`srun`](https://slurm.schedmd.com/srun.html) utility:
 
 ```bash
-srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+srun --partition cpu --pty /bin/bash -l
 ```
 
 The request will go through the scheduler and if resources are available you will be placed on
 a compute node, i.e.
 
 ```text
-k1234567@erc-hpc-login1:~$ srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+k1234567@erc-hpc-login1:~$ srun --partition cpu --pty /bin/bash -l
 srun: job 56544 queued and waiting for resources
 srun: job 56544 has been allocated resources
 k1234567@erc-hpc-comp001:~$
@@ -260,7 +259,7 @@ For a full list of options please see [sbatch](https://slurm.schedmd.com/sbatch.
 You can provide those options as arguments to the `sbatch`, or `srun` commands, i.e.
 
 ```bash
-sbatch --job-name test_job --partition cpu --reservation=cpu_introduction --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
+sbatch --job-name test_job --partition cpu --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
 ```
 
 however that can be time consuming and prone to errors. Luckily you can also define those resource requirements
@@ -274,7 +273,6 @@ will look like:
 #SBATCH --partition=cpu
 #SBATCH --ntasks=1
 #SBATCH --mem=1G
-#SBATCH --reservation=cpu_introduction
 #SBATCH -t 0-0:2 # time (D-HH:MM)
 
 echo "Hello World! "`hostname`
@@ -296,208 +294,39 @@ This is quite useful, as it means the script can be executed outside the schedul
     so your job will likely be scheduled sooner.
     This also ensures that the HPC resources are being used efficiently.
 
-### Advanced resource requirements
+## Using GPUs
 
-In some situations you might want to request specific hardware, such as chipset or fast network interconects.
-This can be achived with the use of `--constrain` option.
+GPUs are becoming increasingly widely used in research software applications, especially for machine learning and AI approaches.
 
-To request a specific type of GPU `a100` you would use
+GPUs are very good at certain types of calculations, and can have >10k cores each so can run many of these calculations in parallel.
+However, GPUs are not the best option for all tasks.
+GPUs are very bad at things that aren't these types of calculations, and typically have much smaller memory.
+In addition, GPU programming can be complex.
 
-```text
-#SBATCH --constrain=a100
-```
-
-or to request a specific type of processor/architecture you would use
-
-```text
-#SBATCH --constrain=haswell
-```
-
-## Job log files
-
-By default the log files will be placed in the directory you have made your submission from (i.e. current working directory) in the format of `slurm-jobid.out`.
-Both [stdout and stderr streams](https://en.wikipedia.org/wiki/Standard_streams) will be redirected from the job to that file.
-These log files are important as they will give you clueues about the execution of your application in particular why it has failed.
-
-You can modify this to suit your needs by explicitly defining different path
-
-```bash
-#SBATCH --output=/scratch/users/%u/%j.out
-```
-
-You can also separate the stdout and stderr into separate log files
-
-```bash
-#SBATCH --output=/scratch/users/%u/%j.out
-#SBATCH --error=/scratch/users/%u/%j.err
-```
-
-!!! info
-    `%u` and `%j` are replacement symbols (representing username and job id) that will be replaced with actual values once the job is submitted.
-    Please see [file patterns section](https://slurm.schedmd.com/sbatch.html) for details.
-
-## Exercises - submitting jobs
-
-Work through the exercises in [this section](exercises.md/#job-submission-part-1) to practice submitting and debugging jobs.
-
-## Parallel jobs
-
-The main advantage of using an HPC system is the ability to utilise its large compute power to run jobs in parallel.
-
-!!! important
-    When considering running parallel jobs make sure to consult your application documentation to find out if it can be run
-    in the parallel environment. Nowadays most applications will support some level of parallelism.
-    Many scientific software tools will have `-p` or `-t` options to specify numbers of CPUs to be used when running in parallel.
-    Applications that can make use of multiple nodes are less common.
-
-    If the application does not support parallelism, requesting additional resources will not improve performance, and will likely
-    lead to longer waiting times for your job to be scheduled.
-    It also leads to resources being wasted as they are allocated to your job but are unused.
-
-    If you request multiple CPUs/nodes for your job, it's a good idea to check how effectively your job uses them using `sacct`, as discussed
-    in the [job monitoring](#job-monitoring) section.
-    Most applications do not scale infinitely and will reach a point where the marginal impact of allocating more resources is minimal.
-
-### Multithreaded/multicore (SMP) jobs
-
-These type of jobs will occupy multiple cores on a single node often using a method known as OpenMP.
-The program which we want to run must be designed to support running multithreaded jobs.
-You can request those using the following script:
-
-```bash
-#SBATCH --job-name=omp_hello
-#SBATCH --partition=cpu
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=2G
-#SBATCH --reservation=cpu_introduction
-#SBATCH -t 0-0:02 # time (D-HH:MM)
-
-/datasets/hpc_training/utils/omp_hello
-```
-
-One possible output would be:
-
-```text
-Hello World from OpenMP thread 2 of 4
-Hello World from OpenMP thread 3 of 4
-Hello World from OpenMP thread 0 of 4
-Hello World from OpenMP thread 1 of 4
-```
-
-Note here that the lines don't come out in any particular order - each time you run the program you might end up with a different result.
-This is because the program doesn't make any attempt to synchronise the printing of each line, it just executes all of them in parallel.
+You can request GPUs using the `--gres` option to SLURM.
+In the submission script below, `--gres gpu:1` requests one GPU.
+On CREATE HPC, you also need to use the `gpu` partition.
+The `nvidia-smi` command prints some information about the GPUs allocated to the job.
 
 !!! hint
-    You can also request memory per cpu, rather than per node using the `--mem-per-cpu` option.
-    `--mem` and `--mem-per-cpu` are mutually exclusive meaning you can use one, or the other in your
-    resource request.
-
-### Array jobs
-
-Array jobs offer a mechanism for submitting and managing collections of similar jobs quickly and easily.
-All jobs will have the same initial options (e.g. memory, cpu, runtime, etc.) and will run the same commands.
-Using array jobs is an easy way to parallelise your workloads, as long as the following is true:
-
-* Each array task can run independently of the others and there are no dependencies between the
-  different components ([embarassingly parallel problem](https://en.wikipedia.org/wiki/Embarrassingly_parallel)).
-* There is no requirement for all of the array tasks to run simultaneously.
-* You can link the array task id (`SLURM_ARRAY_TASK_ID`) somehow to your data, or execution of your application.
-
-To define an array job you will be using an `--array=range[:step][%max_active]` option:
-
-* `range` defines index values and can consist of comma separated list and/or a range of values with a "-" separator, e.g. `1,2,3,4`, or `1-4` or `1,2-4`
-* `step` defines the increment between the index values, i.e. `0-15:4` would be equivalent to `0,4,8,12`
-* `max_active` defines number of simultaneously running tasks at any give time, i.e. `1-10%2` means only two array tasks can run simultaneously for
-  the given array job
-
-A sample array job is given below:
-
-```bash
-#!/bin/bash -l
-#SBATCH --job-name=array-sample
-#SBATCH --partition=cpu
-#SBATCH --ntasks=1
-#SBATCH --mem=1G
-#SBATCH --reservation=cpu_introduction
-#SBATCH -t 0-0:02 # time (D-HH:MM)
-#SBATCH --array=1-3
-
-echo "Array job - task id: $SLURM_ARRAY_TASK_ID"
-```
-
-!!! info
-
-    When the job starts running a separate job id in the format `jobid_taskid` will be assigned to each of the tasks.
-
-    As a result, the array job will produce a separate log file for each of the tasks, i.e.
-    you will see multiple files in the `slurm-jobid_taskid.out` format.
-
-### MPI jobs
-
-Sometimes you might want to utilise resources on multiple nodes simultaneously to perform computations.
-
-As mentioned earlier, requesting the resource by itself will not make your application run in parallel - the application has to support parallel execution.
-
-[Message Passing Interface (MPI)](https://en.wikipedia.org/wiki/Message_Passing_Interface)
-is standard designed for parallel execution and it allows programs to exploit multiple processing cores in parallel.
-
-Although MPI programming is beyond the scope of this course, if your application
-uses, or supports MPI then it can be executed on multiple nodes in parallel.
-For example, given the following submission script:
-
-```bash
-#!/bin/bash -l
-#SBATCH --job-name=multinode-test
-#SBATCH --partition=cpu
-#SBATCH --nodes=2
-#SBATCH --ntasks=16
-#SBATCH --mem=2G
-#SBATCH --reservation=cpu_introduction
-#SBATCH -t 0-0:05 # time (D-HH:MM)
-
-module load openmpi/4.1.3-gcc-10.3.0-python3+-chk-version
-
-mpirun /datasets/hpc_training/utils/mpi_hello
-```
-
-A sample output would be
-
-```text
-Hello world from process 11 of 16 on host erc-hpc-comp006
-Hello world from process 2 of 16 on host erc-hpc-comp005
-Hello world from process 15 of 16 on host erc-hpc-comp006
-Hello world from process 13 of 16 on host erc-hpc-comp006
-Hello world from process 12 of 16 on host erc-hpc-comp006
-Hello world from process 1 of 16 on host erc-hpc-comp005
-Hello world from process 14 of 16 on host erc-hpc-comp006
-Hello world from process 0 of 16 on host erc-hpc-comp005
-Hello world from process 3 of 16 on host erc-hpc-comp005
-Hello world from process 9 of 16 on host erc-hpc-comp006
-Hello world from process 7 of 16 on host erc-hpc-comp005
-Hello world from process 6 of 16 on host erc-hpc-comp005
-Hello world from process 10 of 16 on host erc-hpc-comp006
-Hello world from process 8 of 16 on host erc-hpc-comp006
-Hello world from process 4 of 16 on host erc-hpc-comp005
-Hello world from process 5 of 16 on host erc-hpc-comp005
-```
-
-### GPU jobs
-
-GPU jobs utilise GPUs present in the system.
-You can request those using the following script - note that this time we're using the `gpu` partition and the `gpu_introduction` reservation:
+    You can request `X` gpus (up to 4) using `--gres gpu:X`
 
 ``` bash
 #SBATCH --job-name=gpu-job
 #SBATCH --partition=gpu
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
-#SBATCH --reservation=gpu_introduction
 #SBATCH -t 0-0:02 # time (D-HH:MM)
 #SBATCH --gres gpu:1
 
 nvidia-smi --id=$CUDA_VISIBLE_DEVICES
+```
+
+Submit this job using:
+
+```bash
+sbatch test_gpu.sh
 ```
 
 A sample output would be:
@@ -524,9 +353,151 @@ A sample output would be:
 +-----------------------------------------------------------------------------+
 ```
 
-!!! hint
-    You can request `X` gpus (up to 4) using `--gres gpu:X`
+!!! note "Advanced resource requirements"
 
-## Exercises - parallel jobs and benchmarking
+    In some situations you might want to request specific hardware, such as chipset or fast network interconects.
+    This can be achived with the use of `--constrain` option.
 
-Work through the exercises in [this section](exercises.md/#job-submission-part-2) to practice submitting parallel jobs, and [this section](exercises.md/#job-submission-part-3) to look at optimisation and benchmarking.
+    To request a specific type of GPU `a100` you would use
+
+    ```text
+    #SBATCH --constrain=a100
+    ```
+
+    or to request a specific type of processor/architecture you would use
+
+    ```text
+    #SBATCH --constrain=haswell
+    ```
+
+## Job log files
+
+By default the log files will be placed in the directory you have made your submission from (i.e. current working directory) in the format of `slurm-jobid.out`.
+Both [stdout and stderr streams](https://en.wikipedia.org/wiki/Standard_streams) will be redirected from the job to that file.
+These log files are important as they will give you clues about the execution of your application in particular why it has failed.
+
+You can modify this to suit your needs by explicitly defining different path
+
+```bash
+#SBATCH --output=/scratch/users/%u/%j.out
+```
+
+You can also separate the stdout and stderr into separate log files
+
+```bash
+#SBATCH --output=/scratch/users/%u/%j.out
+#SBATCH --error=/scratch/users/%u/%j.err
+```
+
+!!! info
+    `%u` and `%j` are replacement symbols (representing username and job id) that will be replaced with actual values once the job is submitted.
+    Please see [file patterns section](https://slurm.schedmd.com/sbatch.html) for details.
+
+## A more realistic example
+
+Let's work through a more realistic example.
+
+Here's a Python script which takes a text file as input and identifies the most common words in the file.
+The text is split into tokens, and punctuation and the most common English words are removed.
+The script then generates a wordcloud of the most common words, and saves it to a .png file.
+Finally, the top _N_ words are output in a text file.
+
+```py
+import nltk
+import wordcloud
+import pandas as pd
+import os
+import sys
+
+nltk.download('punkt_tab')
+nltk.download('stopwords')
+
+from nltk.corpus import stopwords
+from string import punctuation
+
+# process command line arguments
+file_name = sys.argv[1]
+top_N = int(sys.argv[2])
+
+file_base, ext = os.path.splitext(os.path.basename(file_name))
+
+# read in text
+with open(file_name, encoding='utf-8-sig') as f:
+    txt = f.read().lower()
+
+# split text into tokens
+tokens = nltk.word_tokenize(txt)
+# remove punctuation and common words
+punct = punctuation + "“" + "”" + "’"
+english_stop_words = set(stopwords.words('english'))
+tokens = [word for word in tokens if 
+                     word not in english_stop_words and
+                     word not in punct]
+
+# create wordcloud and save to file
+wc = wordcloud.WordCloud()
+wc.generate(",".join(tokens))
+wc.to_file(file_base + '-wordcloud.png')
+
+# write csv file of top N tokens
+token_distribution = nltk.FreqDist(tokens)
+top_tokens = pd.DataFrame(token_distribution.most_common(top_N),
+                            columns=['Word', 'Frequency'])
+
+top_tokens.to_csv(file_base + '-top.csv')
+```
+
+The script can be run as follows, specifying the input text file and the number of top words to return:
+
+```bash
+python top_words.py paradise-lost.txt 20
+```
+
+To run this script, we need to first install the Python packages it uses.
+Let's create a new Python virtual environment to install them.
+
+```bash
+module load python/3.11.6-gcc-13.2.0
+python -m venv top_words_env
+```
+
+The packages we need to install are:
+`nltk`, for natural language processing;
+`wordcloud`, to create the wordcloud;
+and `pandas`, to create the table of most common words and their frequencies.
+
+```bash
+source top_words_env/bin/activate
+pip install nltk pandas wordcloud
+```
+
+In the submission script for this job, we need to load the `python` module and activate the virtual environment.
+We then run the script, specifying the input text file and number of top words to return.
+
+```bash
+#! /bin/bash -l
+
+#SBATCH --job-name=top_words
+#SBATCH --partition=cpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+#SBATCH -t 0-0:10 # time (D-HH:MM)
+
+module load python/3.11.6-gcc-13.2.0
+source top_words_env/bin/activate
+
+python top_words.py paradise-lost.txt 20
+```
+
+Submit the job using:
+
+```bash
+sbatch submit_top_words.sh
+```
+
+Once it finishes, examine the output using `cat` or `less` to look at the contents of `paradise-lost-top.csv`.
+
+## Exercises - submitting jobs
+
+Work through the exercises in [this section](exercises.md/#job-submission-part-1) to practice submitting and debugging jobs.

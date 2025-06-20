@@ -1,16 +1,17 @@
-# High performance computing with CREATE
+# High performance computing for Digital Humanities
 
-This workshop is an introduction to using the CREATE High-Performance Computing (HPC) system and is intended to give a basic overview of the tools available and how to use them.
+This workshop is an introduction to using High-Performance Computing (HPC) systems, using the King's College London CREATE HPC as an example.
 
 By the end of the workshop you should be able to:
 
-* Use modules to find and load the necessary software
+* Find and load available software
 * Use Python virtual environments
-* Use Singularity containers
-* Use scheduler commands to submit jobs and find out information about them
+* Understand what a job scheduler does and why this is important for HPC systems
+* Use job scheduler commands to submit jobs and find out information about them
 * Submit different types of jobs
+* Use Singularity containers
 
-## What is an HPC system
+## What is an HPC system?
 
 An HPC system is a term that usually describes a clustered network of computers. The computers in a cluster typically share a common purpose, and are used to accomplish tasks that might otherwise be too big for any one computer. Those computers might share the same, or similar hardware specifications, are usually connected via high speed networks and are backed by a fast, network filesystems.
 
@@ -48,12 +49,13 @@ If you use MacOS or Linux, you will have one available by default.
 If you use Windows, you can use PowerShell - some commands will differ from those used on Mac/Linux.
 
 If you are working through these materials on your own, outside a workshop, you will also need to request an account on the CREATE HPC system.
-Information on how to request access can be found in our [documentation](https://docs.er.kcl.ac.uk/CREATE/requesting_access/)
+Information on how to request access can be found in the CREATE [documentation](https://docs.er.kcl.ac.uk/CREATE/requesting_access/)
 
 ## References
 
 The material in this course was inspired by / based on the following resources
 
+* King's e-Research general [Introduction to HPC workshop](https://hpc-training.sites.er.kcl.ac.uk/) materials
 * [CREATE documentation](https://docs.er.kcl.ac.uk/)
 * [EPCC Introduction to High-Performance Computing](https://epcced.github.io/hpc-intro/)
 * [A previous iteration of this course developed at Maudsley BRC](https://github.kcl.ac.uk/pages/maudsley-brc-cti/drive-health-hpc-training/)
