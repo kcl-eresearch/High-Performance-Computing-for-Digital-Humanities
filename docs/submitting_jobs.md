@@ -83,17 +83,20 @@ sleep 60
 From the login node, submit the job to the scheduler using:
 
 ```bash
-sbatch --partition cpu test_job.sh
+sbatch --partition cpu --reservation cpu_introduction test_job.sh
 ```
 
-If necessary we can also often get test jobs like these to run more quickly by using the `interruptible_cpu` queue.
+We are specifying the partition to use (`cpu`), and also the reservation (`cpu_introduction`).
+We have set up a reservation for this workshop to ensure we don't have to wait too long to be allocated resources.
+Outside of an organised workshop, you likely won't have a reservation.
+On CREATE HPC, we can also often get test jobs like these to run more quickly by using the `interruptible_cpu` queue.
 The interruptible queues make use of otherwise unused space on private nodes, but if the owner of the nodes wants to use them, your running jobs may be cancelled.
 It's useful for quick testing, but if you're going to use the interruptible queues for real jobs you need to make sure they can be safely cancelled and not lose progress - this is often done via **checkpointing**.
 
 Once the command is executed you should see something similar to:
 
 ```text
-k1234567@@erc-hpc-login1:~$ sbatch --partition cpu test_job.sh
+k1234567@@erc-hpc-login1:~$ sbatch --partition cpu --reservation cpu_introduction test_job.sh
 Submitted batch job 56543
 ```
 
@@ -113,14 +116,14 @@ This could be because you want to debug or test something, or the application/pi
 non-interactive execution. To request an interactive job via the scheduler use the [`srun`](https://slurm.schedmd.com/srun.html) utility:
 
 ```bash
-srun --partition cpu --pty /bin/bash -l
+srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
 ```
 
 The request will go through the scheduler and if resources are available you will be placed on
 a compute node, i.e.
 
 ```text
-k1234567@erc-hpc-login1:~$ srun --partition cpu --pty /bin/bash -l
+k1234567@erc-hpc-login1:~$ srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
 srun: job 56544 queued and waiting for resources
 srun: job 56544 has been allocated resources
 k1234567@erc-hpc-comp001:~$
@@ -259,7 +262,7 @@ For a full list of options please see [sbatch](https://slurm.schedmd.com/sbatch.
 You can provide those options as arguments to the `sbatch`, or `srun` commands, i.e.
 
 ```bash
-sbatch --job-name test_job --partition cpu --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
+sbatch --job-name test_job --partition cpu --reservation cpu_introduction --ntasks 1 --mem 1G --time 0-0:2 test_job.sh
 ```
 
 however that can be time consuming and prone to errors. Luckily you can also define those resource requirements
@@ -271,6 +274,7 @@ will look like:
 
 #SBATCH --job-name=hello-world
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --mem=1G
 #SBATCH -t 0-0:2 # time (D-HH:MM)
@@ -283,6 +287,14 @@ sleep 60
     In bash, and other shell scripting languages `#` is a special character usually representing comment
     (`#!` is an exception used to define the interpreter that the script will be executed with) and is ignored during the execution.
     For information on special characters in bash please see [here](https://tldp.org/LDP/abs/html/special-chars.html).
+
+!!! hint
+    You can specify SLURM options using two slightly different formats:
+    1. `--partition cpu`
+    1. `--partition=cpu`
+    Here we have have used the first version on the command line and the second inside the submission script,
+    but this isn't necessary.
+    Either format can be used in either context.
 
 `#SBATCH` is a special tag that will be interpreted by SLURM (other schedulers utilise similar mechanism) when the job is submitted.
 When the script is run outside the scheduler it will be ignored (becuse of the `#` comment).
@@ -305,7 +317,7 @@ In addition, GPU programming can be complex.
 
 You can request GPUs using the `--gres` option to SLURM.
 In the submission script below, `--gres gpu:1` requests one GPU.
-On CREATE HPC, you also need to use the `gpu` partition.
+On CREATE HPC, you also need to use the `gpu` or `interruptible_gpu` partition.
 The `nvidia-smi` command prints some information about the GPUs allocated to the job.
 
 !!! hint
@@ -313,7 +325,7 @@ The `nvidia-smi` command prints some information about the GPUs allocated to the
 
 ``` bash
 #SBATCH --job-name=gpu-job
-#SBATCH --partition=gpu
+#SBATCH --partition=interruptible_gpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
@@ -479,6 +491,7 @@ We then run the script, specifying the input text file and number of top words t
 
 #SBATCH --job-name=top_words
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=2G
