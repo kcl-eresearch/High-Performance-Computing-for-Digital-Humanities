@@ -255,7 +255,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-job1
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
         #SBATCH --ntasks=1
         #SBATCH --nodes=1
         #SBATCH --cpus-per-task=1
@@ -314,7 +315,7 @@ directory also contains example scripts from the exercises for convenience.
         Use `srun` command to request an interactive session
 
         ```
-        k1234567@erc-hpc-login2:~$ srun -p cpu --mem 4G --pty /bin/bash -l
+        k1234567@erc-hpc-login2:~$ srun -p cpu --reservation cpu_introduction --mem 4G --pty /bin/bash -l
         srun: job 56741 queued and waiting for resources
         srun: job 56741 has been allocated resources
         k1234567@erc-hpc-comp001:~$
@@ -584,7 +585,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-multicore
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
         #SBATCH --ntasks=1
         #SBATCH --cpus-per-task=2
 
@@ -639,7 +641,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-array
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
         #SBATCH --ntasks=1
         #SBATCH --array=1-3
 
@@ -697,7 +700,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-array
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
         #SBATCH --ntasks=1
         #SBATCH --array=1-3
 
@@ -763,7 +767,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-jlab
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
         #SBATCH --ntasks=1
         #SBATCH --mem=2G
         #SBATCH --signal=USR2
@@ -824,7 +829,7 @@ directory also contains example scripts from the exercises for convenience.
         the login nodes
 
         ```
-        srun --partition interruptible_cpu --pty /bin/bash -l
+        srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
         ```
 
         After the resources have been allocated, pull the lolcow container using `singularity pull`
@@ -875,7 +880,8 @@ directory also contains example scripts from the exercises for convenience.
         #!/bin/bash -l
 
         #SBATCH --job-name=test-singularity
-        #SBATCH --partition=interruptible_cpu
+        #SBATCH --partition=cpu
+        #SBATCH --reservation=cpu_introduction
 
         singularity exec ~/lolcow_latest.sif cowsay "Hello there"
         ```
@@ -929,7 +935,7 @@ directory also contains example scripts from the exercises for convenience.
             the login nodes:
 
             ```
-            srun --partition interruptible_cpu --pty /bin/bash -l
+            srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
             ```
 
             We can then pull the container with:

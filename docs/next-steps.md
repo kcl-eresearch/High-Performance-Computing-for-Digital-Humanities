@@ -1,6 +1,6 @@
 # Next steps
 
-To use CREATE HPC for your research, request access as described [here](https://docs.er.kcl.ac.uk/CREATE/requesting_access/).
+King's staff and students can request access to CREATE HPC as described [here](https://docs.er.kcl.ac.uk/CREATE/requesting_access/).
 
 You may also want to [register a project](https://docs.er.kcl.ac.uk/CREATE/requesting_access/#project-registration).
 This gives you a project-specific scratch space as well as the option to request [backed-up RDS storage](https://docs.er.kcl.ac.uk/research_data/rds/).
