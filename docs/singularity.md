@@ -1,6 +1,6 @@
 # Singularity
 
-Containers have become popular in the last decade and continue doing so. They provide a method to package an application so it can be run, with its dependencies, isolated from other processes and independent from the host environemnt. In a nutshell they are encapsulations of application, or system environments.
+Containers have become popular in the last decade and continue doing so. They provide a method to package an application so it can be run, with its dependencies, isolated from other processes and independent from the host environment. In a nutshell they are encapsulations of application, or system environments.
 
 Singuarity is a container technology which has been popular in HPC environments due to its security model (no root on the host, no root inside the container).
 You can find out more information about Singularity [here](https://sylabs.io/singularity/).

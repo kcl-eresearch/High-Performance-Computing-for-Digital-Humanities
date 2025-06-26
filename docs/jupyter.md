@@ -58,6 +58,7 @@ We'll go through each section in turn.
 
 #SBATCH --job-name=ops-jupyter
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --mem=2G
 #SBATCH --signal=USR2
@@ -100,6 +101,7 @@ more memory or CPU cores, you'll need to modify this section. For example, to us
 
 #SBATCH --job-name=jupyter
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --mem=2G
 #SBATCH --signal=USR2

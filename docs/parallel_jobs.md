@@ -53,6 +53,7 @@ We need to create a shell script that requests appropriate resources to run the 
 ```bash
 #SBATCH --job-name=omp_hello
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=2G
@@ -139,6 +140,7 @@ To execute the above code on CREATE, we can use `run_squares_numba.sh`:
 #!/bin/bash
 #SBATCH --job-name=squares_numba
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=2G
@@ -199,6 +201,7 @@ A sample array job is given below:
 #!/bin/bash -l
 #SBATCH --job-name=array-sample
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --mem=1G
 #SBATCH -t 0-0:02 # time (D-HH:MM)
@@ -233,6 +236,7 @@ Here's our original submission script, which specifies a single text file as inp
 
 #SBATCH --job-name=top_words
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=2G
@@ -270,6 +274,7 @@ Here's what our updated submission script looks like:
 
 #SBATCH --job-name=top_words
 #SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=2G
