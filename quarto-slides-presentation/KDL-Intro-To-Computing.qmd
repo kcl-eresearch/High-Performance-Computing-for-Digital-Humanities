@@ -58,7 +58,7 @@ Modern computers excel at:
 - **Storage**: Long-term storage for files and programs (*persistent*)  
 - **Motherboard**: Connects everything together
 
-![Server-grade CPUs](images/xeon_and_epyc_cpu.png)
+![Server-grade CPUs](images/xeon_and_epyc_cpu.jpg)
 
 ## Specialized Components
 
