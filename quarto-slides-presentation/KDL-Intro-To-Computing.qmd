@@ -31,6 +31,7 @@ By the end of this workshop, you'll understand:
 **A programmable machine that follows instructions**
 
 Modern computers excel at:
+
 - Fast, accurate calculations
 - Processing large amounts of data  
 - Running complex simulations
@@ -39,6 +40,7 @@ Modern computers excel at:
 ## Slide 5: Computer Limitations
 
 **What computers still can't do:**
+
 - Know what you *actually* wanted
 - Work without clear instructions
 - Understand context like humans do
@@ -73,11 +75,13 @@ Modern computers excel at:
 ## Slide 8: CPU vs GPU - When to Use Each
 
 **CPU: Complex tasks, few at a time**
+
 - General-purpose computing
 - Complex decision-making
 - Sequential processing
 
-**GPU: Simple tasks, many at once**  
+**GPU: Simple tasks, many at once**
+
 - Graphics rendering
 - Machine learning training
 - Parallel data processing
@@ -123,6 +127,7 @@ HPC = Many computers working together as one powerful system
 ## Slide 12: What Benefits from Parallel Computing?
 
 **Perfect for parallel processing:**
+
 - Large dataset analysis
 - Scientific simulations  
 - Machine learning training
@@ -151,6 +156,7 @@ HPC = Many computers working together as one powerful system
 **A job** = A unit of work for the HPC system
 
 **A job script** = Instructions telling the system:
+
 - What program to run
 - How much memory/CPU needed  
 - How long it will take
@@ -163,12 +169,15 @@ HPC = Many computers working together as one powerful system
 **Three ways to manage software on HPC:**
 
 **Modules**: Load/unload software packages
+
 - `module spider python` - search for software
 
-**Containers**: Portable, complete environments  
+**Containers**: Portable, complete environments
+
 - Everything packaged together
 
 **Virtual Environments**: Isolated Python setups
+
 - Keep project dependencies separate
 
 **Activity**: Try `module spider` with a software package you use
@@ -202,12 +211,14 @@ HPC = Many computers working together as one powerful system
 ## Slide 18: What's Next?
 
 **Your HPC journey continues with:**
+
 - Hands-on CREATE system access
 - Writing your first job scripts
 - Running real computational tasks
 - Exploring software modules
 
 **Resources:**
+
 - CREATE documentation
 - Institutional HPC support
 - Community forums and guides
