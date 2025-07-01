@@ -1,144 +1,218 @@
-# Intro to and the History of HPC Computing
+# Introduction to High-Performance Computing
 
-## Slide 1: Introduction to me and my fellow instructors
-Meet the instructors for today's session:
-- Max Wyatt, e-Research Operations Engineer.
-- Liz Ing-Simmons, e-Research Senior Research Software Engineer.
-- James Graham, e-Research Head of Software Engineering.
+---
 
-## Slide 2: Key Points in this presentation
-This workshop is an introduction to High-Performance Computing (HPC), In what situations you may want to use a HPC, the benefits of utilising a HPC along with some of the history and theoretical understanding necessary to be able visualise and effectively troubleshoot issues.
-- Point 1: What is the history of computing?
-- Point 2: What is a HPC.
-- Point 3: Why and when would we want to use a HPC?
+# Part 1: Computing Foundations
 
-## Slide 3: What was, and now is, a computer?
+## Slide 1: Meet Your Instructors
+- **Max Wyatt** - e-Research Operations Engineer
+- **Liz Ing-Simmons** - e-Research Senior Research Software Engineer  
+- **James Graham** - Head of Software Engineering
 
-A computer is a machine that can be programmed to carry out a set of instructions. The first computers were mechanical devices, such as the abacus, which could perform basic arithmetic operations. The first electronic computers were developed in the 1940s and 1950s, and were used primarily for scientific and military applications.
+## Slide 2: Today's Journey
+**From your laptop to supercomputers**
 
-Before the development of electronic computers, people used mechanical devices to perform calculations, such as the slide rule and the mechanical calculator. One example of this would be our 'human computer' Katherine Johnson, who manually calculated the trajectory of early space flights. Later, she would go on to manually check the results of the first computers to ensure their accuracy.
+By the end of this workshop, you'll understand:
+- What makes a computer tick
+- When and why to use HPC
+- How to work with HPC systems
 
-The first electronic computers were large, expensive, and difficult to use, and were primarily used by governments and large corporations. Over time, computers have become smaller, faster, and more powerful, and are now used in a wide variety of applications, from personal computing to large-scale data processing. Almost all of modern research now depends on computers in some way, whether it is for data analysis, simulation, or visualization. This has led to the development of High-Performance Computing (HPC) systems, which are designed to handle large-scale computations and data processing tasks.
+## Slide 3: A Brief History of Computing
 
-## Slide 4: What can a computer do?
+**From human calculators to digital machines**
 
-A computer can perform a wide variety of tasks, including:
+- **Before computers**: Slide rules, mechanical calculators, human "computers"
+- **Katherine Johnson**: Calculated space flight trajectories by hand
+- **1940s-1950s**: First electronic computers (room-sized!)
+- **Today**: Computers everywhere, powering all modern research
 
-- Performing calculations and data processing tasks quickly and accurately
-- Storing and retrieving large amounts of data
-- Running complex simulations and models
-- Analyzing and visualizing data
+## Slide 4: What is a Computer?
+
+**A programmable machine that follows instructions**
+
+Modern computers excel at:
+- Fast, accurate calculations
+- Processing large amounts of data  
+- Running complex simulations
 - Automating repetitive tasks
 
-## What a computer cannot do?
+## Slide 5: Computer Limitations
 
-- Know what you actually wanted it to do
-- Work without instructions
-- Understand the context of the data it is processing
+**What computers still can't do:**
+- Know what you *actually* wanted
+- Work without clear instructions
+- Understand context like humans do
 
-Ultimately, a computer is a tool that can be used to perform tasks, but it is not capable of independent thought or decision-making. It relies on humans to provide it with the necessary instructions and context to carry out its tasks effectively. AI and machine learning are changing this, but they are still limited by the data they are trained on and the algorithms that power them and do not have the same level of understanding or context as a human.
-What are the components of a computer and what do they do?
+*Even AI has these limitations - it needs training data and still makes assumptions*
 
-## Slide 5: What makes up a computer? What are the components of a computer?
+---
 
-A computer is made up of several key components, each of which plays a specific role in the overall functioning of the machine. The main components of a computer include:
+# Part 2: Computer Components
 
-- **Central Processing Unit (CPU)**: The CPU is the brain of the computer, responsible for executing instructions and performing calculations. It processes data and controls the other components of the computer.
-- **Memory (RAM): Random Access Memory (RAM)**: The RAM is the computer's short-term memory, used to store data and instructions that are currently being used by the CPU. It allows the computer to access data quickly and efficiently. This storage is volatile, meaning that it is cleared when the computer is turned off.
-- **Motherboard**: The motherboard is the main circuit board of the computer, connecting all of the components together. It provides the necessary connections for the CPU, memory, storage, and other components to communicate with each other.
-- **Storage**: Storage is the computer's long-term memory, used to store data and programs that are not currently being used by the CPU. This can include hard drives, solid-state drives, and other types of storage media.
-- **Graphics Processing Unit (GPU)**: The GPU is a specialized processor designed to handle complex graphics and image processing tasks. It is often used in scientific research applications, AI model training, video editing, and other applications that can leverage the parallel processing capabilities of the GPU.
-- **Network Interface Card (NIC)**: The NIC is responsible for connecting the computer to a network, allowing it to communicate with other computers and devices. This can include wired connections (such as Ethernet) or wireless connections (such as Wi-Fi).
-- **Operating System (OS)**: The operating system is the software that manages the computer's hardware and software resources. It provides a user interface, manages files and applications, and coordinates the execution of programs. Common examples include Windows, macOS, and Linux.
+## Slide 6: Core Computer Components
 
-![A photo of two server-grade CPUs](images/xeon_and_epyc_cpu.png)
+**The essential parts every computer needs:**
 
-**Task 1**: Can you share with your colleagues the specifications of your laptop? What your Operating system is, CPU etc.
+- **CPU (Central Processing Unit)**: The "brain" - executes instructions
+- **Memory (RAM)**: Short-term storage for active work (*volatile*)
+- **Storage**: Long-term storage for files and programs (*persistent*)  
+- **Motherboard**: Connects everything together
 
-## Slide 6: When would you want to use a CPU vs a GPU?
+![Server-grade CPUs](images/xeon_and_epyc_cpu.png)
 
-In general, you would want to use a CPU for tasks that require complex logic and decision-making, such as running simulations or processing large datasets. A CPU is designed to handle a wide variety of tasks and can perform complex calculations quickly and accurately. A GPU, on the other hand, is designed to handle tasks that can be parallelized, such as rendering graphics or training machine learning models. A GPU can perform many calculations simultaneously, making it well-suited for tasks that require a large amount of data processing. This is because a GPU has many more cores than a CPU and, although simpler, allow it to perform many calculations in parallel.
+## Slide 7: Specialized Components
 
-**Task 2** Using the internet, check to see whether your future workflows may benefit from a GPU or not.
+**Additional parts for specific tasks:**
 
-## Slide 7: What is a High-Performance Computing (HPC) system and what makes it different from a regular computer?
+- **GPU (Graphics Processing Unit)**: Parallel processing powerhouse
+- **Network Interface**: Connects to other computers
+- **Operating System**: Manages all the hardware and software
 
-A HPC system is a collection of computers that work together to perform complex calculations and data processing tasks. These systems are designed to handle large-scale computations and data processing tasks, and are typically used in scientific research, engineering, and other fields that require high-performance computing capabilities. HPC systems are typically composed of many individual computers, which are connected together through a high-speed network. These computers work together to perform calculations and process data, allowing researchers to tackle complex problems that would be impossible to solve on a single computer.
+**Activity**: Share your laptop specs with a neighbor - what OS, CPU, and RAM do you have?
 
-At a very high level, those computers can be divided into the following categories:
+## Slide 8: CPU vs GPU - When to Use Each
 
-    Login nodes
-    Compute nodes
-    Storage nodes
-    Management nodes
+**CPU: Complex tasks, few at a time**
+- General-purpose computing
+- Complex decision-making
+- Sequential processing
 
-!!! Important As a user, you are unlikely to interact with the management nodes, and you will not have access to the storage nodes directly. You will primarily interact with the login nodes and compute nodes.
+**GPU: Simple tasks, many at once**  
+- Graphics rendering
+- Machine learning training
+- Parallel data processing
 
-![An abstraction of a HPC Node](images/node_diagram_two.png)
+**Activity**: Look up whether your research workflows could benefit from GPU acceleration
 
-**Task 3**: Can you find examples of high performance computing clusters available in the UK? An example of this would be at King's, we have *CREATE* as our HPC.
+---
 
-## Slide 8: What is Parallel Computing?
+# Part 3: From Single Computers to HPC
 
-Parallel computing is a type of computing in which multiple processors or computers work together to perform a task. This allows for faster processing times and the ability to handle larger datasets than would be possible with a single processor or computer. In parallel computing, a task is divided into smaller sub-tasks, which are then distributed across multiple processors or computers. Each processor or computer works on its own sub-task simultaneously, allowing the overall task to be completed more quickly.
+## Slide 9: What is High-Performance Computing?
 
-!!! Note It is not in the scope of this training to teach you how to write parallel code, but it is important to understand the concept of parallel computing and how to operate other people's code in a parallel environment.
-Why do we need parallel computing?
+**When one computer isn't enough...**
 
-Parallel computing is necessary because many tasks in scientific research and data processing are too complex or time-consuming to be completed on a single processor or computer. By using parallel computing, researchers can take advantage of the processing power of multiple processors or computers to complete tasks more quickly and efficiently. This allows them to tackle larger problems and analyze larger datasets than would be possible with a single processor or computer. For the environmentally conscious researcher, parallel computing can also help to reduce the carbon footprint of research by allowing tasks to be completed more quickly and efficiently, reducing the overall energy consumption of the research process.
-What workflows benefit from parallel computing?
+HPC = Many computers working together as one powerful system
 
-Parallel computing is particularly beneficial for workflows that involve large datasets or complex calculations. Some examples of workflows that can benefit from parallel computing include:
+- Handles problems too big for single computers
+- Used in science, engineering, and research
+- Connected by high-speed networks
 
-- Scientific simulations: Many scientific simulations involve complex calculations that can be parallelized, allowing them to be run more quickly and efficiently.
-- Data analysis: Large datasets can be processed more quickly using parallel computing, allowing researchers to extract insights and patterns from the data more efficiently.
-- Machine learning: Training machine learning models often involves processing large datasets and performing complex calculations, which can be accelerated using parallel computing.
+## Slide 10: HPC System Architecture
 
-**Task 4**: Do any of these examples relate to you? Discuss with your tables what workflows you would likely be completing.
+**Four types of nodes (computers) in an HPC cluster:**
 
-## Slide 9: Best Practices for HPC Usage
+- **Login nodes**: Where you connect and prepare work
+- **Compute nodes**: Where the actual calculations happen  
+- **Storage nodes**: Where data is stored
+- **Management nodes**: Keep everything running
 
-- **Plan your jobs:** Estimate resource requirements (CPU, memory, time) before submitting jobs to avoid wasting resources. You can use a smaller data-set to run a test job for example.
-- **Use job scripts:** Automate your workflows and document resource needs using job scripts rather than manually submitting an `srun`.
-- **Monitor your jobs:** Regularly check job status and resource usage with scheduler commands (e.g., `squeue`, `sacct`).
-- **Clean up files:** Remove unnecessary files and data from your directories to conserve storage space.
-- **Use modules and environments:** Load only the software you need using modules or containers to avoid conflicts.
-- **Respect fair usage:** Be considerate of other users by not monopolizing resources and following system policies.
-- **Ask for help:** Contact your institutions support or consult documentation if you encounter issues.
+![HPC Node Diagram](images/node_diagram_two.png)
 
-## Slide 10: What is a scheduler and why do we need one?
+**Activity**: Find examples of UK HPC systems (hint: King's has CREATE!)
 
-A scheduler is a software tool that manages the allocation of resources in a HPC system. It is responsible for scheduling jobs to run on the compute nodes, ensuring that resources are used efficiently and that jobs are completed in a timely manner. The scheduler is also responsible for managing the queue of jobs, prioritizing them based on their resource requirements and other factors. For the training workshop, we will be using the Slurm scheduler, which is a widely used open-source job scheduler for HPC systems.
-What is a job and what is a job script?
+## Slide 11: Why Parallel Computing?
 
-A job is a unit of work that is submitted to the scheduler for execution on the compute nodes. A job can be a single command or a script that contains multiple commands. A job script is a file that contains the commands to be executed, along with any necessary configuration options and resource requirements. The job script is submitted to the scheduler, which then allocates the necessary resources and executes the job on the compute nodes.
+**The power of working together**
 
-![A 'humanised' way of viewing what a task scheduler is](images/resturant_queue_manager.svg)
+- **Problem**: Some tasks are too big or slow for one computer
+- **Solution**: Split work into smaller pieces
+- **Benefit**: Multiple processors work simultaneously
+- **Result**: Faster completion, bigger problems solved
 
-## Slide 11: What is a module and why do we need one?
+## Slide 12: What Benefits from Parallel Computing?
 
-A module is a software tool that allows users to manage the software environment on a HPC system. It provides a way to load and unload software packages, set environment variables, and manage dependencies between different software packages. Modules are used to ensure that the correct versions of software packages are used for a particular job, and to avoid conflicts between different software packages. In the context of this training workshop, we will be using modules to load the necessary software packages for our jobs. On CREATE, we use spack to manage our software environment, which allows us to easily install and manage software packages and their dependencies.
+**Perfect for parallel processing:**
+- Large dataset analysis
+- Scientific simulations  
+- Machine learning training
+- Image/video processing
 
-**Task 5**: Using the `module spider` command on the CREATE command-line, search for the name of a package you might want to use. For example, `module spider python`; what does it return?
+**Activity**: Discuss with your table - what workflows might you run in parallel?
 
-## Slide 12: What is a Singularity container and why do we need one?
+---
 
-A Singularity container is a lightweight, portable, and reproducible software environment that can be used to run applications on a HPC system. It allows users to package their applications and all of their dependencies into a single container, which can then be run on any HPC system that supports Singularity. This makes it easy to share applications and ensure that they run consistently across different systems. Singularity containers are particularly useful for running applications that have complex dependencies or require specific versions of software packages.
+# Part 4: Working with HPC Systems
 
-## Slide 13: What is a Python virtual environment and why do we need one?
+## Slide 13: The Job Scheduler - Your HPC Manager
 
-A Python virtual environment is a self-contained directory that contains a Python installation and all of the necessary packages and dependencies for a particular project. It allows users to create isolated environments for their Python projects, ensuring that the correct versions of packages are used and avoiding conflicts between different projects. Virtual environments are particularly useful for managing dependencies in Python projects, as they allow users to easily install and manage packages without affecting the global Python installation.
+**Think of it like a restaurant queue manager**
 
-## Slide 14: Glossary of terms
+- **You**: Submit a "job" (your computational task)
+- **Scheduler**: Manages the queue and assigns resources
+- **System**: Runs your job when resources are available
 
-- **Node**: A node is an individual computer within a high-performance computing (HPC) cluster. Each node typically contains its own CPU(s), memory, storage, and network interfaces. Nodes are categorized by their roles, such as login nodes (for user access), compute nodes (for running jobs), storage nodes (for managing data), and management nodes (for system administration).
-- **Core**: A core is an individual processing unit within a CPU (Central Processing Unit). Modern CPUs contain multiple cores, allowing them to perform multiple tasks simultaneously (parallel processing). Each core can independently execute its own thread or process, increasing the overall computational power of the CPU.
-- **Cluster**: A cluster is a group of interconnected computers (nodes) that work together as a single system to perform computational tasks. In HPC, clusters are used to combine the processing power and resources of multiple nodes, enabling them to solve large and complex problems more efficiently than a single computer could. Clusters are managed by scheduling software and often share storage and networking infrastructure.
-- **Job**: A job is a unit of work submitted to a scheduler on an HPC system. It typically consists of a script or command that specifies the tasks to be performed, the resources required (such as CPUs, memory, and time), and any necessary input or output files. The scheduler manages when and where the job runs on the cluster.
-- **Scheduler**: A scheduler is a software tool used in HPC systems to manage and allocate computational resources. It queues, prioritizes, and dispatches jobs to available compute nodes, ensuring efficient use of resources and fair access for users. Examples include Slurm, PBS, and LSF.
-- **Queue**: A queue is a waiting line for jobs submitted to the scheduler on an HPC system. When users submit jobs, they are placed in a queue until the required resources (such as CPUs, memory, or nodes) become available. The scheduler manages the order in which jobs are run based on factors like job priority, resource requirements, and scheduling policies. Queues help ensure fair and efficient use of the HPC system.
+![Restaurant Queue Manager](images/resturant_queue_manager.svg)
 
-## Slide 15: References
+*We'll use Slurm scheduler in this workshop*
+
+## Slide 14: Jobs and Job Scripts
+
+**A job** = A unit of work for the HPC system
+
+**A job script** = Instructions telling the system:
+- What program to run
+- How much memory/CPU needed  
+- How long it will take
+- Where to save results
+
+*Think of it as a recipe for your computation*
+
+## Slide 15: Software Management
+
+**Three ways to manage software on HPC:**
+
+**Modules**: Load/unload software packages
+- `module spider python` - search for software
+
+**Containers**: Portable, complete environments  
+- Everything packaged together
+
+**Virtual Environments**: Isolated Python setups
+- Keep project dependencies separate
+
+**Activity**: Try `module spider` with a software package you use
+
+## Slide 16: HPC Best Practices & Etiquette
+
+**Be a good HPC citizen:**
+
+- **Plan ahead**: Estimate resources needed (CPU, memory, time)
+- **Test small**: Use small datasets first
+- **Monitor jobs**: Check progress with `squeue`, `sacct`
+- **Clean up**: Remove unnecessary files
+- **Share fairly**: Don't monopolize resources
+- **Ask for help**: Contact support when stuck
+
+---
+
+# Part 5: Wrap-up
+
+## Slide 17: Key Terms to Remember
+
+**Essential HPC vocabulary:**
+
+- **Node**: Individual computer in the cluster
+- **Core**: Processing unit within a CPU  
+- **Job**: Your computational task
+- **Queue**: Waiting line for jobs
+- **Scheduler**: Resource manager (like Slurm)
+- **Cluster**: Group of connected computers
+
+## Slide 18: What's Next?
+
+**Your HPC journey continues with:**
+- Hands-on CREATE system access
+- Writing your first job scripts
+- Running real computational tasks
+- Exploring software modules
+
+**Resources:**
+- CREATE documentation
+- Institutional HPC support
+- Community forums and guides
+
+## Slide 19: References & Acknowledgments
 
 The material in this course was inspired by / based on the following resources
 
