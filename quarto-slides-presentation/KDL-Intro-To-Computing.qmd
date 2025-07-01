@@ -1,7 +1,5 @@
 # Introduction to High-Performance Computing
 
----
-
 # Part 1: Computing Foundations
 
 ## Meet Your Instructors
@@ -49,8 +47,6 @@ Modern computers excel at:
 
 *Even AI has these limitations - it needs training data and still makes assumptions*
 
----
-
 # Part 2: Computer Components
 
 ## Core Computer Components
@@ -62,7 +58,7 @@ Modern computers excel at:
 - **Storage**: Long-term storage for files and programs (*persistent*)  
 - **Motherboard**: Connects everything together
 
-![Server-grade CPUs](images/xeon_and_epyc_cpu.png)
+![Server-grade CPUs](images/xeon_and_epyc_cpu.jpg)
 
 ## Specialized Components
 
@@ -72,7 +68,9 @@ Modern computers excel at:
 - **Network Interface**: Connects to other computers
 - **Operating System**: Manages all the hardware and software
 
-**Activity**: Share your laptop specs with a neighbor - what OS, CPU, and RAM do you have?
+. . . 
+
+**Activity**: Share your laptop specs with a neighbor - what operating system, CPU, and RAM do you have?
 
 ## CPU vs GPU - When to Use Each
 
@@ -88,9 +86,9 @@ Modern computers excel at:
 - Machine learning training
 - Parallel data processing
 
-**Activity**: Look up whether your research workflows could benefit from GPU acceleration
+. . . 
 
----
+**Activity**: Look up whether your research workflows could benefit from GPU acceleration
 
 # Part 3: From Single Computers to HPC
 
@@ -106,6 +104,10 @@ HPC = Many computers working together as one powerful system
 
 ## HPC System Architecture
 
+:::: {.columns}
+
+::: {.column width="50%"}
+
 **Four types of nodes (computers) in an HPC cluster:**
 
 - **Login nodes**: Where you connect and prepare work
@@ -113,7 +115,16 @@ HPC = Many computers working together as one powerful system
 - **Storage nodes**: Where data is stored
 - **Management nodes**: Keep everything running
 
+:::
+
+::: {.column width="50%"}
+
 ![HPC Node Diagram](images/node_diagram_two.png)
+
+:::
+::::
+
+. . . 
 
 **Activity**: Find examples of UK HPC systems (hint: King's has CREATE!)
 
@@ -135,22 +146,28 @@ HPC = Many computers working together as one powerful system
 - Machine learning training
 - Image/video processing
 
-**Activity**: Discuss with your table - what workflows might you run in parallel?
+. . . 
 
----
+**Activity**: Discuss with your table - what workflows might you run in parallel?
 
 # Part 4: Working with HPC Systems
 
 ## The Job Scheduler - Your HPC Manager
 
+:::: {.columns}
+
+::: {.column width="30%"}
 **Think of it like a restaurant queue manager**
 
 - **You**: Submit a "job" (your computational task)
 - **Scheduler**: Manages the queue and assigns resources
 - **System**: Runs your job when resources are available
+:::
 
-![Restaurant Queue Manager](images/resturant_queue_manager.svg)
-
+::: {.column width="70%"}
+![Restaurant Queue Manager](images/restaurant_queue_manager.png)
+:::
+::::
 *We'll use Slurm scheduler in this workshop*
 
 ## Jobs and Job Scripts
@@ -182,7 +199,9 @@ HPC = Many computers working together as one powerful system
 
 - Keep project dependencies separate
 
-**Activity**: Try `module spider` with a software package you use
+. . . 
+
+**Activity**: Think about what software packages you would like to use on the HPC. Which of these management approaches would you expect to use to manage them?
 
 ## HPC Best Practices & Etiquette
 
@@ -194,8 +213,6 @@ HPC = Many computers working together as one powerful system
 - **Clean up**: Remove unnecessary files
 - **Share fairly**: Don't monopolize resources
 - **Ask for help**: Contact support when stuck
-
----
 
 # Part 5: Wrap-up
 

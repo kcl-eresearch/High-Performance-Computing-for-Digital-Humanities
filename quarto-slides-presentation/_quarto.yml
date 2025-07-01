@@ -20,5 +20,4 @@ format:
     markdown: true
     math: true
     highlight: true
-    css: "styles.css"  # Optional: Custom CSS file for styling
-    js: "scripts.js"    # Optional: Custom JavaScript file for additional functionality
+    self-contained: true
