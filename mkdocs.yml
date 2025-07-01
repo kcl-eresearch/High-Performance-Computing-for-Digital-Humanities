@@ -1,7 +1,8 @@
-site_name: High Performance Computing with CREATE
-site_description: High Performance Computing with CREATE
+site_name: High Performance Computing for Digital Humanities
+site_description: High Performance Computing for Digital Humanities
 site_author: KCL e-Research
-site_url: 'https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training'
+site_url: 'https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities'
+repo_url: 'https://github.com/kcl-eresearch/High-Performance-Computing-for-Digital-Humanities'
 
 markdown_extensions:
   - admonition
@@ -37,4 +38,4 @@ nav:
     - Reference:
       - Unix commands: 'unix_commands.md'
       - SSH keys: 'ssh_keys.md'
-    - Slides: 'slides.md'
+    - Slides: 'slides/index.html'
