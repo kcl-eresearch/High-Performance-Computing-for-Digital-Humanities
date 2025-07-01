@@ -1,0 +1,1271 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High Performance Computing with CREATE">
+      
+      
+        <meta name="author" content="KCL e-Research">
+      
+      
+        <link rel="canonical" href="https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/submitting_jobs/">
+      
+      
+        <link rel="prev" href="../using_software/">
+      
+      
+        <link rel="next" href="../parallel_jobs/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Submitting jobs - High Performance Computing with CREATE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#submitting-jobs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="High Performance Computing with CREATE" class="md-header__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing with CREATE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Submitting jobs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="High Performance Computing with CREATE" class="md-nav__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    High Performance Computing with CREATE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using_software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      The scheduler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partitions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submitting-jobs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submitting jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Submitting jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancelling-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelling jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the resources
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using GPUs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-log-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job log files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-more-realistic-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A more realistic example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-submitting-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises - submitting jobs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh_keys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-scheduler" class="md-nav__link">
+    <span class="md-ellipsis">
+      The scheduler
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partitions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submitting-jobs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submitting jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Submitting jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job monitoring
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancelling-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelling jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing the resources
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using GPUs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-log-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job log files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-more-realistic-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A more realistic example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-submitting-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises - submitting jobs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="submitting-jobs">Submitting Jobs<a class="headerlink" href="#submitting-jobs" title="Permanent link">&para;</a></h1>
+<h2 id="the-scheduler">The scheduler<a class="headerlink" href="#the-scheduler" title="Permanent link">&para;</a></h2>
+<p>HPC systems are usually composed out of large number of nodes and have large number of users simultaneously using the facility.
+How do we ensure that the available resources are managed properly?
+This is a job of the scheduler, which is a heart and soul of the system and it's resposible for managing the jobs that are run on the cluster.</p>
+<p>As an analogy, think of the scheduler as a waiter in busy restaurant. This hopefully will give you some idea why sometimes
+you have to wait for the job to run.</p>
+<p><img alt="Waiter analogy" src="../images/restaurant_queue_manager.svg" /></p>
+<p>CREATE is using <a href="https://slurm.schedmd.com">SLURM</a> scheduler, which stands for Simple Linux Utility for Resource Management.
+SLURM is commonly used by other HPC systems as well.
+You may also encounter other job schedulers such as <a href="https://www.openpbs.org/">PBS</a>.
+These work on similar principles, although the exact commands and terminology will be different.</p>
+<h2 id="partitions">Partitions<a class="headerlink" href="#partitions" title="Permanent link">&para;</a></h2>
+<p>You can think of partitions as queues - they reside over specific sets of resources and allow access to particular groups.
+Following the restaurant analogy, think of them as different sections of the restaurant and corresponding queues assigned to them.</p>
+<p>The public partitions available on CREATE HPC are:</p>
+<ul>
+<li><code>cpu</code>: Partition for cpu jobs</li>
+<li><code>gpu</code>: Partition for gpu jobs</li>
+<li><code>long_cpu</code> and <code>long_gpu</code>: Partitions for long running jobs. Requires justification and explicit permission to use</li>
+<li><code>interruptible_cpu</code> and <code>interruptible_gpu</code>: Partitions that use unused capacity on private servers</li>
+</ul>
+<p>In addition, specific groups/faculties have their own partitions on CREATE HPC that can only be used by members of those groups.
+The list of CREATE partitions and who can use them can be found in our <a href="https://docs.er.kcl.ac.uk/CREATE/running_jobs/#identify-your-partition">documentation</a>.
+Additional information about the resource constraints can be found <a href="https://docs.er.kcl.ac.uk/CREATE/scheduler_policy/">here</a>.</p>
+<p>You can get the list of partitions that are available to you via <code>sinfo --summarize</code> command:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$ sinfo --summarize
+PARTITION         AVAIL  TIMELIMIT   NODES(A/I/O/T) NODELIST
+cpu*                 up 2-00:00:00        35/0/0/35 erc-hpc-comp[001-028,183-189]
+gpu                  up 2-00:00:00        13/6/0/19 erc-hpc-comp[030-040],erc-hpc-vm[011-018]
+interruptible_cpu    up 1-00:00:00       20/65/0/85 erc-hpc-comp[041-047,058-109,128-133,135,137,139-151,153-154,157,179-180]
+interruptible_gpu    up 1-00:00:00       24/17/2/43 erc-hpc-comp[048-057,110-127,134,170-178,190-194]
+</code></pre></div>
+<p>Any additional rows you see in the output of <code>sinfo</code> will be private partitions you have access to.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p><code>NODES(A/I/O/T)</code> column refers to nodes state in the form <code>allocated/idle/other/total</code>.</p>
+</div>
+<h2 id="submitting-jobs_1">Submitting jobs<a class="headerlink" href="#submitting-jobs_1" title="Permanent link">&para;</a></h2>
+<p>In most cases you will be submitting non-interactive jobs, commonly referred to as batch jobs. For this you will be
+using the <a href="https://slurm.schedmd.com/sbatch.html"><code>sbatch</code></a> utility.</p>
+<p>To submit a job to the queue, we need to write a <strong>shell script</strong> which contains the commands we want to run.
+When the scheduler picks our job from the queue, it will run this script.
+There's several ways we could create this script on the cluster, but for short scripts it's often easiest to use a <strong>command line text editor</strong> to create it directly on the cluster.
+For more complex scripts you might prefer to write them on your computer and transfer them across, but it's relatively rare that job submission scripts get that complex.</p>
+<p>One common text editor that you should always have access to on systems like CREATE is <code>nano</code>:</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>test_job.sh
+</code></pre></div>
+<p>Nano is relatively similar to a basic graphical text editor like Notepad on Windows - you have a cursor (controlled by the arrow keys) and text is entered as you type.
+Once we're done, we can use <code>Ctrl + O</code> to save the file - at this point if we haven't already told Nano the filename it will ask for one.
+Then finally, <code>Ctrl + X</code> to exit back to the command line.
+If we ever forget these shortcuts, Nano has a helpful reminder bar at the bottom.</p>
+<p>If you find yourself doing a lot of text editing on the cluster, it may be worth learning to use a more advanced text editor like Vim or Emacs, but Nano is enough for most people.</p>
+<p>We are going to start with a simple shell script <code>test_job.sh</code> that will contain the commands to be run during the job execution:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -l</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World! &quot;</span><span class="sb">`</span>hostname<span class="sb">`</span>
+sleep<span class="w"> </span><span class="m">60</span>
+</code></pre></div>
+<p>From the login node, submit the job to the scheduler using:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>--partition<span class="w"> </span>cpu<span class="w"> </span>--reservation<span class="w"> </span>cpu_introduction<span class="w"> </span>test_job.sh
+</code></pre></div>
+<p>We are specifying the partition to use (<code>cpu</code>), and also the reservation (<code>cpu_introduction</code>).
+We have set up a reservation for this workshop to ensure we don't have to wait too long to be allocated resources.
+Outside of an organised workshop, you likely won't have a reservation.
+On CREATE HPC, we can also often get test jobs like these to run more quickly by using the <code>interruptible_cpu</code> queue.
+The interruptible queues make use of otherwise unused space on private nodes, but if the owner of the nodes wants to use them, your running jobs may be cancelled.
+It's useful for quick testing, but if you're going to use the interruptible queues for real jobs you need to make sure they can be safely cancelled and not lose progress - this is often done via <strong>checkpointing</strong>.</p>
+<p>Once the command is executed you should see something similar to:</p>
+<div class="highlight"><pre><span></span><code>k1234567@@erc-hpc-login1:~$ sbatch --partition cpu --reservation cpu_introduction test_job.sh
+Submitted batch job 56543
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you do not define a partition during the job submission the default partition will be used, in this case <code>cpu</code>.</p>
+</div>
+<p>The job id (<code>56543</code>) is a unique identifier assigned to your job and can be used to query the status of the job. We will go through it
+in the <a href="#job-monitoring">job monitoring</a> section.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When submitting a support request please provide relevant jobids of the failed, or problematic jobs.</p>
+</div>
+<h3 id="interactive-jobs">Interactive jobs<a class="headerlink" href="#interactive-jobs" title="Permanent link">&para;</a></h3>
+<p>Sometimes you might need, or want to run things interactively, rather than submitting them as batch jobs.
+This could be because you want to debug or test something, or the application/pipeline does not support
+non-interactive execution. To request an interactive job via the scheduler use the <a href="https://slurm.schedmd.com/srun.html"><code>srun</code></a> utility:</p>
+<div class="highlight"><pre><span></span><code>srun<span class="w"> </span>--partition<span class="w"> </span>cpu<span class="w"> </span>--reservation<span class="w"> </span>cpu_introduction<span class="w"> </span>--pty<span class="w"> </span>/bin/bash<span class="w"> </span>-l
+</code></pre></div>
+<p>The request will go through the scheduler and if resources are available you will be placed on
+a compute node, i.e.</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$ srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+srun: job 56544 queued and waiting for resources
+srun: job 56544 has been allocated resources
+k1234567@erc-hpc-comp001:~$
+</code></pre></div>
+<p>To exit an interactive job, we use the Bash command <code>exit</code> - this exits the current shell, so if you're inside an interactive job it will exit that, if you're just logged in to one of the login nodes, it will disconnect your SSH session.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>At the moment there are no dedicated partitions, or nodes for interactive sessions and those sessions share the resources with
+all of the other jobs. If there are no free resources available you request will fail.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Running applications with Graphical User Interfaces (GUIs)</p>
+<p>To run an interactive job for an application with a Graphical User Interface (GUI), for example RStudio, you must enable 'X11 forwarding' and 'authentication agent forwarding' when you connect to CREATE:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-XA<span class="w"> </span>hpc.create.kcl.ac.uk
+</code></pre></div>
+<p>Then request compute resources using <code>salloc</code> - once your resources have been allocated you can then connect to the node with a further <code>ssh</code> connection:</p>
+<div class="highlight"><pre><span></span><code>salloc<span class="w"> </span>&lt;parameters&gt;
+ssh<span class="w"> </span>-X<span class="w"> </span><span class="nv">$SLURM_NODELIST</span>
+xeyes
+</code></pre></div>
+</div>
+<h2 id="job-monitoring">Job monitoring<a class="headerlink" href="#job-monitoring" title="Permanent link">&para;</a></h2>
+<p>It is important to be able to see the status of your running jobs, or to find out information
+about completed, or failed jobs.</p>
+<p>To monitor the status of the running jobs use <a href="https://slurm.schedmd.com/squeue.html"><code>squeue</code></a> utility.
+Without any arguments, the command will print queue information for all users, however you can use <code>--me</code> parameter
+to filter the list:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$ squeue --me
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+             56544       cpu     bash k1234567  R       6:41      1 erc-hpc-comp001
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Job state is described in the <code>ST</code> column. For the full list of states please see <a href="https://slurm.schedmd.com/squeue.html">squeue</a>
+docs (JOB STATE CODES section).</p>
+<p>The most common codes that you might see are:</p>
+<ul>
+<li><code>PD</code>: Pending - Job is awaiting resource allocation.</li>
+<li><code>R</code>: Running - Job currently has an allocation.</li>
+<li><code>CG</code>: Completing - Job is in the process of completing. Some processes on some nodes may still be active.</li>
+<li><code>CD</code>: Completed - Job has terminated all processes on all nodes with an exit code of zero.</li>
+</ul>
+</div>
+<p>For jobs that have finished, you can use <a href="https://slurm.schedmd.com/sacct.html"><code>sacct</code></a> utility to extract the relevant information.</p>
+<div class="highlight"><pre><span></span><code>sacct -j 56543
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+56543        test_job.+        cpu        kcl          1  COMPLETED      0:0
+56543.batch       batch                   kcl          1  COMPLETED      0:0
+</code></pre></div>
+<p>The above shows the default information.</p>
+<p>You can use <code>--long</code> option to display all of the stored information, or alternatively
+you can customise your queries to display the information that you specifically looking for by using <code>--format</code> parameter:</p>
+<div class="highlight"><pre><span></span><code>sacct -j 13378473 --format=ReqMem,AllocNodes,AllocCPUS,NodeList,JobID,Elapsed,State
+    ReqMem AllocNodes  AllocCPUS        NodeList        JobID    Elapsed      State
+---------- ---------- ---------- --------------- ------------ ---------- ----------
+    1000Mc          1          1         noded19 13378473       00:00:01  COMPLETED
+    1000Mc          1          1         noded19 13378473.ba+   00:00:01  COMPLETED
+</code></pre></div>
+<p>For the list of available options please see the job accounting fields in the <a href="https://slurm.schedmd.com/sacct.html"><code>sacct</code></a> documentation.</p>
+<div class="admonition tip">
+<p class="admonition-title">Check how efficiently your job used its resources</p>
+<p><code>sacct</code> can be used to check how efficiently your job used the resources you requested.
+For example, you can use the option <code>--format=JobID,JobName,Timelimit,Elapsed,CPUTime,ReqCPUS,NCPUS,ReqMem,MaxRSS</code>
+to get information on the maximum memory usage, total elapsed time, and CPU time used by your job.</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$<span class="w"> </span>sacct<span class="w"> </span>-j<span class="w"> </span><span class="m">8328</span><span class="w"> </span>--format<span class="o">=</span>JobID,JobName,Timelimit,Elapsed,CPUTime,ReqCPUS,NCPUS,ReqMem,MaxRSS
+JobID<span class="w">           </span>JobName<span class="w">  </span>Timelimit<span class="w">    </span>Elapsed<span class="w">    </span>CPUTime<span class="w">  </span>ReqCPUS<span class="w">      </span>NCPUS<span class="w">     </span>ReqMem<span class="w">     </span>MaxRSS
+------------<span class="w"> </span>----------<span class="w"> </span>----------<span class="w"> </span>----------<span class="w"> </span>----------<span class="w"> </span>--------<span class="w"> </span>----------<span class="w"> </span>----------<span class="w"> </span>----------
+<span class="m">8328</span><span class="w">           </span>hellowor<span class="w">   </span><span class="m">00</span>:02:00<span class="w">   </span><span class="m">00</span>:00:07<span class="w">   </span><span class="m">00</span>:00:28<span class="w">        </span><span class="m">4</span><span class="w">          </span><span class="m">4</span><span class="w">         </span>2G
+<span class="m">8328</span>.ba+<span class="w">          </span>batch<span class="w">              </span><span class="m">00</span>:00:07<span class="w">   </span><span class="m">00</span>:00:28<span class="w">        </span><span class="m">4</span><span class="w">          </span><span class="m">4</span><span class="w">               </span>325772K
+</code></pre></div>
+<p>The example job above requested 2GB of memory but only used about 0.33 GB, and requested up to 2 minutes but only took 7 seconds.</p>
+<p>You should look at resource usage of your jobs and use this to guide the resources you request for similar jobs in the future.
+Jobs that request lower resources will likely be scheduled faster.
+Requesting only the resources you need also ensures that the HPC resources are used efficiently.
+Requesting more CPUs or memory than you need can stop other people's jobs running and lead to significant HPC resources sitting idle.</p>
+</div>
+<h2 id="cancelling-jobs">Cancelling jobs<a class="headerlink" href="#cancelling-jobs" title="Permanent link">&para;</a></h2>
+<p>You can cancel running, or queued job using <a href="https://slurm.schedmd.com/scancel.html"><code>scancel</code></a> utility. You can cancel
+specific jobs using their <code>jobid</code></p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$<span class="w"> </span>scancel<span class="w"> </span><span class="m">56544</span>
+</code></pre></div>
+<p>If you want to cancel all of your jobs you can add the <code>--user</code> option</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login1:~$<span class="w"> </span>scancel<span class="w"> </span>--user<span class="w"> </span>k1234567
+</code></pre></div>
+<h2 id="choosing-the-resources">Choosing the resources<a class="headerlink" href="#choosing-the-resources" title="Permanent link">&para;</a></h2>
+<p>Jobs require resources to be defined, e.g. number of nodes, cpus, amount of memory or the runtime.
+Defaults, such as 1 day runtime, 1 core, 1 node, etc are provided for convenience,
+but in most cases they will not be sufficient to accomodate more intensive jobs and explicit request has to be made for more.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you do not request enough resources and your job exceeds the allocated amount, it will be terminated by the scheduler.</p>
+</div>
+<p>The resources can be requested by passing additional options to the <code>sbatch</code> and <code>srun</code> commands. In most cases
+you will be using the following parameters to define the resources for your job:</p>
+<ul>
+<li>partition: <code>--partition</code>, or <code>-p</code> defines which partition, or queue your job will be targeting</li>
+<li>memory: <code>--mem</code> defines how much memory your job needs per allocated node</li>
+<li>tasks: <code>--ntasks</code>, or <code>-n</code> defines how many tasks your job needs</li>
+<li>nodes: <code>--nodes</code>, or <code>-n</code> defines how many nodes your job requires</li>
+<li>cpus per task: <code>--cpus-per-task</code>, defines how many cpus per task are needed</li>
+<li>runtime: <code>--time</code>, or <code>-t</code> defines how much time your job needs to run (in the <code>D-HH:MM</code> format)</li>
+<li>reservation: <code>--reservation</code> asks the scheduler to allocate your job to some pre-existing reserved space</li>
+</ul>
+<p>For a full list of options please see <a href="https://slurm.schedmd.com/sbatch.html">sbatch</a> documentation.</p>
+<p>You can provide those options as arguments to the <code>sbatch</code>, or <code>srun</code> commands, i.e.</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>--job-name<span class="w"> </span>test_job<span class="w"> </span>--partition<span class="w"> </span>cpu<span class="w"> </span>--reservation<span class="w"> </span>cpu_introduction<span class="w"> </span>--ntasks<span class="w"> </span><span class="m">1</span><span class="w"> </span>--mem<span class="w"> </span>1G<span class="w"> </span>--time<span class="w"> </span><span class="m">0</span>-0:2<span class="w"> </span>test_job.sh
+</code></pre></div>
+<p>however that can be time consuming and prone to errors. Luckily you can also define those resource requirements
+in your submission scripts using <code>#SBATCH</code> tags. The sample job from the <a href="#submitting-jobs">previous section</a>
+will look like:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">#SBATCH --job-name=hello-world</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH -t 0-0:2 # time (D-HH:MM)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World! &quot;</span><span class="sb">`</span>hostname<span class="sb">`</span>
+sleep<span class="w"> </span><span class="m">60</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>In bash, and other shell scripting languages <code>#</code> is a special character usually representing comment
+(<code>#!</code> is an exception used to define the interpreter that the script will be executed with) and is ignored during the execution.
+For information on special characters in bash please see <a href="https://tldp.org/LDP/abs/html/special-chars.html">here</a>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can specify SLURM options using two slightly different formats:
+1. <code>--partition cpu</code>
+1. <code>--partition=cpu</code>
+Here we have have used the first version on the command line and the second inside the submission script,
+but this isn't necessary.
+Either format can be used in either context.</p>
+</div>
+<p><code>#SBATCH</code> is a special tag that will be interpreted by SLURM (other schedulers utilise similar mechanism) when the job is submitted.
+When the script is run outside the scheduler it will be ignored (becuse of the <code>#</code> comment).
+This is quite useful, as it means the script can be executed outside the scheduler control and will run successfully.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When requesting resources try to request them close to what your job needs, rather than requesting the maximum.
+Think back to the restaurant analogy - it's easier to find a table for a group of two people than a group of eight,
+so your job will likely be scheduled sooner.
+This also ensures that the HPC resources are being used efficiently.</p>
+</div>
+<h2 id="using-gpus">Using GPUs<a class="headerlink" href="#using-gpus" title="Permanent link">&para;</a></h2>
+<p>GPUs are becoming increasingly widely used in research software applications, especially for machine learning and AI approaches.</p>
+<p>GPUs are very good at certain types of calculations, and can have &gt;10k cores each so can run many of these calculations in parallel.
+However, GPUs are not the best option for all tasks.
+GPUs are very bad at things that aren't these types of calculations, and typically have much smaller memory.
+In addition, GPU programming can be complex.</p>
+<p>You can request GPUs using the <code>--gres</code> option to SLURM.
+In the submission script below, <code>--gres gpu:1</code> requests one GPU.
+On CREATE HPC, you also need to use the <code>gpu</code> or <code>interruptible_gpu</code> partition.
+The <code>nvidia-smi</code> command prints some information about the GPUs allocated to the job.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can request <code>X</code> gpus (up to 4) using <code>--gres gpu:X</code></p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1">#SBATCH --job-name=gpu-job</span>
+<span class="c1">#SBATCH --partition=interruptible_gpu</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=4G</span>
+<span class="c1">#SBATCH -t 0-0:02 # time (D-HH:MM)</span>
+<span class="c1">#SBATCH --gres gpu:1</span>
+
+nvidia-smi<span class="w"> </span>--id<span class="o">=</span><span class="nv">$CUDA_VISIBLE_DEVICES</span>
+</code></pre></div>
+<p>Submit this job using:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>test_gpu.sh
+</code></pre></div>
+<p>A sample output would be:</p>
+<div class="highlight"><pre><span></span><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 470.182.03   Driver Version: 470.182.03   CUDA Version: 11.4     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla K40c          On   | 00000000:08:00.0 Off |                    0 |
+| 23%   32C    P8    23W / 235W |      0MiB / 11441MiB |      0%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Advanced resource requirements</p>
+<p>In some situations you might want to request specific hardware, such as chipset or fast network interconects.
+This can be achived with the use of <code>--constrain</code> option.</p>
+<p>To request a specific type of GPU <code>a100</code> you would use</p>
+<div class="highlight"><pre><span></span><code>#SBATCH --constrain=a100
+</code></pre></div>
+<p>or to request a specific type of processor/architecture you would use</p>
+<div class="highlight"><pre><span></span><code>#SBATCH --constrain=haswell
+</code></pre></div>
+</div>
+<h2 id="job-log-files">Job log files<a class="headerlink" href="#job-log-files" title="Permanent link">&para;</a></h2>
+<p>By default the log files will be placed in the directory you have made your submission from (i.e. current working directory) in the format of <code>slurm-jobid.out</code>.
+Both <a href="https://en.wikipedia.org/wiki/Standard_streams">stdout and stderr streams</a> will be redirected from the job to that file.
+These log files are important as they will give you clues about the execution of your application in particular why it has failed.</p>
+<p>You can modify this to suit your needs by explicitly defining different path</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#SBATCH --output=/scratch/users/%u/%j.out</span>
+</code></pre></div>
+<p>You can also separate the stdout and stderr into separate log files</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#SBATCH --output=/scratch/users/%u/%j.out</span>
+<span class="c1">#SBATCH --error=/scratch/users/%u/%j.err</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>%u</code> and <code>%j</code> are replacement symbols (representing username and job id) that will be replaced with actual values once the job is submitted.
+Please see <a href="https://slurm.schedmd.com/sbatch.html">file patterns section</a> for details.</p>
+</div>
+<h2 id="a-more-realistic-example">A more realistic example<a class="headerlink" href="#a-more-realistic-example" title="Permanent link">&para;</a></h2>
+<p>Let's work through a more realistic example.</p>
+<p>Here's a Python script which takes a text file as input and identifies the most common words in the file.
+The text is split into tokens, and punctuation and the most common English words are removed.
+The script then generates a wordcloud of the most common words, and saves it to a .png file.
+Finally, the top <em>N</em> words are output in a text file.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">wordcloud</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">string</span><span class="w"> </span><span class="kn">import</span> <span class="n">punctuation</span>
+
+<span class="c1"># process command line arguments</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">top_N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">file_base</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_name</span><span class="p">))</span>
+
+<span class="c1"># read in text</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8-sig&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">txt</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># split text into tokens</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+<span class="c1"># remove punctuation and common words</span>
+<span class="n">punct</span> <span class="o">=</span> <span class="n">punctuation</span> <span class="o">+</span> <span class="s2">&quot;“&quot;</span> <span class="o">+</span> <span class="s2">&quot;”&quot;</span> <span class="o">+</span> <span class="s2">&quot;’&quot;</span>
+<span class="n">english_stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> 
+                     <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">english_stop_words</span> <span class="ow">and</span>
+                     <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">punct</span><span class="p">]</span>
+
+<span class="c1"># create wordcloud and save to file</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="n">wordcloud</span><span class="o">.</span><span class="n">WordCloud</span><span class="p">()</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+<span class="n">wc</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">file_base</span> <span class="o">+</span> <span class="s1">&#39;-wordcloud.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># write csv file of top N tokens</span>
+<span class="n">token_distribution</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="n">top_tokens</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">token_distribution</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="n">top_N</span><span class="p">),</span>
+                            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Word&#39;</span><span class="p">,</span> <span class="s1">&#39;Frequency&#39;</span><span class="p">])</span>
+
+<span class="n">top_tokens</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">file_base</span> <span class="o">+</span> <span class="s1">&#39;-top.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>The script can be run as follows, specifying the input text file and the number of top words to return:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>top_words.py<span class="w"> </span>paradise-lost.txt<span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<p>To run this script, we need to first install the Python packages it uses.
+Let's create a new Python virtual environment to install them.</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>top_words_env
+</code></pre></div>
+<p>The packages we need to install are:
+<code>nltk</code>, for natural language processing;
+<code>wordcloud</code>, to create the wordcloud;
+and <code>pandas</code>, to create the table of most common words and their frequencies.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>top_words_env/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>nltk<span class="w"> </span>pandas<span class="w"> </span>wordcloud
+</code></pre></div>
+<p>In the submission script for this job, we need to load the <code>python</code> module and activate the virtual environment.
+We then run the script, specifying the input text file and number of top words to return.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#! /bin/bash -l</span>
+
+<span class="c1">#SBATCH --job-name=top_words</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:10 # time (D-HH:MM)</span>
+
+module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+<span class="nb">source</span><span class="w"> </span>top_words_env/bin/activate
+
+python<span class="w"> </span>top_words.py<span class="w"> </span>paradise-lost.txt<span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<p>Submit the job using:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>submit_top_words.sh
+</code></pre></div>
+<p>Once it finishes, examine the output using <code>cat</code> or <code>less</code> to look at the contents of <code>paradise-lost-top.csv</code>.</p>
+<h2 id="exercises-submitting-jobs">Exercises - submitting jobs<a class="headerlink" href="#exercises-submitting-jobs" title="Permanent link">&para;</a></h2>
+<p>Work through the exercises in <a href="../exercises/#job-submission-part-1">this section</a> to practice submitting and debugging jobs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

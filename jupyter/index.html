@@ -1,0 +1,856 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High Performance Computing with CREATE">
+      
+      
+        <meta name="author" content="KCL e-Research">
+      
+      
+        <link rel="canonical" href="https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/jupyter/">
+      
+      
+        <link rel="prev" href="../singularity/">
+      
+      
+        <link rel="next" href="../exercises/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Jupyter notebooks - High Performance Computing with CREATE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jupyter-notebooks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="High Performance Computing with CREATE" class="md-header__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing with CREATE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Jupyter notebooks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="High Performance Computing with CREATE" class="md-nav__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    High Performance Computing with CREATE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using_software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submitting_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-tunneling" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSH tunneling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-jupyterlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Jupyterlab
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submission-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submission script
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh_keys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ssh-tunneling" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSH tunneling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-jupyterlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing Jupyterlab
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#submission-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Submission script
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="jupyter-notebooks">Jupyter notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permanent link">&para;</a></h1>
+<p>Jupyter notebooks provide a convenient way to run Python code and visualise outputs through a graphical user interface.</p>
+<p>HPC clusters typically don't provide access to a graphical user interface - all interactions happen through the terminal.
+However, there are ways to run software with a graphical user interface on an HPC cluster.
+This allows you to benefit from the resources available on the HPC (multiple cores for parallel jobs, more memory than available on your computer)
+while also having the convenience of a familiar graphical user interface.</p>
+<h2 id="ssh-tunneling">SSH tunneling<a class="headerlink" href="#ssh-tunneling" title="Permanent link">&para;</a></h2>
+<p>The approach we will use to connect to the Jupyter notebook today is called SSH tunneling (or SSH port forwarding).
+A port, in this context, is a virtual point where network connections between devices start and end.
+Computers have 65,535 possible ports; each port is assigned a number to identify it.
+Some port numbers are reserved to identify specific services.
+For example, port 80 is used for HTTP connections and port 443 for HTTPS.</p>
+<p>Jupyter notebooks use port 8888 by default - if you run a Jupyter notebook locally e.g. using <code>jupyterlab</code>, you likely access it by going to <code>localhost:8888/lab</code> in your web browser.</p>
+<p>To connect to a Jupyter notebook (or other service) running on an HPC cluster, we have to set up an SSH tunnel that connects a port on our local machine to the port used by the Jupyter notebook on the HPC node.</p>
+<p>We can do this using the <code>ssh</code> command with specific options:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-NL<span class="w"> </span><span class="m">8888</span>:10.211.123.123:12345<span class="w"> </span>k1234567@hpc.create.kcl.ac.uk
+</code></pre></div>
+<ul>
+<li>The <code>-N</code> and <code>-L</code> options specify that we want to just set up port forwarding and not run any commands on the HPC node.</li>
+<li><code>8888</code> is the <em>local</em> port we want to use to connect to the Jupyter notebook</li>
+<li><code>10.211.123.123</code> is the IP address of the node we want to connect to</li>
+<li><code>12345</code> is the port on that node that the Jupyter notebook is running on (when running on a shared system, it's best not to use the default <code>8888</code> port as someone else might also be using it!)</li>
+</ul>
+<h2 id="installing-jupyterlab">Installing Jupyterlab<a class="headerlink" href="#installing-jupyterlab" title="Permanent link">&para;</a></h2>
+<p>We will use <code>jupyterlab</code> to run a Jupyter notebook on the HPC.
+We'll create a new Python virtual environment for this,
+but note that you could also install the <code>jupyterlab</code> package within an existing virtual environment if you have created a virtual env for a specific project.</p>
+<div class="highlight"><pre><span></span><code>module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>jupyter_env
+</code></pre></div>
+<p>We'll activate the environment and install the <code>jupyterlab</code> package.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>jupyter_env/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
+</code></pre></div>
+<h2 id="submission-script">Submission script<a class="headerlink" href="#submission-script" title="Permanent link">&para;</a></h2>
+<p>The submission script we'll use to run jupyterlab is shown below.
+We'll go through each section in turn.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -l</span>
+
+<span class="c1">#SBATCH --job-name=ops-jupyter</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH --signal=USR2</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+
+module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+<span class="nb">source</span><span class="w"> </span>jupyter_env/bin/activate
+
+<span class="c1"># get unused socket per https://unix.stackexchange.com/a/132524</span>
+<span class="nb">readonly</span><span class="w"> </span><span class="nv">IPADDRESS</span><span class="o">=</span><span class="k">$(</span>hostname<span class="w"> </span>-I<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;10.211.4.&#39;</span><span class="k">)</span>
+<span class="nb">readonly</span><span class="w"> </span><span class="nv">PORT</span><span class="o">=</span><span class="k">$(</span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import socket; s=socket.socket(); s.bind((&quot;&quot;, 0)); print(s.getsockname()[1]); s.close()&#39;</span><span class="k">)</span>
+cat<span class="w"> </span><span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="w"> </span><span class="s">&lt;&lt;END</span>
+<span class="s">1. SSH tunnel from your workstation using the following command:</span>
+
+<span class="s">   Linux and MacOS:</span>
+<span class="s">   ssh -NL 8888:${HOSTNAME}:${PORT} ${USER}@hpc.create.kcl.ac.uk</span>
+
+<span class="s">   Windows:</span>
+<span class="s">   ssh -m hmac-sha2-512 -NL 8888:${HOSTNAME}:${PORT} ${USER}@hpc.create.kcl.ac.uk</span>
+
+<span class="s">   and point your web browser to http://localhost:8888/lab?token=&lt;add the token from the jupyter output below&gt;</span>
+
+<span class="s">When done using the notebook, terminate the job by</span>
+<span class="s">issuing the following command on the login node:</span>
+
+<span class="s">      scancel -f ${SLURM_JOB_ID}</span>
+
+<span class="s">END</span>
+
+jupyter-lab<span class="w"> </span>--port<span class="o">=</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="w"> </span>--ip<span class="o">=</span><span class="si">${</span><span class="nv">IPADDRESS</span><span class="si">}</span><span class="w"> </span>--no-browser
+
+<span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;notebook exited&#39;</span><span class="w"> </span><span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+</code></pre></div>
+<p>The first section of this is the #SBATCH statements which specify the resources we're requesting. If you want to request
+more memory or CPU cores, you'll need to modify this section. For example, to use 8 CPU cores and 25GB of memory:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=jupyter
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --mem=2G
+#SBATCH --signal=USR2
+#SBATCH --cpus-per-task=1
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To effectively make use of multiple CPU cores in Python code, you will usually need to explicitly
+specify this in your Python code, e.g. by <a href="../parallel_jobs/#python-example">using the Numba package</a>.
+If you're not sure that you'll use them, don't request multiple CPU cores - you'll tie up resources
+that other users might want to use, and it'll slow down allocation of resources for your job.</p>
+</div>
+<p>Next, the Python module is loaded and the virtual environment we just created is activated.</p>
+<div class="highlight"><pre><span></span><code>module load python/3.11.6-gcc-13.2.0
+source jupyter_env/bin/activate
+</code></pre></div>
+<p>The next block identifies the IP address of the allocated node and finds an unused port for Jupyterlab to use.
+It then prints information to the SLURM output file which will explain how set up the SSH tunnel and connect to your Jupyterlab session after you submit the job.</p>
+<div class="highlight"><pre><span></span><code># get unused socket per https://unix.stackexchange.com/a/132524
+readonly IPADDRESS=$(hostname -I | tr &#39; &#39; &#39;\n&#39; | grep &#39;10.211.4.&#39;)
+readonly PORT=$(python -c &#39;import socket; s=socket.socket(); s.bind((&quot;&quot;, 0)); print(s.getsockname()[1]); s.close()&#39;)
+cat 1&gt;&amp;2 &lt;&lt;END
+1. SSH tunnel from your workstation using the following command:
+
+   Linux and MacOS:
+   ssh -NL 8888:${HOSTNAME}:${PORT} ${USER}@hpc.create.kcl.ac.uk
+
+   Windows:
+   ssh -m hmac-sha2-512 -NL 8888:${HOSTNAME}:${PORT} ${USER}@hpc.create.kcl.ac.uk
+
+   and point your web browser to http://localhost:8888/lab?token=&lt;add the token from the jupyter output below&gt;
+
+When done using the notebook, terminate the job by
+issuing the following command on the login node:
+
+      scancel -f ${SLURM_JOB_ID}
+
+END
+</code></pre></div>
+<p>The final section of the batch script runs jupyterlab using the identified IP address and port.</p>
+<div class="highlight"><pre><span></span><code>jupyter-lab --port=${PORT} --ip=${IPADDRESS} --no-browser
+</code></pre></div>
+<p>Submit the script using <code>sbatch</code>, wait for the job to start (use <code>squeue --me</code> to check the status of your jobs),
+and check the output file for connection information:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$<span class="w"> </span>sbatch<span class="w"> </span>jupyter.sh
+Submitted<span class="w"> </span>batch<span class="w"> </span>job<span class="w"> </span><span class="m">15244802</span>
+k1234567@erc-hpc-login2:~$<span class="w"> </span>cat<span class="w"> </span>slurm-15244802.out
+</code></pre></div>
+<p>On your laptop or desktop, start a new terminal session and run the ssh command given in your job's output,
+e.g. <code>ssh -NL 8888:erc-hpc-comp015:53723 k1234567@hpc.create.kcl.ac.uk</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This will produce a message saying you may need to visit the e-Research Portal to authorise
+your SSH connection, but then no further output, even if successful. This is expected!</p>
+</div>
+<p>Then in your web browser go to <a href="http://localhost:8888">http://localhost:8888/lab?token=yourtokenhere</a>, and you should see the Jupyter Lab interface.</p>
+<p>When you're finished working, close the browser tab,
+use <code>Ctrl+C</code> to close the SSH tunnel,
+then on the HPC run <code>scancel -f &lt;your job id&gt;</code>, as given in the output file of your job, to cancel the
+job's allocation and free up the resources.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

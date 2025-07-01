@@ -1,0 +1,1957 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High Performance Computing with CREATE">
+      
+      
+        <meta name="author" content="KCL e-Research">
+      
+      
+        <link rel="canonical" href="https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/exercises/">
+      
+      
+        <link rel="prev" href="../jupyter/">
+      
+      
+        <link rel="next" href="../next-steps/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Practical - High Performance Computing with CREATE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercises" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="High Performance Computing with CREATE" class="md-header__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing with CREATE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Practical
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="High Performance Computing with CREATE" class="md-nav__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    High Performance Computing with CREATE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using_software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submitting_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using modules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-software-environment-module-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic software environment module usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-environment-module-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further environment module usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-virtual-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtual environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python virtual environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-virtualenv-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtualenv creation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-virtualenv-package-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtualenv package installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-part-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job submission (part 1)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job submission (part 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slurm-batch-job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM batch job submission
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slurm-interactive-job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM interactive job submission
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-slurm-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU SLURM jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-slurm-job-scripts-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging SLURM job scripts (1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-slurm-job-scripts-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging SLURM job scripts (2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-part-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job submission (part 2)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job submission (part 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-core-slurm-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-core SLURM jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slurm-array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM array jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organising-input-for-slurm-array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organising input for SLURM array jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Jupyter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Jupyter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-labnotebook-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Lab/Notebook jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#singularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Singularity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singularity-container-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularity container usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-containers-in-a-batch-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using containers in a batch job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-containers-that-are-useful-for-your-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finding containers that are useful for your research
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh_keys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using modules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-software-environment-module-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic software environment module usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#further-environment-module-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further environment module usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-virtual-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtual environments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python virtual environments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-virtualenv-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtualenv creation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-virtualenv-package-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python virtualenv package installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-part-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job submission (part 1)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job submission (part 1)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#slurm-batch-job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM batch job submission
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slurm-interactive-job-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM interactive job submission
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu-slurm-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      GPU SLURM jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-slurm-job-scripts-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging SLURM job scripts (1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-slurm-job-scripts-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging SLURM job scripts (2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#job-submission-part-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job submission (part 2)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Job submission (part 2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-core-slurm-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-core SLURM jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slurm-array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      SLURM array jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organising-input-for-slurm-array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organising input for SLURM array jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-jupyter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Jupyter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Jupyter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jupyter-labnotebook-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jupyter Lab/Notebook jobs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#singularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Singularity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#singularity-container-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singularity container usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-containers-in-a-batch-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using containers in a batch job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-containers-that-are-useful-for-your-research" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finding containers that are useful for your research
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="exercises">Exercises<a class="headerlink" href="#exercises" title="Permanent link">&para;</a></h1>
+<p>This section contains collection of exercises based on the material covered in the previous sections.</p>
+<p>Sample answers are provided in-line in the expandable boxes, but please try to do exercises by yourself
+before looking at the sample answers. There are also some hints to help you if you are stuck.</p>
+<p>Supporting files can be found on CREATE HPC in <code>/datasets/hpc_training</code> directory. The
+directory also contains example scripts from the exercises for convenience.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>There might be multiple ways to achieve a specific goal - If your method does not match the sample
+answer it might not mean you have done things incorrectly, just differently.</p>
+</div>
+<h2 id="using-modules">Using modules<a class="headerlink" href="#using-modules" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="basic-software-environment-module-usage">Basic software environment module usage<a class="headerlink" href="#basic-software-environment-module-usage" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Load and use the Python environment module with the most recent version of Python</p>
+<ul>
+<li>Investigate the module environment before and after loading the module. What has changed?</li>
+<li>Print python version</li>
+<li>Check the python interpreter location on the filesystem</li>
+<li>Unload the module and check the python version and location again. What is different?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<p>Use <code>which</code> command to find the location and <code>-V</code> option to print python version.</p>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>First print the list of the modules before the module has been loaded</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module list
+</code></pre></div>
+<p>Next load the Python module - N.B. the most recent version you have available may be different to this example answer.</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module load python/3.8.12-gcc-9.4.0
+</code></pre></div>
+<p>List the currently loaded modules:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module list
+
+Currently Loaded Modules:
+  1) bzip2/1.0.8-gcc-9.4.0     6) libiconv/1.16-gcc-9.4.0   11) ncurses/6.2-gcc-9.4.0             16) xz/5.2.5-gcc-9.4.0
+  2) libmd/1.0.3-gcc-9.4.0     7) libxml2/2.9.12-gcc-9.4.0  12) openssl/1.1.1l-gcc-9.4.0          17) zlib/1.2.11-gcc-9.4.0
+  3) libbsd/0.11.3-gcc-9.4.0   8) tar/1.34-gcc-9.4.0        13) readline/8.1-gcc-9.4.0            18) python/3.8.12-gcc-9.4.0
+  4) expat/2.4.1-gcc-9.4.0     9) gettext/0.21-gcc-9.4.0    14) sqlite/3.36.0-gcc-9.4.0
+  5) gdbm/1.19-gcc-9.4.0      10) libffi/3.3-gcc-9.4.0      15) util-linux-uuid/2.36.2-gcc-9.4.0
+</code></pre></div>
+<p>You can see that the python module and its dependencies have been added.</p>
+<p>Test by printing python version:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ python -V
+Python 3.8.12
+</code></pre></div>
+<p>You can also see where the python interpreter resides:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ which python
+/software/spackages_prod/apps/linux-ubuntu20.04-zen2/gcc-9.4.0/python-3.8.12-mdneme5mnx2ihlvy6ihbvjatdvnn45l6/bin/python
+</code></pre></div>
+<p>Unload the python module using:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module rm python/3.8.12-gcc-9.4.0
+</code></pre></div>
+<p>Check the version and location again:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ python -V
+Python 3.8.10
+k1234567@erc-hpc-login2:~$ which python
+/usr/bin/python
+</code></pre></div>
+<p>Now we are using system provided python. Although we said that no software
+is automatically pre-loaded, there will be applications that come with the
+operating system and cannot be removed/hidden easily.</p>
+</details>
+</li>
+<li>
+<h3 id="further-environment-module-usage">Further environment module usage<a class="headerlink" href="#further-environment-module-usage" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Explore loading different versions of the same environment</p>
+<ul>
+<li>Load the most recent version of Python and then attempt to load a different version. What is the outcome?</li>
+</ul>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Start by loading python 3.8.12 (N.B. the versions you have available may be different to this example answer):</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module load python/3.8.12-gcc-9.4.0
+</code></pre></div>
+<p>Next load python 2.7.18:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module load python/2.7.18-gcc-9.4.0
+</code></pre></div>
+<p>You should see the following message informing you about the module swap:</p>
+<div class="highlight"><pre><span></span><code>The following have been reloaded with a version change:
+  1) python/3.8.12-gcc-9.4.0 =&gt; python/2.7.18-gcc-9.4.0
+</code></pre></div>
+</details>
+</li>
+</ol>
+<h2 id="python-virtual-environments">Python virtual environments<a class="headerlink" href="#python-virtual-environments" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="python-virtualenv-creation">Python virtualenv creation<a class="headerlink" href="#python-virtualenv-creation" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Create and use a Python virtual environment</p>
+<ul>
+<li>Create python virtualenv using the most recent available version of python and activate it.</li>
+<li>Find out where the python interpreter and pip utility are located</li>
+<li>Deactivate the python virtual environment</li>
+<li>Check the location of python interpreter and pip utility again</li>
+</ul>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Start by loading the python interpreter using:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module load python/3.11.6-gcc-13.2.0
+</code></pre></div>
+<p>Once the module has been loaded create the python virtual environment:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ python -m venv myvenv
+</code></pre></div>
+<p>Next activate the environment:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ source myvenv/bin/activate
+(myvenv) k1234567@erc-hpc-login2:~$
+</code></pre></div>
+<p>Use <code>which</code> command to print the locations of the python interpreter and pip utility</p>
+<div class="highlight"><pre><span></span><code>(myvenv) k1234567@erc-hpc-login2:~$ which python
+/users/k1234567/myvenv/bin/python
+(myvenv) k1234567@erc-hpc-login2:~$ which pip
+/users/k1234567/myvenv/bin/pip
+</code></pre></div>
+<p><strong>Note</strong>: The above paths might vary depending on where on the filesystem you have created your virtual environemnt.</p>
+<p>Next deactivate the virtual environment</p>
+<div class="highlight"><pre><span></span><code>(myvenv) k1234567@erc-hpc-login2:~$ deactivate
+</code></pre></div>
+<p>Check the location of python interpreter and pip using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ which python
+/software/spackages_v0_21_prod/apps/linux-ubuntu22.04-zen2/gcc-13.2.0/python-3.11.6-oe7bpykqsieymznu5rprjla46ti6uagh/bin/python
+k1234567@erc-hpc-login2:~$ which pip
+/usr/bin/pip
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="python-virtualenv-package-installation">Python virtualenv package installation<a class="headerlink" href="#python-virtualenv-package-installation" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Install packages into a python virtual environment</p>
+<ul>
+<li>Using the virtualenv created in the previous excercise, install the <code>pandas</code> package to it. Check if it has been installed.</li>
+<li>What other packages were installed as dependencies?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>pip install package_name</code> to install a package in your virtual environment</li>
+<li>Use <code>pip list</code> to list installed packages</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Using the previously created environment activate it</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ source myvenv/bin/activate
+(myvenv) k1234567@erc-hpc-login2:~$
+</code></pre></div>
+<p>Next use pip command to install the relevant package</p>
+<div class="highlight"><pre><span></span><code>(myvenv) k1234567@erc-hpc-login2:~$ pip install pandas
+Collecting pandas
+  Downloading pandas-1.4.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.7/11.7 MB 14.4 MB/s eta 0:00:00
+Collecting python-dateutil&gt;=2.8.1
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 247.7/247.7 KB 1.8 MB/s eta 0:00:00
+Collecting pytz&gt;=2020.1
+  Downloading pytz-2022.1-py2.py3-none-any.whl (503 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 503.5/503.5 KB 1.7 MB/s eta 0:00:00
+Collecting numpy&gt;=1.18.5
+  Downloading numpy-1.22.3-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 13.6 MB/s eta 0:00:00
+Collecting six&gt;=1.5
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: pytz, six, numpy, python-dateutil, pandas
+Successfully installed numpy-1.22.3 pandas-1.4.2 python-dateutil-2.8.2 pytz-2022.1 six-1.16.0
+</code></pre></div>
+<p>Additional dependencies that pandas package requires will also be installed.</p>
+<p>You can check if the package has been installed using</p>
+<div class="highlight"><pre><span></span><code>(myvenv) k1234567@erc-hpc-login2:~$ pip list
+Package         Version
+--------------- -------
+numpy           1.22.3
+pandas          1.4.2
+pip             22.0.4
+python-dateutil 2.8.2
+pytz            2022.1
+setuptools      62.1.0
+six             1.16.0
+wheel           0.37.1
+</code></pre></div>
+<p><strong>Note</strong>: The version numbers you see might not match those above.</p>
+</details>
+</li>
+</ol>
+<h2 id="job-submission-part-1">Job submission (part 1)<a class="headerlink" href="#job-submission-part-1" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="slurm-batch-job-submission">SLURM batch job submission<a class="headerlink" href="#slurm-batch-job-submission" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit a batch job requesting 1 core and 2G of memory</p>
+<ul>
+<li>Have the job print the hostname of the node that it runs on</li>
+<li>Check if the job is running</li>
+<li>Analyse the output file</li>
+<li>Check information about completed job</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>hostname</code> command to print the hostname of the node</li>
+<li>Add <code>sleep</code> to the jobscript so that it does not terminate too quickly</li>
+<li>Use <code>squeue</code> to check the status of the job</li>
+<li>Use <code>sacct</code> to get the information about the job when it has finished</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-job1.sh</code> and add the following contents to it</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-job1
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=2G
+
+echo &quot;My hostname is &quot;`hostname`
+sleep 60
+</code></pre></div>
+<p>Submit the jobs using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-job1.sh
+Submitted batch job 56739
+</code></pre></div>
+<p>You can check the status of your job(s)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ squeue --me
+JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+56739       cpu test-job k1234567  R       0:10      1 erc-hpc-comp001
+</code></pre></div>
+<p>Analyse the output, which should be located in the <code>slurm-jobid.out</code> file (replace <code>jobid</code> with the id of your job)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56739.out
+My hostname is erc-hpc-comp001
+</code></pre></div>
+<p>You can check information about completed job using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 56739
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+56739         test-job1        cpu        kcl          1  COMPLETED      0:0
+56739.batch       batch                   kcl          1  COMPLETED      0:0
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="slurm-interactive-job-submission">SLURM interactive job submission<a class="headerlink" href="#slurm-interactive-job-submission" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Request an interactive session with one core and 4G of memory</p>
+<ul>
+<li>Print the hostname of the interactive node that you have been allocated</li>
+<li>Print number of cores available</li>
+<li>What happens immediately after requesting the interactive job? How is it different from submitting a batch job? Why might this be a bad thing?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>hostname</code> command to print the hostname of the node</li>
+<li>Use <code>nproc</code> utility to print the number of allocated cpus for the job</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Use <code>srun</code> command to request an interactive session</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ srun -p cpu --reservation cpu_introduction --mem 4G --pty /bin/bash -l
+srun: job 56741 queued and waiting for resources
+srun: job 56741 has been allocated resources
+k1234567@erc-hpc-comp001:~$
+</code></pre></div>
+<p>Print the hostname of the allocated node and number of cores that we have been allocated</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-comp001:~$ hostname
+erc-hpc-comp001
+k1234567@erc-hpc-comp001:~$ nproc
+1
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="gpu-slurm-jobs">GPU SLURM jobs<a class="headerlink" href="#gpu-slurm-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit a job requesting gpu(s) on a single node.</p>
+<ul>
+<li>Write a job script that requests a single gpu and does something that reports the information in its output</li>
+<li>Submit a job that requests two gpus and check the output</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>nvidia-smi --id=$CUDA_VISIBLE_DEVICES</code> utility to print the details of allocated gpu(s) for the job</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-gpu.sh</code> and add the following contents to it:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-gpu
+#SBATCH --partition=interruptible_gpu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --gres gpu:1
+
+nvidia-smi --id=$CUDA_VISIBLE_DEVICES
+</code></pre></div>
+<p>Submit the jobs using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-gpu.sh
+Submitted batch job 57425
+</code></pre></div>
+<p>Analyse the output, which should be located in the <code>slurm-jobid.out</code> file (replace <code>jobid</code> with the id of your job)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-57425.out
+Tue May 10 09:23:12 2022
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.54       Driver Version: 510.54       CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   1  NVIDIA A100-SXM...  On   | 00000000:31:00.0 Off |                    0 |
+| N/A   42C    P0    51W / 400W |      0MiB / 40960MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div>
+<p>Next modify <code>--gres</code> option to be <code>--gres gpu:2</code> and re-submit the job.</p>
+<p>Analyse the output, which should be located in the <code>slurm-jobid.out</code> file (replace <code>jobid</code> with the id of your job)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-57460.out
+Tue May 10 09:32:21 2022
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.60.02    Driver Version: 510.60.02    CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   1  NVIDIA A100-SXM...  Off  | 00000000:31:00.0 Off |                    0 |
+| N/A   35C    P0    55W / 400W |      0MiB / 40960MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+|   2  NVIDIA A100-SXM...  Off  | 00000000:B1:00.0 Off |                    0 |
+| N/A   34C    P0    55W / 400W |      0MiB / 40960MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="debugging-slurm-job-scripts-1">Debugging SLURM job scripts (1)<a class="headerlink" href="#debugging-slurm-job-scripts-1" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Analyse and fix a SLURM batch job script</p>
+<ul>
+<li>For this exercise, use the <code>bad-script1.sh</code> script located in the <code>sample-scripts</code> folder in the supporting files directory</li>
+<li>Examine the job script, what is it intended to do?</li>
+<li>Submit it as a batch job. What is the problem? Try to fix the issue.</li>
+<li>How else could you have fixed the issue?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<p>You will have to copy the script to your local workspace in order to modify it.</p>
+</details>
+<details class="example">
+<summary>Sample Answer</summary>
+<p>Submit the <code>/datasets/hpc_training/sample-scripts/sample-scripts/bad-script1.sh</code> job</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch /datasets/hpc_training/sample-scripts/sample-scripts/bad-script1.sh
+</code></pre></div>
+<p>Once the job has finished analyse its output file</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56749.out
+slurmstepd-erc-hpc-comp001: error: *** JOB 56749 ON erc-hpc-comp001 CANCELLED AT 2022-05-09T14:41:14 DUE TO TIME LIMIT ***
+</code></pre></div>
+<p>and the accounting information</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 56749
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+56749        bad-scrip+        cpu        kcl          1    TIMEOUT      0:0
+56749.batch       batch                   kcl          1  CANCELLED     0:15
+</code></pre></div>
+<p>You can see that the job was killed because insufficient runtime was requested. Fix it by changing
+the runtime to 3 minutes which should conver the 2 minute sleep (You can alternatively decrease the sleep time).</p>
+<div class="highlight"><pre><span></span><code>#SBATCH -t 0-0:03 # time (D-HH:MM)
+</code></pre></div>
+<p>Once the amended script is submitted the output file should contain the following</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56751.out
+Hello World! erc-hpc-comp001
+</code></pre></div>
+<p>and the accouting information should contain</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 56751
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+56751        bad-scrip+        cpu        kcl          1  COMPLETED      0:0
+56751.batch       batch                   kcl          1  COMPLETED      0:0
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="debugging-slurm-job-scripts-2">Debugging SLURM job scripts (2)<a class="headerlink" href="#debugging-slurm-job-scripts-2" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Analyse and fix a SLURM batch job script</p>
+<ul>
+<li>For this exercise, use the <code>bad-script2.sh</code> script located in the <code>sample-scripts</code> folder in the supporting files directory</li>
+<li>Examine the job script, what resources does it request from SLURM?</li>
+<li>Submit it as a batch job. What is the problem? Try to fix the issue.</li>
+<li>How else could you have fixed the issue?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<p>You will have to copy the script to your local workspace in order to modify it.</p>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Submit the <code>/datasets/hpc_training/sample-scripts/bad-script2.sh</code> job</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch /datasets/hpc_training/sample-scripts/bad-script2.sh
+</code></pre></div>
+<p>Once the job has finished analyse its output file</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-12345.out
+Settings:
+memset_increment_size =&gt; 0.0
+memset_size =&gt; 2
+memset_sleep =&gt; 10
+memalloc_sleep =&gt; 0
+cpuburn =&gt; 1
+memalloc =&gt; 1
+burntime =&gt; 20
+nprocs =&gt; 1
+memalloc_size =&gt; 2
+ncores =&gt; 1
+...
+slurmstepd: error: Detected 1 oom-kill event(s) in step 12345.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
+</code></pre></div>
+<p>and the accounting information:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 12345
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+12345        bad-scrip+        cpu    default          1 OUT_OF_ME+    0:125
+12345   .ba+      batch               default          1 OUT_OF_ME+    0:125
+</code></pre></div>
+<p>This time the job was killed because of insufficient memory. Fix it by changing
+the required memory to 3G, or by decreasing the amount of memory needed by cpumemburn.</p>
+<div class="highlight"><pre><span></span><code>#SBATCH --mem=3G
+</code></pre></div>
+<p>Once the amended script is submitted the output file should contain the following:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-57619.out
+Settings:
+memset_increment_size =&gt; 0.0
+memset_size =&gt; 2
+memset_sleep =&gt; 10
+memalloc_sleep =&gt; 0
+cpuburn =&gt; 1
+memalloc =&gt; 1
+burntime =&gt; 20
+nprocs =&gt; 1
+memalloc_size =&gt; 2
+ncores =&gt; 1
+...
+</code></pre></div>
+<p>and the accounting information should contain:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 57619
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+57619        bad-scrip+        cpu    default          1  COMPLETED      0:0
+57619.ba+         batch               default          1  COMPLETED      0:0
+</code></pre></div>
+</details>
+</li>
+</ol>
+<h2 id="job-submission-part-2">Job submission (part 2)<a class="headerlink" href="#job-submission-part-2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="multi-core-slurm-jobs">Multi-core SLURM jobs<a class="headerlink" href="#multi-core-slurm-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit a job requesting multiple cores on a single node.</p>
+<ul>
+<li>Write a job script that requests two cores and does something that reports the information in its output</li>
+<li>Submit the job and check whether the correct resources have been allocated to the job by SLURM. Does it match the output from your job?</li>
+<li>How else could you have achieved the same resource request?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>nproc</code> utility to print the number of allocated cpus for the job</li>
+<li>Use <code>sacct</code> to check the resource allocation after the job has finished</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-multicore.sh</code> and add the following contents to it:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-multicore
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
+
+echo &quot;I have &quot;`nproc`&quot; cpus.&quot;
+</code></pre></div>
+<p>Submit the jobs using:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-multicore.sh
+Submitted batch job 56758
+</code></pre></div>
+<p>Analyse the output, which should be located in the <code>slurm-jobid.out</code> file (replace <code>jobid</code> with the id of your job)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56758.out
+I have 2 cpus.
+</code></pre></div>
+<p>You can check the information about completed job using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sacct -j 56758
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+56758        test-mult+        cpu        kcl          2  COMPLETED      0:0
+56758.batch       batch                   kcl          2  COMPLETED      0:0
+</code></pre></div>
+<p>You should see the <code>AllocCPUS</code> with value of 2.</p>
+</details>
+</li>
+<li>
+<h3 id="slurm-array-jobs">SLURM array jobs<a class="headerlink" href="#slurm-array-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit an array job consisting of 3 tasks</p>
+<ul>
+<li>Write a job script that defines an array of 3 tasks</li>
+<li>Have your job print out the SLURM array task ID number in its output</li>
+<li>Submit the script and then immediately check the status of the running job. How many individual jobs are running?</li>
+<li>How do you identify array jobs and tasks in the queue displayed by SLURM?</li>
+<li>Investigate the output files - how does an array job differ from the other jobs that you have been submitting?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>sleep</code> command to delay the execution of the script so that you can check its status</li>
+<li>Use <code>squeue</code> command to check the status of the running job.</li>
+<li>Use <code>SLURM_ARRAY_TASK_ID</code> environment variable inside the job to get the task id associated witht he task.</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-array.sh</code> and add the following contents to it:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-array
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --array=1-3
+
+sleep 60
+echo &quot;My task id is ${SLURM_ARRAY_TASK_ID}&quot;
+</code></pre></div>
+<p>Submit the jobs using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-array.sh
+Submitted batch job 56759
+</code></pre></div>
+<p>Check the status of the job using:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ squeue --me
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           56759_1       cpu test-arr k1234567  R       0:12      1 erc-hpc-comp001
+           56759_2       cpu test-arr k1234567  R       0:12      1 erc-hpc-comp001
+           56759_3       cpu test-arr k1234567  R       0:12      1 erc-hpc-comp001
+</code></pre></div>
+<p>You may see separate entries corresponding to each of the tasks in your array job.</p>
+<p>Analyse the output, which should be located in the <code>slurm-jobid_X.out</code> files (replace <code>jobid</code> with the id of your job).
+<code>X</code> will be a number corresponding to your tasks range, so you should have 3 separate log files, one for each array task.</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56759_1.out
+My task id is 1
+k1234567@erc-hpc-login2:~$ cat slurm-56759_2.out
+My task id is 2
+k1234567@erc-hpc-login2:~$ cat slurm-56759_3.out
+My task id is 3
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="organising-input-for-slurm-array-jobs">Organising input for SLURM array jobs<a class="headerlink" href="#organising-input-for-slurm-array-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Define an array job where each task takes its input from a different file</p>
+<ul>
+<li>Write an array job script where each task will print the contents of the files located in the <code>sample-files/arrayjob</code> folder in the supporting files directory</li>
+<li>Each task should only print the contents of one file, no two tasks should print the same file</li>
+<li>Submit the job, confirm the contents of the array tasks output files match the input file contents as intended</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Try to find the association between the task id and the filename</li>
+<li>Use <code>cat</code> to print out the contents of the file</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-array-files.sh</code> and add the following contents to it</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-array
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --array=1-3
+
+cat /datasets/hpc_training/sample-files/arrayjob/file${SLURM_ARRAY_TASK_ID}.txt
+</code></pre></div>
+<p>Submit the jobs using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-array-files.sh
+Submitted batch job 56769
+</code></pre></div>
+<p>Analyse the output, which should be located in the <code>slurm-jobid_X.out</code> files (replace <code>jobid</code> with the id of your job).
+<code>X</code> will be a number corresponding to your tasks range, so you should have 3 separate log files, one for each array task.</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56769_1.out
+Hello, I&#39;m file 1
+k1234567@erc-hpc-login2:~$ cat slurm-56769_2.out
+Hello, I&#39;m file 2
+k1234567@erc-hpc-login2:~$ cat slurm-56769_3.out
+Hello, I&#39;m file 3  
+</code></pre></div>
+</details>
+</li>
+</ol>
+<h2 id="using-jupyter">Using Jupyter<a class="headerlink" href="#using-jupyter" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="jupyter-labnotebook-jobs">Jupyter Lab/Notebook jobs<a class="headerlink" href="#jupyter-labnotebook-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit a Jupyter lab notebook job and connect to it using SSH tunnelling</p>
+<ul>
+<li>Jupyter Lab should be installed in a Python virtual environment</li>
+<li>Sample <code>test-jlab.sh</code> script is located in the <code>sample-scripts</code> folder in the supporting files directory. You won't have to change any existing content but you will have to add some things in</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>You will have to copy the script to your local workspace in order to modify it</li>
+<li>Create python virtual environment and install <code>jupyterlab</code> package into it</li>
+<li>Once the job is running the output file will give you the ssh tunnel detils</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>First of all we need to create the python virtualenv and install jupyter lab package:</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ module load python/3.8.12-gcc-9.4.0
+k1234567@erc-hpc-login2:~$ python -m venv jvenv
+k1234567@erc-hpc-login2:~$ source jvenv/bin/activate
+(jvenv) k1234567@erc-hpc-login2:~$ pip install jupyterlab
+Collecting jupyterlab
+...
+Successfully installed MarkupSafe ...
+(jvenv) k1234567@erc-hpc-login2:~$ deactivate
+</code></pre></div>
+<p>Next we copy the <code>test-jlab.sh</code> and modify it. The only two things that need to be added are:</p>
+<ul>
+<li>Module loading of the python module</li>
+<li>Virtualenv activation before the <code>jupyter-lab</code> command is executed</li>
+</ul>
+<p>After the modifications the script might look like:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-jlab
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+#SBATCH --ntasks=1
+#SBATCH --mem=2G
+#SBATCH --signal=USR2
+#SBATCH --cpus-per-task=1
+
+module load python/3.8.12-gcc-9.4.0
+
+# get unused socket per https://unix.stackexchange.com/a/132524
+readonly IPADDRESS=$(hostname -I | tr &#39; &#39; &#39;\n&#39; | grep &#39;10.211.4.&#39;)
+readonly PORT=$(python -c &#39;import socket; s=socket.socket(); s.bind((&quot;&quot;, 0)); print(s.getsockname()[1]); s.close()&#39;)
+cat 1&gt;&amp;2 &lt;&lt;END
+1. SSH tunnel from your workstation using the following command:
+
+   ssh -NL 8888:${HOSTNAME}:${PORT} ${USER}@hpc.create.kcl.ac.uk
+
+   and point your web browser to http://localhost:8888
+
+When done using the notebook, terminate the job by
+issuing the following command on the login node:
+
+      scancel -f ${SLURM_JOB_ID}
+
+END
+
+source jvenv/bin/activate
+jupyter-lab --port=${PORT} --ip=${IPADDRESS} --no-browser
+
+printf &#39;notebook exited&#39; 1&gt;&amp;2
+</code></pre></div>
+<p>Next submit the job and wait until its running</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-jlab.sh
+</code></pre></div>
+<p>Once the job has started look at the output file - at the top of the file there will be instructions
+on how to connect to the instance from you laptop/workstation using ssh tunnel.</p>
+<p>After the connection instructions, there will be jupyter lab specific output. You can ignore most of it with the exception
+of the token that you will need to authenticate to the web interface.</p>
+</details>
+</li>
+</ol>
+<h2 id="singularity">Singularity<a class="headerlink" href="#singularity" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<h3 id="singularity-container-usage">Singularity container usage<a class="headerlink" href="#singularity-container-usage" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Pull and run a container</p>
+<ul>
+<li>Pull the <code>lolcow</code> Singularity container and run it. What is the output?</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Start an interactive session before running the commands</li>
+<li>Use <code>singularity pull</code> command to download the container</li>
+<li>Use <code>singularity run</code> command to run the container</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Start an interactive session first as singularity is not available on
+the login nodes</p>
+<div class="highlight"><pre><span></span><code>srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+</code></pre></div>
+<p>After the resources have been allocated, pull the lolcow container using <code>singularity pull</code></p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-comp179:~$ singularity pull docker://sylabsio/lolcow
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+INFO:    Creating SIF file...
+</code></pre></div>
+<p>Once the container has been downloaded use <code>run</code> command to run it</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-comp179:~$ singularity run lolcow_latest.sif
+INFO:    Converting SIF file to temporary sandbox...
+ ________________________________________
+/ Alas, how love can trifle with itself! \
+|                                        |
+| -- William Shakespeare, &quot;The Two       |
+\ Gentlemen of Verona&quot;                   /
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="using-containers-in-a-batch-job">Using containers in a batch job<a class="headerlink" href="#using-containers-in-a-batch-job" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Submit a batch job and execute singularity container command</p>
+<ul>
+<li>Submit the batch job using default scheduler options</li>
+<li>Use <code>lolcow</code> container</li>
+<li>Execute <code>cowsay</code> command within the container that prints <code>Hello there</code> string</li>
+</ul>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>Use <code>cowsay string</code> command to print <code>string</code> text</li>
+<li>Ensure that you use the correct path to the container file</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Create a sample script <code>test-singularity.sh</code> and add the following contents to it</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+
+#SBATCH --job-name=test-singularity
+#SBATCH --partition=cpu
+#SBATCH --reservation=cpu_introduction
+
+singularity exec ~/lolcow_latest.sif cowsay &quot;Hello there&quot;
+</code></pre></div>
+<p>Submit the jobs using</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ sbatch test-singularity.sh
+Submitted batch job 56748
+</code></pre></div>
+<p>Analyse the output, which should be located in the <code>slurm-jobid.out</code> file (replace <code>jobid</code> with the id of your job)</p>
+<div class="highlight"><pre><span></span><code>k1234567@erc-hpc-login2:~$ cat slurm-56748.out
+ _____________
+&lt; Hello there &gt;
+ -------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+</code></pre></div>
+</details>
+</li>
+<li>
+<h3 id="finding-containers-that-are-useful-for-your-research">Finding containers that are useful for your research<a class="headerlink" href="#finding-containers-that-are-useful-for-your-research" title="Permanent link">&para;</a></h3>
+<p><strong>Goal</strong>: Use DockerHub to find a container that could be useful for your research and run it with Singularity</p>
+<p><a href="https://hub.docker.com">DockerHub</a> is an online repository of container images.
+Many commonly used pieces of software have been containerized into images that are officially endorsed, providing a convenient way to use this software without needing to install it.</p>
+<ul>
+<li>On DockerHub, search for some software you use in your research and see if you can find a container for that software</li>
+<li>Can you find documentation about how to use the container?</li>
+<li>Download the image to the HPC cluster</li>
+<li>
+<p>Run it with Singularity</p>
+<details class="hint">
+<summary>Hint</summary>
+<ul>
+<li>If you can't think of a software to search for, try searching for <code>R</code> or <code>python</code>.</li>
+<li>Start an interactive session before running the commands</li>
+<li>Use <code>singularity pull docker://{container name}</code> command to download the container (replacing the <code>{}</code> and their contents with the correct container name)</li>
+<li>Use <code>singularity run</code> command to run the container</li>
+</ul>
+</details>
+<details class="example">
+<summary>Sample answer</summary>
+<p>Let's search for a container that provides the <code>tidyverse</code> R packages.</p>
+<p>There is a <code>tidyverse</code> container provided by the <code>rocker</code> organisation.</p>
+<p>To pull the container, first start an interactive session as singularity is not available on
+the login nodes:</p>
+<div class="highlight"><pre><span></span><code>srun --partition cpu --reservation cpu_introduction --pty /bin/bash -l
+</code></pre></div>
+<p>We can then pull the container with:</p>
+<div class="highlight"><pre><span></span><code>singularity<span class="w"> </span>pull<span class="w"> </span>tidyverse.sif<span class="w"> </span>docker://rocker/tidyverse
+</code></pre></div>
+<p>We can run R using the container with:</p>
+<div class="highlight"><pre><span></span><code>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>tidyverse.sif<span class="w"> </span>R
+</code></pre></div>
+</details>
+</li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,831 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High Performance Computing with CREATE">
+      
+      
+        <meta name="author" content="KCL e-Research">
+      
+      
+        <link rel="canonical" href="https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/unix_commands/">
+      
+      
+        <link rel="prev" href="../next-steps/">
+      
+      
+        <link rel="next" href="../ssh_keys/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Unix commands - High Performance Computing with CREATE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-unix-commands" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="High Performance Computing with CREATE" class="md-header__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing with CREATE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unix commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="High Performance Computing with CREATE" class="md-nav__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    High Performance Computing with CREATE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using_software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submitting_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parallel_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes-on-relative-and-absolute-paths-in-unix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on Relative and Absolute Paths in Unix
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh_keys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#notes-on-relative-and-absolute-paths-in-unix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes on Relative and Absolute Paths in Unix
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="basic-unix-commands">Basic Unix Commands<a class="headerlink" href="#basic-unix-commands" title="Permanent link">&para;</a></h1>
+<p>Unix is the name of a family of operating systems (OS) that support multi-tasking and multiple users. Unix commands allow you to interact with the OS and applications on it. Sometimes a Unix like operating system is deployed without a graphical user interface (GUI). Therefore, the only way to interact with the OS is through commandline. Furthermore, some applications do not have a GUI and can only be invoked through the command line.</p>
+<p>Below is a list of basic commands and an explanation for each command. Please note that some of these commands require one or more arguments while others do not need any.  </p>
+<p>Some commands can change behaviour or output based on switches provided. A switch is usually a letter or a word preceded by a <strong>-</strong> dash or two dashes <strong>--</strong> respectively.</p>
+<ul>
+<li>cd<ul>
+<li>Changes the current directory that you are in.</li>
+<li>Examples:<ul>
+<li><code>cd dir1</code> <em># changes current directory to dir1</em></li>
+<li><code>cd</code>  <em># changes current directory to your home directory</em></li>
+</ul>
+</li>
+<li>Notes:<ul>
+<li>Please see the notes on relative and absolute paths below.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pwd<ul>
+<li>Prints the current directory you are in.</li>
+</ul>
+</li>
+<li>mkdir<ul>
+<li>Creates a new directory</li>
+<li>Examples:<ul>
+<li><code>mkdir test_dir</code> <em># Creates a directory with test_dir as its name</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mv<ul>
+<li>Moves file(s) or directories from a source path to a destination path.</li>
+<li>Examples:<ul>
+<li><code>mv test_file test_dir/</code> <em># Moves test_file to test_dir</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cp<ul>
+<li>Copies file(s) from a source path to a destination path.</li>
+<li>Examples:<ul>
+<li><code>cp test_file test_dir/</code> <em># Copies test_file to test_dir</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rm<ul>
+<li>Removes file(s).</li>
+<li>Examples:<ul>
+<li><code>rm test_file</code> <em># Removes test_file if it exists</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rmdir<ul>
+<li>Removes directory</li>
+<li>Examples:<ul>
+<li><code>rm test_dir</code> <em># Removes test_dir if it exists and is empty</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>tail</p>
+<ul>
+<li>Shows the last 10 lines from any text file.</li>
+<li>Examples:<ul>
+<li><code>tail some_file.txt</code> <em># Shows the last 10 lines of some_file.txt</em></li>
+<li><code>tail -f some_file.txt</code> <em># Shows the last 10 lines of some_file.txt and keeps track of changes</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ls</p>
+<ul>
+<li>Lists the contents of the current directory.</li>
+<li>Examples:<ul>
+<li><code>ls -l</code> <em># Lists the contents of current directory in long format</em></li>
+<li><code>ls -a</code> <em># Lists the contents of current directory including hidden files.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>whoami<ul>
+<li>Prints your username.</li>
+</ul>
+</li>
+<li>history<ul>
+<li>Prints a list of commands executed by you.</li>
+</ul>
+</li>
+<li>groups<ul>
+<li>Prints the list of groups your user is a member of.</li>
+</ul>
+</li>
+<li>clear<ul>
+<li>Clears command line screen, useful when logs or warnings have filled up the screen.</li>
+</ul>
+</li>
+<li>last<ul>
+<li>Prints a history of logins to the system.</li>
+</ul>
+</li>
+<li>ps<ul>
+<li>Prints a list of existing processes of current user.</li>
+</ul>
+</li>
+<li>top<ul>
+<li>Shows a live list of tasks and resource usage.</li>
+</ul>
+</li>
+<li>man<ul>
+<li>Shows the manual of a specific command.</li>
+<li>Examples:<ul>
+<li><code>man tail</code> <em># Shows the manual for command tail</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="notes-on-relative-and-absolute-paths-in-unix">Notes on Relative and Absolute Paths in Unix<a class="headerlink" href="#notes-on-relative-and-absolute-paths-in-unix" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Some Unix commands accept paths as arguments. Paths can be defined as Relative or Absolute. Absolute paths start from the root of the file system with a forward slash <strong>/</strong> .Relative paths use the current working directory as a refrence and navigate the path from there. For instance, if you are in your home directory and wish to navigate to a directory called <em>test_dir</em> (which is in your home directory), you can use the <code>cd test_dir</code> command.  </p>
+</li>
+<li>
+<p>If you are in your home directory and wish to navigate to a directory that is not present there, you can use <strong>../</strong> (two full-stops followed by a forward slash) in the path to go one level up. For instance <code>cd ../some_dir/</code> would take you one level up from where you are. You can use as many <strong>../</strong> as the number of levels you need to go up in a relative path.</p>
+</li>
+</ul>
+<p>For example, if you are in a directory called <code>some_dir/</code> inside your home directory:</p>
+<div class="highlight"><pre><span></span><code>/users/k1234567
+├── some_dir/            &lt;-- current location
+│   ├── nested_dir/
+│   └── myfile.txt
+└── test_dir/
+</code></pre></div>
+<p><code>cd nested_dir</code> will take you into <code>nested_dir/</code>.</p>
+<div class="highlight"><pre><span></span><code>/users/k1234567
+├── some_dir/
+│   ├── nested_dir/      &lt;-- current location
+│   └── myfile.txt
+└── test_dir/
+</code></pre></div>
+<p>From there, <code>cd ..</code> will take you back to <code>some_dir/</code>.
+The command <code>cd ../../test_dir</code> will take you straight from <code>nested_dir/</code> to the <code>test_dir/</code> directory that is inside your home directory without any intermediate steps.</p>
+<div class="highlight"><pre><span></span><code>/users/k1234567
+├── some_dir/
+│   ├── nested_dir/
+│   └── myfile.txt
+└── test_dir/            &lt;-- current location
+</code></pre></div>
+<p>You could also move to these directories by using their absolute paths, e.g. <code>cd /users/k1234567/test_dir/</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

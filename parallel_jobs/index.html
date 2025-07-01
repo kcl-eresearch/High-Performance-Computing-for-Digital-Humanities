@@ -1,0 +1,1079 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="High Performance Computing with CREATE">
+      
+      
+        <meta name="author" content="KCL e-Research">
+      
+      
+        <link rel="canonical" href="https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/parallel_jobs/">
+      
+      
+        <link rel="prev" href="../submitting_jobs/">
+      
+      
+        <link rel="next" href="../singularity/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Parallel jobs - High Performance Computing with CREATE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#parallel-jobs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="High Performance Computing with CREATE" class="md-header__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            High Performance Computing with CREATE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Parallel jobs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="High Performance Computing with CREATE" class="md-nav__button md-logo" aria-label="High Performance Computing with CREATE" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    High Performance Computing with CREATE
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intro
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connecting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../using_software/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../submitting_jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Submitting jobs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parallel jobs
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multithreadedmulticore-smp-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multithreaded/multicore (SMP) jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multithreaded/multicore (SMP) jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Array jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Array jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-more-realistic-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A more realistic example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distributed-memory-parallelism-dmp-mpi-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distributed Memory Parallelism (DMP) / MPI jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-parallel-jobs-and-benchmarking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises - parallel jobs and benchmarking
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../singularity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jupyter notebooks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Practical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Next steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix_commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unix commands
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh_keys/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH keys
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../slides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slides
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multithreadedmulticore-smp-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multithreaded/multicore (SMP) jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multithreaded/multicore (SMP) jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#array-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Array jobs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Array jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-more-realistic-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      A more realistic example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#distributed-memory-parallelism-dmp-mpi-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distributed Memory Parallelism (DMP) / MPI jobs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises-parallel-jobs-and-benchmarking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercises - parallel jobs and benchmarking
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="parallel-jobs">Parallel jobs<a class="headerlink" href="#parallel-jobs" title="Permanent link">&para;</a></h1>
+<p>One main advantage of using an HPC system is the ability to utilise its large compute power to run jobs in parallel.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When considering running parallel jobs make sure to consult your application documentation to find out if it can be run
+in the parallel environment. Nowadays most applications will support some level of parallelism.
+Many scientific software tools will have <code>-p</code> or <code>-t</code> options to specify numbers of CPUs to be used when running in parallel.
+Applications that can make use of multiple nodes are less common.</p>
+<p>If the application does not support parallelism, requesting additional resources will not improve performance, and will likely
+lead to longer waiting times for your job to be scheduled.
+It also leads to resources being wasted as they are allocated to your job but are unused.</p>
+<p>If you request multiple CPUs/nodes for your job, it's a good idea to check how effectively your job uses them using <code>sacct</code>, as discussed
+in the <a href="../submitting_jobs/#job-monitoring">job monitoring</a> section.
+Most applications do not scale infinitely and will reach a point where the marginal impact of allocating more resources is minimal.</p>
+</div>
+<p>There are four types of parallel execution we'll discuss here, but we won't cover all of them in detail:</p>
+<ul>
+<li>Shared Memory Parallelism (SMP) / Multithreading</li>
+<li>Distributed Memory Parallelism / Multiprocessing</li>
+<li>Job Arrays</li>
+<li>GPUs</li>
+</ul>
+<p>Before we delve deeper into each of these, let's clarify some terminology:</p>
+<p><strong>Processes</strong>: A process is an instance of a running program. It has its own memory space and resources allocated by the operating system. Processes are independent of each other and do not share memory, except through inter-process communication mechanisms.</p>
+<p><strong>Threads</strong>: Threads are units of execution (or CPU utilisation) within a process. A process can have multiple threads, and these threads share the same memory space. Threads within the same process can communicate directly with each other. Threads are often used to perform multiple tasks concurrently within a single program.</p>
+<p><strong>Tasks / Jobs</strong>: In the context of SLURM and other job scheduling systems, a task / job typically refers to a unit of work that can be executed independently of other units of work. Each task may correspond to a single process or a group of processes, depending on how the job is configured. So far, each time we've submitted something to the queue, we've created one task / job.</p>
+<h2 id="multithreadedmulticore-smp-jobs">Multithreaded/multicore (SMP) jobs<a class="headerlink" href="#multithreadedmulticore-smp-jobs" title="Permanent link">&para;</a></h2>
+<p>Shared Memory Parallelism, as the name suggests, is a form of parallelism where all parallel threads of execution have access to a block of shared memory.
+We can use this shared memory to store objects which multiple threads need access to and to allow the threads to communicate.</p>
+<p>This can also be referred to as <strong>multithreading</strong> as the initial single thread of a process forks into a number of parallel threads.
+This approach will generally use a library such as <code>OpenMP</code> (Open MultiProcessing), <code>TBB</code> (Threading Building Blocks), or <code>pthread</code> (POSIX threads).</p>
+<div class="admonition note">
+<p class="admonition-title">Parallel programming</p>
+<p>Writing our own code which makes use of parallelism is a complex topic and is beyond the scope of this training. We use some minimal examples to help explain how different models of parallelism work, but don't worry if you don't fully understand all the examples.</p>
+</div>
+<p>As an example, let's run a minimal C parallel program, called <code>omp_hello.c</code>, that prints "Hello World" for a number of threads.
+This program is available at <code>/datasets/hpc_training/utils/omp_hello</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Example files</p>
+<p>Most of the example files we use in this section can be found on CREATE at <code>/datasets/hpc_training/</code>.</p>
+</div>
+<p>We need to create a shell script that requests appropriate resources to run the program:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#SBATCH --job-name=omp_hello</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=4</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:02 # time (D-HH:MM)</span>
+
+/datasets/hpc_training/utils/omp_hello
+</code></pre></div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can also request memory per cpu, rather than per node using the <code>--mem-per-cpu</code> option.
+<code>--mem</code> and <code>--mem-per-cpu</code> are mutually exclusive meaning you can use one, or the other in your
+resource request.</p>
+</div>
+<p>We submit the job with the following command:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>run_omp_hello.sh
+</code></pre></div>
+<p>One possible output would be:</p>
+<div class="highlight"><pre><span></span><code>Hello World from OpenMP thread 2 of 4
+Hello World from OpenMP thread 3 of 4
+Hello World from OpenMP thread 0 of 4
+Hello World from OpenMP thread 1 of 4
+</code></pre></div>
+<p>Note here that the lines don't come out in any particular order - each time you run the program you might end up with a different result.
+This is because the program doesn't make any attempt to synchronise the printing of each line, it just executes all of them in parallel.</p>
+<div class="admonition warning">
+<p class="admonition-title">Order of execution</p>
+<p>When using parallelism, we cannot rely on threads / processes reaching a particular line of code in any particular order, though each individual thread will still execute the order as expected. If we need things to happen in a particular order, for example if we wanted the threads to say hello in order, we need to force this using <strong>synchronisation</strong>.</p>
+</div>
+<h3 id="python-example">Python example<a class="headerlink" href="#python-example" title="Permanent link">&para;</a></h3>
+<p>Let's consider the slightly more complex example of a Python script, called <code>squares_numba.py</code>, which calculates the square of numbers from one to one billion using multithreading - again with OpenMP, but this time via the Numba library.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numba</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="nd">@numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">squares</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># Square numbers in parallel using Numba</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numba</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="c1"># print(&quot;Hello from thread&quot;, numba.get_thread_id())</span>
+        <span class="n">squares</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">squares</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">squares</span> <span class="o">=</span> <span class="n">calculate_squares</span><span class="p">(</span><span class="mi">1_000_000_000</span><span class="p">)</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Used </span><span class="si">{}</span><span class="s2"> threads&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numba</span><span class="o">.</span><span class="n">get_num_threads</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Took </span><span class="si">{:.4f}</span><span class="s2"> seconds&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">))</span>
+</code></pre></div>
+<p>The output should be something like:</p>
+<div class="highlight"><pre><span></span><code>Used 8 threads
+Took 1.6164 seconds
+</code></pre></div>
+<p>The key steps in this code are:</p>
+<ul>
+<li>Import necessary libraries: Time to measure the execution time, NumPy for numerical computation, and Numba for parallelisation.</li>
+<li>Define a function <code>calculate_squares()</code> which calculates the squares of numbers from one to one billion - computers can square numbers very quickly, so this needs to be a large number.</li>
+<li>Use Numba's <code>@jit</code> decorator to enable JIT compilation and the <code>parallel=True</code> option to enable parallel execution using OpenMP. Python libraries like Numba use OpenMP internally to parallelize computations. Numba uses a compiler called LLVM to compile our Python code - when we ask for parallel execution with <code>@jit(parallel=True)</code>, that then uses OpenMP just like we did in our C++ example.</li>
+<li>Using <code>numba.prange</code> for our loop instead of the usual <code>range</code> causes it to be executed in parallel across all available threads. Each thread will be given an approximately equal share of the loop iterations to execute.</li>
+<li>In the main block we call the <code>calculate_squares()</code> function and time how long it takes to run.</li>
+</ul>
+<p>To execute the above code on CREATE, we can use <code>run_squares_numba.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=squares_numba</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=4</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:02 # time (D-HH:MM)</span>
+
+<span class="c1"># Load any required modules</span>
+module<span class="w"> </span>load<span class="w"> </span>python/3.9.12-gcc-10.3.0<span class="w">  </span>
+
+<span class="c1"># Activate virtual environment</span>
+<span class="nb">source</span><span class="w"> </span>numba_venv/bin/activate
+
+python<span class="w"> </span>squares_numba.py
+</code></pre></div>
+<p>But before we run that we'll need to install necessary packages (in this case Numpy and Numba) in a virtual environment using:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>numba_venv
+<span class="nb">source</span><span class="w"> </span>numba_venv/bin/activate
+pip<span class="w"> </span>install<span class="w"> </span>numba<span class="w"> </span>numpy
+</code></pre></div>
+<p>We can then submit the job:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>submit_squares_numba.sh
+</code></pre></div>
+<h2 id="array-jobs">Array jobs<a class="headerlink" href="#array-jobs" title="Permanent link">&para;</a></h2>
+<p>Array jobs are a feature provided by job schedulers like SLURM and offer a mechanism for <strong>submitting and managing collections of similar tasks</strong> (a task is equal to a single "job" from a "job array") quickly and easily.
+Each task in the job array runs independently.
+Job arrays are useful for running multiple instances of the same job with different input parameters or configurations.
+Tasks in a job array may or may not communicate with each other, depending on the specific requirements of the job.</p>
+<p>Unlike in MPI or multi-threading, <strong>parallelization is orchestrated at the level of the shell script</strong> rather than within your program (e.g. Python script).
+Each task in the job array represents an independent instance of the program, and the shell script manages the execution of these instances in parallel by iterating over the task indices and launching separate invocations of the program.
+This approach allows you to parallelize the execution of the program across multiple tasks without modifying the script itself, making it a flexible and convenient method for running parallel tasks on HPC systems.</p>
+<p>All jobs will have the same initial options (e.g. memory, number of cpus, runtime, etc.) and will run the same commands.
+Using array jobs is an easy way to parallelise your workloads, as long as the following is true:</p>
+<ul>
+<li>Each array task can run independently of the others and there are no dependencies between the
+  different components (<a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">embarassingly parallel problem</a>).</li>
+<li>There is no requirement for all of the array tasks to run simultaneously.</li>
+<li>You can link the array task id (<code>SLURM_ARRAY_TASK_ID</code>) somehow to your data, or execution of your application.</li>
+</ul>
+<p>To define an array job you will be using an <code>--array=range[:step][%max_active]</code> option:</p>
+<ul>
+<li><code>range</code> defines index values and can consist of comma separated list and/or a range of values with a "-" separator, e.g. <code>1,2,3,4</code>, or <code>1-4</code> or <code>1,2-4</code></li>
+<li><code>step</code> defines the increment between the index values, i.e. <code>0-15:4</code> would be equivalent to <code>0,4,8,12</code></li>
+<li><code>max_active</code> defines number of simultaneously running tasks at any give time, i.e. <code>1-10%2</code> means only two array tasks can run simultaneously for
+  the given array job</li>
+</ul>
+<p>A sample array job is given below:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -l</span>
+<span class="c1">#SBATCH --job-name=array-sample</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --mem=1G</span>
+<span class="c1">#SBATCH -t 0-0:02 # time (D-HH:MM)</span>
+<span class="c1">#SBATCH --array=1-3</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Array job - task id: </span><span class="nv">$SLURM_ARRAY_TASK_ID</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>Submit the array job using:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>submit_array.sh
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When the job starts running a separate job id in the format <code>jobid_taskid</code> will be assigned to each of the tasks.</p>
+<p>As a result, the array job will produce a separate log file for each of the tasks, i.e.
+you will see multiple files in the <code>slurm-jobid_taskid.out</code> format.</p>
+</div>
+<h3 id="a-more-realistic-example">A more realistic example<a class="headerlink" href="#a-more-realistic-example" title="Permanent link">&para;</a></h3>
+<p>For a more realistic example, let's revisit the Python script we used earlier to identify the most frequent words in a text file.
+It would be useful to able to run this on many input text files, without having to modify the Python script or manually submit a job for each input.
+This is a great usecase for array jobs.</p>
+<p>Here's our original submission script, which specifies a single text file as input.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#! /bin/bash -l</span>
+
+<span class="c1">#SBATCH --job-name=top_words</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:10 # time (D-HH:MM)</span>
+
+module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+<span class="nb">source</span><span class="w"> </span>top_words_env/bin/activate
+
+python<span class="w"> </span>top_words.py<span class="w"> </span>paradise-lost.txt<span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<p>There are multiple text files we can use as input in the <code>/datasets/hpc_training/DH-RSE/data/</code> folder.
+We'll use <code>ls</code> to create a list of these input files and save it to an file.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/datasets/hpc_training/DH-RSE/data/*.txt<span class="w"> </span>&gt;<span class="w"> </span>input_files.txt
+</code></pre></div>
+<p>We can now use the <code>head</code> and <code>tail</code> commands to pull out individual lines in the file.
+For example, to extract the third line:</p>
+<div class="highlight"><pre><span></span><code>head<span class="w"> </span>input_files.txt<span class="w"> </span>-n<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p>The <code>head</code> command extracts the first <em>n</em> lines of a file (here <em>n</em> = 3).
+We use the pipe <code>|</code> to pass this output directly to the <code>tail</code> command, which extracts the last <em>n</em> lines of its input.
+Here we specify <em>n</em> = 1 to extract just the last line returned by <code>head</code>, which is the the third line of the input file.</p>
+<p>In the submission script, we can use the <code>$SLURM_ARRAY_TASK_ID</code> to extract the corresponding file name.
+Here's what our updated submission script looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#! /bin/bash -l</span>
+
+<span class="c1">#SBATCH --job-name=top_words</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --reservation=cpu_introduction</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --cpus-per-task=1</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:10 # time (D-HH:MM)</span>
+<span class="c1">#SBATCH --array=1-10</span>
+
+module<span class="w"> </span>load<span class="w"> </span>python/3.11.6-gcc-13.2.0
+<span class="nb">source</span><span class="w"> </span>top_words_env/bin/activate
+
+<span class="nv">input_file</span><span class="o">=</span><span class="sb">`</span>head<span class="w"> </span>input_files.txt<span class="w"> </span>-n<span class="w"> </span><span class="nv">$SLURM_ARRAY_TASK_ID</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="sb">`</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Analysing &quot;</span><span class="nv">$input_file</span>
+
+python<span class="w"> </span>top_words.py<span class="w"> </span><span class="nv">$input_file</span><span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<p>Submit the array job with:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>submit_top_words_array.sh
+</code></pre></div>
+<p>You can then monitor the jobs with <code>squeue --me</code>.
+Output files will be produced for each item in the array.</p>
+<h2 id="distributed-memory-parallelism-dmp-mpi-jobs">Distributed Memory Parallelism (DMP) / MPI jobs<a class="headerlink" href="#distributed-memory-parallelism-dmp-mpi-jobs" title="Permanent link">&para;</a></h2>
+<p>Sometimes you might want to utilise resources on multiple nodes simultaneously to perform computations.
+This is possible using a Message Passing Interface (MPI).
+In MPI, multiple independent processes run concurrently on separate nodes or processors.
+Each process has its own memory space.
+Communication between processes is achieved through explicit message passing (processes send and receive messages via MPI function calls).</p>
+<p>As mentioned earlier, requesting the resource by itself will not make your application run in parallel - the application has to support parallel execution.</p>
+<p><a href="https://en.wikipedia.org/wiki/Message_Passing_Interface">Message Passing Interface (MPI)</a>
+is the most common library used by research software for parallel execution across processes.</p>
+<p>Although MPI programming is beyond the scope of this course, if your application
+uses, or supports MPI then it can be executed on multiple nodes in parallel.
+For example, given the following submission script:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash -l</span>
+<span class="c1">#SBATCH --job-name=multinode-test</span>
+<span class="c1">#SBATCH --partition=cpu</span>
+<span class="c1">#SBATCH --nodes=2</span>
+<span class="c1">#SBATCH --ntasks=16</span>
+<span class="c1">#SBATCH --mem=2G</span>
+<span class="c1">#SBATCH -t 0-0:05 # time (D-HH:MM)</span>
+
+module<span class="w"> </span>load<span class="w"> </span>openmpi/4.1.3-gcc-10.3.0-python3+-chk-version
+
+mpirun<span class="w"> </span>/datasets/hpc_training/utils/mpi_hello
+</code></pre></div>
+<p>Which would be submitted using:</p>
+<div class="highlight"><pre><span></span><code>sbatch<span class="w"> </span>test_mpi.sh
+</code></pre></div>
+<p>A sample output would be:</p>
+<div class="highlight"><pre><span></span><code>Hello world from process 11 of 16 on host erc-hpc-comp006
+Hello world from process 2 of 16 on host erc-hpc-comp005
+Hello world from process 15 of 16 on host erc-hpc-comp006
+Hello world from process 13 of 16 on host erc-hpc-comp006
+Hello world from process 12 of 16 on host erc-hpc-comp006
+Hello world from process 1 of 16 on host erc-hpc-comp005
+Hello world from process 14 of 16 on host erc-hpc-comp006
+Hello world from process 0 of 16 on host erc-hpc-comp005
+Hello world from process 3 of 16 on host erc-hpc-comp005
+Hello world from process 9 of 16 on host erc-hpc-comp006
+Hello world from process 7 of 16 on host erc-hpc-comp005
+Hello world from process 6 of 16 on host erc-hpc-comp005
+Hello world from process 10 of 16 on host erc-hpc-comp006
+Hello world from process 8 of 16 on host erc-hpc-comp006
+Hello world from process 4 of 16 on host erc-hpc-comp005
+Hello world from process 5 of 16 on host erc-hpc-comp005
+</code></pre></div>
+<h2 id="exercises-parallel-jobs-and-benchmarking">Exercises - parallel jobs and benchmarking<a class="headerlink" href="#exercises-parallel-jobs-and-benchmarking" title="Permanent link">&para;</a></h2>
+<p>Work through the exercises in <a href="../exercises/#job-submission-part-2">this section</a> to practice submitting parallel jobs.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.indexes", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
