@@ -500,7 +500,7 @@ We then run the script, specifying the input text file and number of top words t
 module load python/3.11.6-gcc-13.2.0
 source top_words_env/bin/activate
 
-python top_words.py paradise-lost.txt 20
+python /datasets/hpc_training/DH-RSE/scripts/top_words.py /datasets/hpc_training/DH-RSE/data/paradise-lost.txt 20
 ```
 
 Submit the job using:

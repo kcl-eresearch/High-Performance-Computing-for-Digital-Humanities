@@ -103,9 +103,9 @@ more memory or CPU cores, you'll need to modify this section. For example, to us
 #SBATCH --partition=cpu
 #SBATCH --reservation=cpu_introduction
 #SBATCH --ntasks=1
-#SBATCH --mem=2G
+#SBATCH --mem=25G
 #SBATCH --signal=USR2
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=8
 ```
 
 !!!tip

@@ -134,7 +134,7 @@ The key steps in this code are:
 * Using `numba.prange` for our loop instead of the usual `range` causes it to be executed in parallel across all available threads. Each thread will be given an approximately equal share of the loop iterations to execute.
 * In the main block we call the `calculate_squares()` function and time how long it takes to run.
 
-To execute the above code on CREATE, we can use `run_squares_numba.sh`:
+To execute the above code on CREATE, we can use `submit_squares.sh`:
 
 ```bash
 #!/bin/bash
@@ -150,23 +150,23 @@ To execute the above code on CREATE, we can use `run_squares_numba.sh`:
 module load python/3.9.12-gcc-10.3.0  
 
 # Activate virtual environment
-source numba_venv/bin/activate
+source numba_env/bin/activate
 
-python squares_numba.py
+python /datasets/hpc_training/DH-RSE/scripts/squares_numba.py
 ```
 
 But before we run that we'll need to install necessary packages (in this case Numpy and Numba) in a virtual environment using:
 
 ```bash
-python -m venv numba_venv
-source numba_venv/bin/activate
+python -m venv numba_env
+source numba_env/bin/activate
 pip install numba numpy
 ```
 
 We can then submit the job:
 
 ```bash
-sbatch submit_squares_numba.sh
+sbatch submit_squares.sh
 ```
 
 ## Array jobs
