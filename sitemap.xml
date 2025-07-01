@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/connecting/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/connecting/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/exercises/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/exercises/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/jupyter/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/jupyter/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/next-steps/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/next-steps/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/parallel_jobs/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/parallel_jobs/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/rstudio/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/rstudio/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/singularity/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/singularity/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/slides/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/slides/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/ssh_keys/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/ssh_keys/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/submitting_jobs/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/submitting_jobs/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/unix_commands/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/unix_commands/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
     <url>
-         <loc>https://github.kcl.ac.uk/pages/e-research/CREATE-HPC-Training/using_software/</loc>
+         <loc>https://kcl-eresearch.github.io/High-Performance-Computing-for-Digital-Humanities/using_software/</loc>
          <lastmod>2025-07-01</lastmod>
     </url>
 </urlset>
